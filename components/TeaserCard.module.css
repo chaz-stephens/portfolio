@@ -3,17 +3,41 @@
   display: block;
   background: transparent;
   border: var(--border-width-bold) solid var(--color-border-bold);
-  border-radius: var(--radius-none);
+  border-radius: var(--radius-surface);
   padding: var(--space-6);
   clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+  box-shadow: var(--shadow-resting-accent);
   transition: border-color var(--duration-micro) var(--ease-standard),
-    transform var(--duration-micro) var(--ease-standard);
+    transform var(--duration-micro) var(--ease-standard),
+    box-shadow var(--duration-micro) var(--ease-standard);
 }
 
 .card:hover,
 .card:focus-visible {
   border-color: var(--color-accent);
   transform: translateY(-2px);
+  box-shadow: 6px 6px 0 0 var(--color-accent);
+}
+
+.card:active {
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  box-shadow: 0 0 0 0 var(--color-accent);
+}
+
+:global(.wash-swap) .card {
+  animation: cardWashPulse var(--duration-transition) var(--ease-standard);
+}
+
+@keyframes cardWashPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* The stitched "seam" sitting exactly on the die-cut diagonal — see the geometry note in
@@ -62,13 +86,49 @@
 .statRow {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-4);
+  gap: 0;
   margin-top: var(--space-5);
+}
+
+/* Nested-in-teaser-card exception (DESIGN_SPEC.md §4, Stat tile): the card already carries
+   --shadow-resting-accent, so its embedded stat tiles drop their own border/radius/shadow
+   entirely — hairline dividers between cells only, the same internal-division idiom the
+   size-chart strip uses, not a second layer of elevation stacked on the first. */
+.statRow :global(.tile) {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0 var(--space-4);
+  border-right: var(--border-width-hairline) solid var(--color-border-hairline);
+}
+
+.statRow :global(.tile):first-child {
+  padding-left: 0;
+}
+
+.statRow :global(.tile):last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
+.statRow :global(.tile.link:hover),
+.statRow :global(.tile.link:focus-visible) {
+  border-right-color: var(--color-border-hairline);
 }
 
 @media (max-width: 640px) {
   .statRow {
     grid-template-columns: 1fr;
+  }
+
+  .statRow :global(.tile) {
+    border-right: none;
+    border-bottom: var(--border-width-hairline) solid var(--color-border-hairline);
+    padding-block: var(--space-4);
+  }
+
+  .statRow :global(.tile):last-child {
+    border-bottom: none;
   }
 }
 
@@ -77,8 +137,15 @@
     transition: border-color var(--duration-micro) var(--ease-standard);
   }
 
+  .card,
   .card:hover,
-  .card:focus-visible {
+  .card:focus-visible,
+  .card:active {
     transform: none;
+    box-shadow: var(--shadow-resting-accent);
+  }
+
+  :global(.wash-swap) .card {
+    animation: none;
   }
 }

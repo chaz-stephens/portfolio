@@ -10,11 +10,13 @@ import styles from "./WashSwitcher.module.css";
 // than component state, so selecting a wash doesn't need a setState-in-effect round trip.
 
 const WASHES = [
-  { id: "raw", label: "Raw", hex: "#C85A1E" },
+  { id: "raw", label: "Raw", hex: "#B17030" },
   { id: "indigo", label: "Indigo", hex: "#4C6EDB" },
-  { id: "black", label: "Black", hex: "#6E7A52" },
+  { id: "black", label: "Black", hex: "#767C86" },
   { id: "ecru", label: "Ecru", hex: "#D8C9A3" },
 ] as const;
+
+const WASH_SWAP_CLASS = "wash-swap";
 
 type WashId = (typeof WASHES)[number]["id"];
 
@@ -51,6 +53,11 @@ function selectWash(id: WashId) {
   } catch {
     // localStorage unavailable — selection still applies for this session.
   }
+  // Wash-swap pulse (DESIGN_SPEC.md §5): every accent-shadowed surface gets a synchronized
+  // scale pulse for the duration of the color transition, so switching washes reads as one
+  // visible event across the page, not just a color fade under the hood.
+  root.classList.add(WASH_SWAP_CLASS);
+  window.setTimeout(() => root.classList.remove(WASH_SWAP_CLASS), 520);
   listeners.forEach((listener) => listener());
 }
 
@@ -71,7 +78,7 @@ export default function WashSwitcher() {
           <button
             key={w.id}
             type="button"
-            className={`${styles.swatch} ${active === w.id ? styles.active : ""}`}
+            className={`${styles.swatch} accentSurface ${active === w.id ? styles.active : ""}`}
             style={{ backgroundColor: w.hex }}
             onClick={() => selectWash(w.id)}
             aria-label={`${w.label} accent`}

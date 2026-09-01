@@ -14,9 +14,9 @@
 
   /* Denim-wash accent palette — fixed hex definitions. Never referenced directly by
      components; the JS switcher repoints --color-accent / --color-accent-on-light below. */
-  --wash-raw: #c85a1e;
+  --wash-raw: #b17030;
   --wash-indigo: #4c6edb;
-  --wash-black: #6e7a52;
+  --wash-black: #767c86;
   --wash-ecru: #d8c9a3;
   --wash-ecru-ink: #7a6a42;
 
@@ -55,7 +55,9 @@
   --space-10: 128px;
   --space-11: 160px;
 
-  --radius-none: 0;
+  --radius-none: 0; /* tables, footer/nav rules — flat data surfaces stay square */
+  --radius-control: 4px; /* buttons, wash swatches, inputs */
+  --radius-surface: 6px; /* stat tiles, size-chart strip, teaser cards, hero spec-strip */
   --radius-chip: 2px;
 
   --container-max: 1200px;
@@ -63,6 +65,19 @@
 
   --border-width-hairline: 1px;
   --border-width-bold: 2px;
+
+  /* Elevation — a hard-edged, zero-blur offset shadow, not a soft drop shadow. Reads as one
+     flat plane sitting in front of another (same flat/graphic vocabulary as the clip-path
+     notches elsewhere in this system), not a simulated light source. Two registers: accent
+     for home-page personality-layer surfaces (also what makes the wash switcher's payoff
+     visible across the whole page, not just a couple of small elements), neutral/ink-toned
+     for the case study's restrained register. See DESIGN_SPEC.md §3. */
+  --shadow-offset: 4px;
+  --shadow-offset-sm: 2px;
+  --shadow-resting-accent: var(--shadow-offset) var(--shadow-offset) 0 0
+    var(--color-accent);
+  --shadow-resting-neutral: var(--shadow-offset-sm) var(--shadow-offset-sm) 0 0
+    var(--color-border-hairline);
 
   --page-pad: 20px;
 }
@@ -100,6 +115,83 @@
   :root,
   .theme-light {
     transition-duration: 50ms;
+  }
+}
+
+/* Accent-shadowed surface contract (DESIGN_SPEC.md §3, §4 "places accent appears" #7).
+   Applied to the primary button, both teaser cards, the size-chart strip, the hero
+   spec-strip, and the wash switcher — every home-page surface that should visibly confirm
+   a wash change, not just the two or three small elements the previous pass touched. */
+.accentSurface {
+  box-shadow: var(--shadow-resting-accent);
+  transition: box-shadow var(--duration-micro) var(--ease-standard),
+    transform var(--duration-micro) var(--ease-standard);
+}
+
+.accentSurface:hover {
+  box-shadow: 6px 6px 0 0 var(--color-accent);
+}
+
+.accentSurface:active {
+  box-shadow: 0 0 0 0 var(--color-accent);
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+}
+
+.neutralSurface {
+  box-shadow: var(--shadow-resting-neutral);
+  transition: box-shadow var(--duration-micro) var(--ease-standard),
+    transform var(--duration-micro) var(--ease-standard);
+}
+
+.neutralSurface:hover {
+  box-shadow: 4px 4px 0 0 var(--color-border-hairline);
+}
+
+.neutralSurface:active {
+  box-shadow: 0 0 0 0 var(--color-border-hairline);
+  transform: translate(var(--shadow-offset-sm), var(--shadow-offset-sm));
+}
+
+/* Wash-swap pulse (DESIGN_SPEC.md §5): every accent-shadowed surface gets a synchronized
+   scale pulse for the duration of the color transition, toggled via a `wash-swap` class
+   WashSwitcher adds to <html> for 500ms on each click. One shared animation, not a
+   per-component script. */
+@keyframes washPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.wash-swap .accentSurface {
+  animation: washPulse var(--duration-transition) var(--ease-standard);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accentSurface,
+  .accentSurface:hover,
+  .accentSurface:active,
+  .neutralSurface,
+  .neutralSurface:hover,
+  .neutralSurface:active {
+    transition: none;
+    transform: none;
+    box-shadow: var(--shadow-resting-accent);
+  }
+
+  .neutralSurface,
+  .neutralSurface:hover,
+  .neutralSurface:active {
+    box-shadow: var(--shadow-resting-neutral);
+  }
+
+  .wash-swap .accentSurface {
+    animation: none;
   }
 }
 
@@ -223,16 +315,22 @@ table {
   font-weight: 700;
   font-size: 1rem;
   padding: 14px 32px;
-  border-radius: var(--radius-none);
+  border-radius: var(--radius-control);
   border: var(--border-width-bold) solid transparent;
   white-space: nowrap;
-  transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease,
+    box-shadow var(--duration-micro) var(--ease-standard),
+    transform var(--duration-micro) var(--ease-standard);
 }
 
+/* Primary (Resume, case-study PDF CTA) — the button direct feedback singled out as
+   "reads like an error." Fill/text/border unchanged; radius + a hard accent shadow is the
+   whole fix (DESIGN_SPEC.md §4/§7). */
 .btn-primary {
   background: var(--color-accent);
   color: var(--color-ink);
   border-color: var(--color-accent);
+  box-shadow: var(--shadow-resting-accent);
 }
 
 .btn-primary:hover,
@@ -240,18 +338,59 @@ table {
   background: transparent;
   border-color: var(--color-accent);
   color: var(--color-accent);
+  box-shadow: 6px 6px 0 0 var(--color-accent);
+}
+
+.btn-primary:active {
+  box-shadow: 0 0 0 0 var(--color-accent);
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+}
+
+.wash-swap .btn-primary {
+  animation: washPulse var(--duration-transition) var(--ease-standard);
 }
 
 .btn-ghost {
   background: transparent;
   border-color: var(--color-ink);
   color: var(--color-ink);
+  box-shadow: var(--shadow-resting-neutral);
 }
 
 .btn-ghost:hover,
 .btn-ghost:focus-visible {
   border-color: var(--color-accent);
   color: var(--color-accent);
+  box-shadow: 4px 4px 0 0 var(--color-border-hairline);
+}
+
+.btn-ghost:active {
+  box-shadow: 0 0 0 0 var(--color-border-hairline);
+  transform: translate(var(--shadow-offset-sm), var(--shadow-offset-sm));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary,
+  .btn-primary:hover,
+  .btn-primary:active,
+  .btn-ghost,
+  .btn-ghost:hover,
+  .btn-ghost:active {
+    transform: none;
+  }
+  .btn-primary,
+  .btn-primary:hover,
+  .btn-primary:active {
+    box-shadow: var(--shadow-resting-accent);
+  }
+  .btn-ghost,
+  .btn-ghost:hover,
+  .btn-ghost:active {
+    box-shadow: var(--shadow-resting-neutral);
+  }
+  .wash-swap .btn-primary {
+    animation: none;
+  }
 }
 
 /* Inline body links — always-on underline, ink at rest, accent on hover/focus */

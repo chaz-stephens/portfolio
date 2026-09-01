@@ -3,8 +3,69 @@
   padding-bottom: var(--space-9);
 }
 
-.heroInner {
-  position: relative;
+/* Two-column at desktop (DESIGN_SPEC.md §6) — the actual fix for "unused space on the
+   right": the hero uses the full --container-max width, not --prose-max, and a real second
+   element (the spec-strip) claims the right column instead of leaving it empty. Named grid
+   areas keep reading order correct at both breakpoints: below 1024px the spec-strip sits
+   between the bio and the button row (matching the spec's mobile order); at 1024px+ it
+   moves into a right column that spans the full height of the left column's content. */
+.heroGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+  grid-template-areas:
+    "kicker"
+    "name"
+    "positioning"
+    "bio"
+    "spec"
+    "buttons";
+}
+
+.heroGrid > .kicker {
+  grid-area: kicker;
+}
+
+.heroGrid > .name {
+  grid-area: name;
+}
+
+.heroGrid > .positioning {
+  grid-area: positioning;
+}
+
+.bioGroup {
+  grid-area: bio;
+}
+
+.heroRight {
+  grid-area: spec;
+  display: flex;
+  align-items: flex-start;
+}
+
+.heroGrid > .buttonRow {
+  grid-area: buttons;
+}
+
+@media (min-width: 1024px) {
+  .heroGrid {
+    grid-template-columns: minmax(0, 1fr) 320px;
+    column-gap: var(--space-9);
+    row-gap: var(--space-4);
+    grid-template-areas:
+      "kicker      spec"
+      "name        spec"
+      "positioning spec"
+      "bio         spec"
+      "buttons     spec";
+    align-items: start;
+  }
+
+  .heroRight {
+    align-self: stretch;
+    align-items: stretch;
+  }
 }
 
 .kicker {
@@ -18,7 +79,6 @@
 }
 
 .name {
-  margin-top: var(--space-4);
   font-family: var(--font-sans);
   font-weight: 900;
   font-size: 4.5rem;
@@ -34,19 +94,26 @@
 }
 
 .positioning {
-  margin-top: var(--space-4);
-  max-width: var(--prose-max);
   font-size: 1.25rem;
   line-height: 1.55;
   color: var(--color-ink);
 }
 
+/* Bio — split into two shorter paragraphs (was one dense block) and justified/hyphenated
+   per direct feedback ("maybe both, but more just a general imbalance" — the imbalance fix
+   is the two-column grid above; justify was the literal half of that answer). Deliberately
+   not applied to .positioning: justify does nothing useful on a one-line block and looks
+   broken on a short paragraph's ragged last line. */
 .bio {
-  margin-top: var(--space-4);
-  max-width: var(--prose-max);
   font-size: 1rem;
   line-height: 1.65;
   color: var(--color-ink-secondary);
+  text-align: justify;
+  hyphens: auto;
+}
+
+.bio + .bio {
+  margin-top: var(--space-4);
 }
 
 .buttonRow {
@@ -54,7 +121,6 @@
   flex-wrap: wrap;
   align-items: center;
   gap: var(--space-5);
-  margin-top: var(--space-6);
 }
 
 /* Section canvas contract, shared by every below-the-hero section — see

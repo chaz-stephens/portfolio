@@ -1,0 +1,61 @@
+.strip {
+  display: flex;
+  flex-direction: column;
+  border: var(--border-width-bold) solid var(--color-border-bold);
+  border-radius: var(--radius-surface);
+  padding: var(--space-5);
+  width: 100%;
+}
+
+.kicker {
+  display: block;
+  padding-bottom: var(--space-3);
+  margin-bottom: var(--space-4);
+  border-bottom: var(--border-width-hairline) solid var(--color-border-hairline);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+.line {
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: var(--color-ink-secondary);
+}
+
+.stat {
+  margin-top: var(--space-5);
+}
+
+/* When the card stretches to fill the hero's right column at desktop (see page.module.css),
+   push the headline stat to the bottom instead of leaving dead space beneath it. */
+@media (min-width: 1024px) {
+  .stat {
+    margin-top: auto;
+    padding-top: var(--space-5);
+  }
+}
+
+.statNumber {
+  display: block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 2.5rem;
+  line-height: 1.05;
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.statLabel {
+  display: block;
+  margin-top: var(--space-2);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}

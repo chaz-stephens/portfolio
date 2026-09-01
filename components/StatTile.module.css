@@ -2,17 +2,34 @@
   display: block;
   background: transparent;
   border: var(--border-width-bold) solid var(--color-border-bold);
-  border-radius: var(--radius-none);
+  border-radius: var(--radius-surface);
   padding: var(--space-5);
+  box-shadow: var(--shadow-resting-neutral);
 }
 
 .tile.link {
-  transition: border-color 150ms ease;
+  transition: border-color 150ms ease, box-shadow var(--duration-micro) var(--ease-standard);
 }
 
 .tile.link:hover,
 .tile.link:focus-visible {
   border-color: var(--color-accent);
+  box-shadow: 4px 4px 0 0 var(--color-border-hairline);
+}
+
+.tile.link:active {
+  box-shadow: 0 0 0 0 var(--color-border-hairline);
+  transform: translate(var(--shadow-offset-sm), var(--shadow-offset-sm));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile.link,
+  .tile.link:hover,
+  .tile.link:focus-visible,
+  .tile.link:active {
+    box-shadow: var(--shadow-resting-neutral);
+    transform: none;
+  }
 }
 
 .number {

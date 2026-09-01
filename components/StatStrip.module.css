@@ -18,6 +18,24 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   border: var(--border-width-bold) solid var(--color-border-bold);
+  border-radius: var(--radius-surface);
+  box-shadow: var(--shadow-resting-accent);
+}
+
+:global(.wash-swap) .strip {
+  animation: stripWashPulse var(--duration-transition) var(--ease-standard);
+}
+
+@keyframes stripWashPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .cell {
@@ -99,5 +117,9 @@
   .number::after,
   .label {
     transition: none;
+  }
+
+  :global(.wash-swap) .strip {
+    animation: none;
   }
 }

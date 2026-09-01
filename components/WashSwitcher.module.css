@@ -19,14 +19,13 @@
   height: 24px;
   min-width: 24px;
   min-height: 24px;
-  padding: 2px;
+  padding: 0;
   border: none;
-  border-radius: var(--radius-none);
+  border-radius: var(--radius-control);
   box-sizing: border-box;
-  background-clip: content-box;
-  background-origin: content-box;
   cursor: pointer;
-  transition: transform var(--duration-micro) var(--ease-standard);
+  transition: transform var(--duration-micro) var(--ease-standard),
+    box-shadow var(--duration-micro) var(--ease-standard);
 }
 
 .swatch:hover,
