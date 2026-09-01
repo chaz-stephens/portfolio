@@ -17,9 +17,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 const SITE_URL = "https://chaz-stephens.com";
-const TITLE = "Chaz Stephens — Medical Device Product Management";
+const TITLE = "Chaz Stephens | Product Development & Strategy";
 const DESCRIPTION =
-  "Program manager and PMP moving into medical device product management. Case study: SubQ-Confirm, a delivery-confirmation subsystem for wearable insulin pumps.";
+  "Program manager and PMP focused on product development: identifying market gaps and building the strategy to close them. Case study: SubQ-Confirm, a delivery-confirmation subsystem for wearable insulin pumps.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

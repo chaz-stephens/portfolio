@@ -12,14 +12,35 @@ export default function Home() {
         <div className={`container ${styles.hero}`}>
           <div className={styles.heroInner}>
             <span className={styles.kicker}>
-              MEDICAL DEVICE PRODUCT MANAGEMENT
+              PRODUCT DEVELOPMENT &amp; STRATEGY
             </span>
             <h1 className={styles.name}>Chaz Stephens</h1>
             <p className={styles.positioning}>
-              Program manager and PMP moving into medical device product
-              management.
+              Program manager and PMP interested in product development:
+              identifying market gaps and building the strategy to close
+              them.
             </p>
-            <p className={styles.bio}>Bio coming soon.</p>
+            <p className={styles.bio}>
+              I&apos;ve spent over a decade in and around cancer biology. It
+              started with graduate research on TGF-β signaling in fibrosis
+              and cancer, then became a run of program management roles:
+              overseeing cancer clinical trials at the National Cancer
+              Institute, cancer diagnostics at Quest Diagnostics, and now
+              broader clinical data standards work at Merck. What&apos;s
+              kept me in this space is the patient population at the other
+              end of it: clinical trials and diagnostics only matter because
+              someone is waiting on the result. What I&apos;ve found I enjoy
+              most, though, is owning that whole arc myself: taking a
+              product from an idea through to a real commercialization
+              strategy, not just one piece of it. A hands-on product
+              management course let me build a full example of that, end to
+              end, and produced the SubQ-Confirm case study below: market
+              sizing, product requirements, and a go-to-market plan for a
+              real patient-facing need. I hold a patent and two
+              peer-reviewed publications from my earlier research, and I
+              write Indigo &amp; Asphalt, an independent menswear
+              publication, on the side.
+            </p>
             <div className={styles.buttonRow}>
               <a
                 href="/resume.pdf"
@@ -67,7 +88,7 @@ export default function Home() {
         <div className={styles.footerSpacer} />
       </main>
       <Footer
-        tags={["PORTFOLIO", "MEDICAL DEVICE PM", "CHAZ STEPHENS © 2026"]}
+        tags={["PORTFOLIO", "PRODUCT & PROGRAM MANAGEMENT", "CHAZ STEPHENS © 2026"]}
         activeTag="PORTFOLIO"
       />
     </>
