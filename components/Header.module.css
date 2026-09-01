@@ -2,6 +2,7 @@
   position: sticky;
   top: 0;
   z-index: 10;
+  /* Always dark canvas regardless of the section scrolled beneath it (DESIGN_SPEC.md §4). */
   background: var(--color-canvas);
   color: var(--color-ink);
   border-bottom: var(--border-width-hairline) solid var(--color-border-hairline);
@@ -18,24 +19,45 @@
   padding-bottom: var(--space-3);
 }
 
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--color-ink);
+}
+
 .wordmark {
   font-family: var(--font-sans);
   font-weight: 700;
   font-size: 1rem;
   color: var(--color-ink);
+  white-space: nowrap;
+  transition: color var(--duration-micro) var(--ease-standard);
 }
 
-.back {
+.backLabel {
   font-family: var(--font-mono);
   font-weight: 500;
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-ink-muted);
+  white-space: nowrap;
+  transition: color var(--duration-micro) var(--ease-standard);
 }
 
-.back:hover,
-.back:focus-visible {
+/* Monogram hover: stroke flashes to accent — the one place the badge and the wash switcher
+   visibly confirm they're the same system (§4). Slower than the standard hover; it's a
+   discovery moment, not a functional affordance. */
+.brand:hover svg,
+.brand:focus-visible svg {
+  color: var(--color-accent);
+}
+
+.brand:hover .wordmark,
+.brand:hover .backLabel,
+.brand:focus-visible .wordmark,
+.brand:focus-visible .backLabel {
   color: var(--color-accent);
 }
 
@@ -46,10 +68,17 @@
   gap: var(--space-5);
 }
 
+.contactLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+}
+
 .contactLink {
   font-size: 0.875rem;
   color: var(--color-ink-secondary);
   text-decoration: underline;
+  transition: color var(--duration-micro) var(--ease-standard);
 }
 
 .contactLink:hover,
@@ -60,4 +89,22 @@
 .resumeBtn {
   padding: 8px 20px;
   font-size: 0.875rem;
+}
+
+@media (max-width: 480px) {
+  .actions {
+    gap: var(--space-3);
+  }
+
+  .contactLinks {
+    gap: var(--space-3);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wordmark,
+  .backLabel,
+  .contactLink {
+    transition: none;
+  }
 }

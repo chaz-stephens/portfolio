@@ -1,0 +1,21 @@
+.svg {
+  display: block;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  color: var(--color-ink);
+  transition: color 300ms var(--ease-standard);
+}
+
+@media (min-width: 768px) {
+  .svg {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .svg {
+    transition: none;
+  }
+}

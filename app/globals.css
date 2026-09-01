@@ -12,12 +12,30 @@
   --color-border-hairline: #262626;
   --color-border-bold: var(--color-ink);
 
-  /* Accent — one color, sparing use only (see component specs) */
-  --color-accent: #e85015;
-  --color-accent-bright: #ff6b2c;
-  --color-accent-deep: #c43d0e;
+  /* Denim-wash accent palette — fixed hex definitions. Never referenced directly by
+     components; the JS switcher repoints --color-accent / --color-accent-on-light below. */
+  --wash-raw: #c85a1e;
+  --wash-indigo: #4c6edb;
+  --wash-black: #6e7a52;
+  --wash-ecru: #d8c9a3;
+  --wash-ecru-ink: #7a6a42;
+
+  /* Accent — one color, sparing use only (see component specs). --color-accent is a live
+     pointer the wash switcher repoints via inline style on <html>; the value below is the
+     no-JS / first-paint default (Indigo). */
+  --color-accent: var(--wash-indigo);
+  --color-accent-on-light: var(--wash-indigo);
+  --color-accent-bright: color-mix(in srgb, var(--color-accent) 80%, white 20%);
+  --color-accent-deep: color-mix(in srgb, var(--color-accent) 80%, black 20%);
 
   --color-focus: var(--color-accent);
+
+  /* Motion */
+  --duration-micro: 150ms;
+  --duration-transition: 500ms;
+  --duration-reveal: 600ms;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
 
   /* Fonts */
   --font-sans: var(--font-archivo), "Archivo", system-ui, sans-serif;
@@ -59,6 +77,60 @@
 
   --color-border-hairline: #e4e4e0;
   --color-border-bold: var(--color-ink);
+
+  /* --color-accent-on-light is set by JS on :root and inherits into this scope already;
+     redeclaring it here to point at itself keeps every existing var(--color-accent)
+     consumer (buttons, links, stat numbers, card borders) automatically safe on the light
+     canvas — including the Ecru exception (§1a) — with no per-component branching. */
+  --color-accent: var(--color-accent-on-light);
+}
+
+@property --color-accent {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #4c6edb;
+}
+
+:root,
+.theme-light {
+  transition: --color-accent var(--duration-transition) var(--ease-standard);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root,
+  .theme-light {
+    transition-duration: 50ms;
+  }
+}
+
+/* Scroll-triggered reveal (IntersectionObserver-driven, see components/Reveal.tsx).
+   Progressive enhancement: content is visible by default (safe for no-JS, blocked scripts,
+   and non-JS crawlers indexing this job-search site's core content). The hidden-until-scrolled
+   state only applies once the `js` class confirms JS actually loaded and is managing it
+   (set synchronously in app/layout.tsx, same anti-FOUC script that sets the wash color). */
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--duration-reveal) var(--ease-reveal),
+    transform var(--duration-reveal) var(--ease-reveal);
+}
+
+.js .reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 @media (min-width: 768px) {

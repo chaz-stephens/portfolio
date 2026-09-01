@@ -1,0 +1,95 @@
+.switcher {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.labels {
+  display: none;
+}
+
+.swatches {
+  display: flex;
+  gap: 6px;
+}
+
+.swatch {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  padding: 2px;
+  border: none;
+  border-radius: var(--radius-none);
+  box-sizing: border-box;
+  background-clip: content-box;
+  background-origin: content-box;
+  cursor: pointer;
+  transition: transform var(--duration-micro) var(--ease-standard);
+}
+
+.swatch:hover,
+.swatch:focus-visible {
+  transform: scale(1.08);
+}
+
+.swatch.active {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+/* Corner-stitch tick — the same X-cross bar-tack language as the monogram (§4), echoing
+   the two components as one "stitch" system. */
+.swatch.active::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: 6px;
+  height: 6px;
+  background: linear-gradient(
+      45deg,
+      transparent 45%,
+      var(--color-ink) 45%,
+      var(--color-ink) 55%,
+      transparent 55%
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 45%,
+      var(--color-ink) 45%,
+      var(--color-ink) 55%,
+      transparent 55%
+    );
+}
+
+@media (min-width: 1024px) {
+  .labels {
+    display: flex;
+    gap: 12px;
+  }
+
+  .labelText {
+    flex: 1 0 24px;
+    white-space: nowrap;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 0.625rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--color-ink-muted);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .swatch {
+    transition: none;
+  }
+
+  .swatch:hover,
+  .swatch:focus-visible {
+    transform: none;
+  }
+}

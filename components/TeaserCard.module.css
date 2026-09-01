@@ -1,0 +1,84 @@
+.card {
+  position: relative;
+  display: block;
+  background: transparent;
+  border: var(--border-width-bold) solid var(--color-border-bold);
+  border-radius: var(--radius-none);
+  padding: var(--space-6);
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+  transition: border-color var(--duration-micro) var(--ease-standard),
+    transform var(--duration-micro) var(--ease-standard);
+}
+
+.card:hover,
+.card:focus-visible {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+/* The stitched "seam" sitting exactly on the die-cut diagonal — see the geometry note in
+   DESIGN_SPEC.md §4: anchored at the clip-path's top vertex, rotated 45deg to land on its
+   bottom vertex. */
+.seam {
+  position: absolute;
+  top: 0;
+  left: calc(100% - 16px);
+  width: 22.63px;
+  height: 0;
+  border-top: 1px dashed var(--color-border-bold);
+  transform-origin: left top;
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
+.metadata {
+  display: block;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+.title {
+  margin-top: var(--space-3);
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: 2rem;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+}
+
+.description {
+  margin-top: var(--space-3);
+  max-width: var(--prose-max);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--color-ink-secondary);
+}
+
+.statRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+}
+
+@media (max-width: 640px) {
+  .statRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: border-color var(--duration-micro) var(--ease-standard);
+  }
+
+  .card:hover,
+  .card:focus-visible {
+    transform: none;
+  }
+}

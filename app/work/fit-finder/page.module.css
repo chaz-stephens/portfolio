@@ -1,0 +1,112 @@
+.section {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  padding-bottom: var(--space-9);
+}
+
+.s1 {
+  padding-top: var(--space-10);
+}
+
+.s2 {
+  padding-top: var(--space-9);
+}
+
+.s3 {
+  padding-top: var(--space-9);
+}
+
+.s4 {
+  padding-top: var(--space-9);
+}
+
+.s5 {
+  padding-top: var(--space-11);
+  padding-bottom: var(--space-11);
+}
+
+.body {
+  max-width: var(--prose-max);
+  margin-top: var(--space-5);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--color-ink-secondary);
+}
+
+.body + .body {
+  margin-top: var(--space-4);
+}
+
+.metaBlock {
+  margin-top: var(--space-5);
+}
+
+.metaLine {
+  max-width: var(--prose-max);
+  margin-top: var(--space-3);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--color-ink-secondary);
+}
+
+.metaLine strong {
+  color: var(--color-ink);
+  font-weight: 700;
+}
+
+.statRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+@media (max-width: 640px) {
+  .statRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Web tool screenshot — bordered per the system's card contract (2px ink outline, no fill). */
+.mediaWeb {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: var(--space-6);
+  border: var(--border-width-bold) solid var(--color-border-bold);
+}
+
+.mediaPhones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.mediaPhone {
+  display: block;
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+  border: var(--border-width-bold) solid var(--color-border-bold);
+}
+
+@media (max-width: 640px) {
+  .mediaPhone {
+    max-width: 45%;
+  }
+}
+
+.cta {
+  margin-top: var(--space-6);
+}
+
+.ctaCaption {
+  display: block;
+  margin-top: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}

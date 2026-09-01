@@ -1,14 +1,44 @@
-import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import StatTile from "@/components/StatTile";
+import Reveal from "@/components/Reveal";
+import StatStrip from "@/components/StatStrip";
+import TeaserCard from "@/components/TeaserCard";
 import styles from "./page.module.css";
+
+const EXPERIENCE = [
+  {
+    company: "Merck",
+    role: "Associate Director, Global Clinical Data Standards",
+    dates: "January 2023 – Present",
+  },
+  {
+    company: "Quest Diagnostics",
+    role: "Senior Project Manager, Oncology Clinical Franchise",
+    dates: "March 2021 – January 2023",
+  },
+  {
+    company: "National Cancer Institute",
+    role: "Scientific Program Manager",
+    dates: "March 2017 – March 2021",
+  },
+  {
+    company: "Smithers Avanza",
+    role: "Study Coordinator II",
+    dates: "June 2016 – March 2017",
+  },
+  {
+    company: "Champions Oncology",
+    role: "Project Leader",
+    dates: "September 2015 – May 2016",
+  },
+];
 
 export default function Home() {
   return (
     <>
       <Header />
       <main>
+        {/* Hero — copy unchanged; flat dark canvas, no personality-layer intrusion */}
         <div className={`container ${styles.hero}`}>
           <div className={styles.heroInner}>
             <span className={styles.kicker}>
@@ -68,24 +98,93 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="container">
-          <Link href="/work/subq-confirm" className={styles.teaser}>
-            <span className={styles.teaserKicker}>FEATURED CASE STUDY</span>
-            <h3 className={styles.teaserTitle}>SubQ-Confirm</h3>
-            <p className={styles.teaserDescription}>
-              A delivery-confirmation subsystem concept for wearable insulin
-              pumps, developed end-to-end from clinical need through FDA
-              pathway and go-to-market.
-            </p>
-            <div className={styles.statRow}>
-              <StatTile number="$110M" label="SOM · 5 YEAR" accent />
-              <StatTile number="71%" label="GROSS MARGIN" />
-              <StatTile number="$5.25B" label="TAM · GLOBAL" />
-            </div>
-          </Link>
-        </div>
+        {/* Career stats + work-history timeline — the density-break flip to light canvas */}
+        <section className={`theme-light container ${styles.section} ${styles.statsSection}`}>
+          <StatStrip
+            kicker="CAREER SPEC"
+            items={[
+              { number: "9+", label: "YRS EXP", accent: true },
+              { number: "1", label: "PATENT" },
+              { number: "2", label: "PUBLISHED" },
+              { number: "1,115+", label: "CATALOG SKUS" },
+            ]}
+          />
 
-        <div className={styles.footerSpacer} />
+          <div className={styles.timelineWrap}>
+            <span className={styles.timelineKicker}>EXPERIENCE</span>
+            <div className={styles.timeline}>
+              {EXPERIENCE.map((job, i) => (
+                <Reveal key={job.company} index={i} className={styles.timelineItem}>
+                  <span className={styles.timelineDate}>{job.dates}</span>
+                  <span className={styles.timelineRole}>{job.role}</span>
+                  <span className={styles.timelineCompany}>{job.company}</span>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Case-study teasers — flip back to dark before contact/footer */}
+        <section className={`container ${styles.section} ${styles.teasersSection}`}>
+          <div className={styles.teaserGrid}>
+            <Reveal index={0}>
+              <TeaserCard
+                href="/work/subq-confirm"
+                metadata={["PRODUCT MGMT", "AUG 2026", "MDPM CAPSTONE"]}
+                title="SubQ-Confirm"
+                description="A delivery-confirmation subsystem concept for wearable insulin pumps, developed end-to-end from clinical need through FDA pathway and go-to-market."
+                stats={[
+                  { number: "$110M", label: "SOM · 5 YEAR", accent: true },
+                  { number: "71%", label: "GROSS MARGIN" },
+                  { number: "$5.25B", label: "TAM · GLOBAL" },
+                ]}
+              />
+            </Reveal>
+            <Reveal index={1}>
+              <TeaserCard
+                href="/work/fit-finder"
+                metadata={["SOLE BUILDER", "LIVE PRODUCT", "WEB + ANDROID + STRIPE"]}
+                title="Fit Finder"
+                description="A body-measurement matching tool that helps people find jeans that actually fit, built and shipped independently."
+                stats={[
+                  { number: "1,115+", label: "CATALOG MODELS" },
+                  { number: "TOP", label: "TRAFFIC ON SITE", accent: true },
+                  { number: "IN REVIEW", label: "GOOGLE PLAY STORE" },
+                ]}
+              />
+            </Reveal>
+          </div>
+        </section>
+
+        {/* Contact — button row repeated at point of exit */}
+        <section className={`container ${styles.section} ${styles.contactSection}`}>
+          <Reveal>
+            <div className={styles.buttonRow}>
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary"
+              >
+                Resume
+              </a>
+              <a
+                href="mailto:castephens90@gmail.com"
+                className="btn btn-ghost"
+              >
+                Email
+              </a>
+              <a
+                href="https://www.linkedin.com/in/chaz-stephens/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-ghost"
+              >
+                LinkedIn
+              </a>
+            </div>
+          </Reveal>
+        </section>
       </main>
       <Footer
         tags={["PORTFOLIO", "PRODUCT & PROGRAM MANAGEMENT", "CHAZ STEPHENS © 2026"]}
