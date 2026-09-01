@@ -5,10 +5,28 @@ import SectionHeading from "@/components/SectionHeading";
 import StatTile from "@/components/StatTile";
 import styles from "./page.module.css";
 
+const TITLE = "SubQ-Confirm — Medical Device Case Study | Chaz Stephens";
+const DESCRIPTION =
+  "SubQ-Confirm: a delivery-confirmation subsystem concept for wearable insulin pumps, developed end-to-end from clinical need through FDA pathway and go-to-market.";
+
 export const metadata: Metadata = {
-  title: "SubQ-Confirm — Medical Device Case Study | Chaz Stephens",
-  description:
-    "SubQ-Confirm: a delivery-confirmation subsystem concept for wearable insulin pumps, developed end-to-end from clinical need through FDA pathway and go-to-market.",
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: {
+    canonical: "/work/subq-confirm",
+  },
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    url: "/work/subq-confirm",
+    siteName: "Chaz Stephens",
+    type: "article",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+  },
 };
 
 export default function SubQConfirmCaseStudy() {

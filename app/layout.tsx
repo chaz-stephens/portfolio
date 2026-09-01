@@ -16,10 +16,30 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const SITE_URL = "https://chaz-stephens.com";
+const TITLE = "Chaz Stephens — Medical Device Product Management";
+const DESCRIPTION =
+  "Program manager and PMP moving into medical device product management. Case study: SubQ-Confirm, a delivery-confirmation subsystem for wearable insulin pumps.";
+
 export const metadata: Metadata = {
-  title: "Chaz Stephens — Medical Device Product Management",
-  description:
-    "Program manager and PMP moving into medical device product management. Case study: SubQ-Confirm, a delivery-confirmation subsystem for wearable insulin pumps.",
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    url: SITE_URL,
+    siteName: "Chaz Stephens",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
