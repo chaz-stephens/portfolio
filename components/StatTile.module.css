@@ -1,0 +1,55 @@
+.tile {
+  display: block;
+  background: transparent;
+  border: var(--border-width-bold) solid var(--color-border-bold);
+  border-radius: var(--radius-none);
+  padding: var(--space-5);
+}
+
+.tile.link {
+  transition: border-color 150ms ease;
+}
+
+.tile.link:hover,
+.tile.link:focus-visible {
+  border-color: var(--color-accent);
+}
+
+.number {
+  display: block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 2.5rem;
+  line-height: 1.05;
+  color: var(--color-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.number.lg {
+  font-size: 4rem;
+  line-height: 1;
+}
+
+.number.accent {
+  color: var(--color-accent);
+}
+
+.label {
+  display: block;
+  margin-top: var(--space-2);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+.caption {
+  display: block;
+  margin-top: var(--space-2);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--color-ink-secondary);
+}

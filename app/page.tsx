@@ -1,69 +1,75 @@
-import Image from "next/image";
+import Link from "next/link";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import StatTile from "@/components/StatTile";
 import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
-          </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      <Header />
+      <main>
+        <div className={`container ${styles.hero}`}>
+          <div className={styles.heroInner}>
+            <span className={styles.kicker}>
+              MEDICAL DEVICE PRODUCT MANAGEMENT
+            </span>
+            <h1 className={styles.name}>Chaz Stephens</h1>
+            <p className={styles.positioning}>
+              Program manager and PMP moving into medical device product
+              management.
+            </p>
+            <p className={styles.bio}>Bio coming soon.</p>
+            <div className={styles.buttonRow}>
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary"
+              >
+                Resume
+              </a>
+              <a
+                href="mailto:castephens90@gmail.com"
+                className="btn btn-ghost"
+              >
+                Email
+              </a>
+              <a
+                href="https://www.linkedin.com/in/chaz-stephens/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-ghost"
+              >
+                LinkedIn
+              </a>
+            </div>
+          </div>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="container">
+          <Link href="/work/subq-confirm" className={styles.teaser}>
+            <span className={styles.teaserKicker}>FEATURED CASE STUDY</span>
+            <h3 className={styles.teaserTitle}>SubQ-Confirm</h3>
+            <p className={styles.teaserDescription}>
+              A delivery-confirmation subsystem concept for wearable insulin
+              pumps, developed end-to-end from clinical need through FDA
+              pathway and go-to-market.
+            </p>
+            <div className={styles.statRow}>
+              <StatTile number="$110M" label="SOM · 5 YEAR" accent />
+              <StatTile number="71%" label="GROSS MARGIN" />
+              <StatTile number="$5.25B" label="TAM · GLOBAL" />
+            </div>
+          </Link>
         </div>
+
+        <div className={styles.footerSpacer} />
       </main>
-    </div>
+      <Footer
+        tags={["PORTFOLIO", "MEDICAL DEVICE PM", "CHAZ STEPHENS © 2026"]}
+        activeTag="PORTFOLIO"
+      />
+    </>
   );
 }
