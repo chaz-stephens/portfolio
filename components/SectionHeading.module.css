@@ -17,6 +17,13 @@
   line-height: 1.05;
   letter-spacing: -0.02em;
   color: var(--color-ink);
+  /* A single long word ("Commercialization") at this size/weight measured wider than the
+     390px-viewport column and doesn't wrap on its own, causing real horizontal page overflow
+     on the go-to-market section's heading. hyphens:auto breaks it at a real syllable with a
+     visible hyphen when the browser supports it; overflow-wrap is the hard-break fallback.
+     Neither has any effect on a heading that already fits. */
+  hyphens: auto;
+  overflow-wrap: break-word;
 }
 
 @media (min-width: 768px) {
