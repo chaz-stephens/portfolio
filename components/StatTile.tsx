@@ -1,4 +1,5 @@
 import Link from "next/link";
+import CountUpNumber from "./CountUpNumber";
 import styles from "./StatTile.module.css";
 
 interface StatTileProps {
@@ -20,13 +21,12 @@ export default function StatTile({
 }: StatTileProps) {
   const content = (
     <>
-      <span
+      <CountUpNumber
+        value={number}
         className={`${styles.number} ${size === "lg" ? styles.lg : ""} ${
           accent ? styles.accent : ""
         }`}
-      >
-        {number}
-      </span>
+      />
       <span className={styles.label}>{label}</span>
       {caption ? <span className={styles.caption}>{caption}</span> : null}
     </>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import StatTile from "@/components/StatTile";
 import styles from "./page.module.css";
@@ -75,25 +76,31 @@ export default function SubQConfirmCaseStudy() {
               alarm.
             </p>
             <div className={styles.statRow}>
-              <StatTile
-                number="$5.25B"
-                label="TAM · GLOBAL"
-                caption="3.5M pump users worldwide × ~$1,500/yr of confirmation disposables"
-                size="lg"
-              />
-              <StatTile
-                number="$2.25B"
-                label="SAM · UNITED STATES"
-                caption="1.5M US pump users; closed-loop beachhead ~900K ≈ $1.35B"
-                size="lg"
-              />
-              <StatTile
-                number="$110M"
-                label="SOM · 5 YEAR"
-                caption="5% of the US pump base — ~75,000 users on subscription sets"
-                accent
-                size="lg"
-              />
+              <Reveal index={0}>
+                <StatTile
+                  number="$5.25B"
+                  label="TAM · GLOBAL"
+                  caption="3.5M pump users worldwide × ~$1,500/yr of confirmation disposables"
+                  size="lg"
+                />
+              </Reveal>
+              <Reveal index={1}>
+                <StatTile
+                  number="$2.25B"
+                  label="SAM · UNITED STATES"
+                  caption="1.5M US pump users; closed-loop beachhead ~900K ≈ $1.35B"
+                  size="lg"
+                />
+              </Reveal>
+              <Reveal index={2}>
+                <StatTile
+                  number="$110M"
+                  label="SOM · 5 YEAR"
+                  caption="5% of the US pump base — ~75,000 users on subscription sets"
+                  accent
+                  size="lg"
+                />
+              </Reveal>
             </div>
           </div>
         </section>
@@ -136,26 +143,26 @@ export default function SubQConfirmCaseStudy() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <Reveal as="tr" index={0} className={styles.tableRow}>
                   <td>Normal delivery</td>
                   <td>Normal</td>
                   <td>Dry</td>
-                </tr>
-                <tr>
+                </Reveal>
+                <Reveal as="tr" index={1} className={styles.tableRow}>
                   <td>Occlusion</td>
                   <td>High</td>
                   <td>Dry</td>
-                </tr>
-                <tr>
+                </Reveal>
+                <Reveal as="tr" index={2} className={styles.tableRow}>
                   <td>Site leak</td>
                   <td>&lt; 60% of normal</td>
                   <td>Wet</td>
-                </tr>
-                <tr>
+                </Reveal>
+                <Reveal as="tr" index={3} className={styles.tableRow}>
                   <td>Cannula-out</td>
                   <td>Low</td>
                   <td>Dry</td>
-                </tr>
+                </Reveal>
               </tbody>
             </table>
           </div>
@@ -195,11 +202,11 @@ export default function SubQConfirmCaseStudy() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <Reveal as="tr" index={0} className={styles.tableRow}>
                   <td>510(k) 4–8 mo · accessory/De Novo 9–18 mo</td>
                   <td>MDR 2017/745 Class IIa, 18–24 months</td>
                   <td>MDB Class II, 15-day target</td>
-                </tr>
+                </Reveal>
               </tbody>
             </table>
           </div>
@@ -240,9 +247,9 @@ export default function SubQConfirmCaseStudy() {
               critical-task success across adolescents, adults, and caregivers
               in a simulated home environment.
             </p>
-            <span className={styles.callout}>
+            <Reveal as="span" className={styles.callout}>
               100% critical-task success in summative usability testing
-            </span>
+            </Reveal>
           </div>
         </section>
 
@@ -272,18 +279,24 @@ export default function SubQConfirmCaseStudy() {
               Diabetes, Abbott, Dexcom.
             </p>
             <div className={styles.statRow}>
-              <StatTile
-                number="71%"
-                label="GROSS MARGIN · DISPOSABLE"
-                accent
-                size="lg"
-              />
-              <StatTile number="66%" label="GROSS MARGIN · MODULE" size="lg" />
-              <StatTile
-                number="$101M"
-                label="PROJECTED SET REVENUE AT SCALE"
-                size="lg"
-              />
+              <Reveal index={0}>
+                <StatTile
+                  number="71%"
+                  label="GROSS MARGIN · DISPOSABLE"
+                  accent
+                  size="lg"
+                />
+              </Reveal>
+              <Reveal index={1}>
+                <StatTile number="66%" label="GROSS MARGIN · MODULE" size="lg" />
+              </Reveal>
+              <Reveal index={2}>
+                <StatTile
+                  number="$101M"
+                  label="PROJECTED SET REVENUE AT SCALE"
+                  size="lg"
+                />
+              </Reveal>
             </div>
           </div>
         </section>

@@ -846,6 +846,26 @@ The color switcher and the tag/spec-sheet motifs above are half of "interactive 
 this is the other half. Two named easing curves, three named durations, everything else specified
 against them so nothing gets an ad hoc animation value.
 
+**Revision note (this pass) — case-study pages extended to the same differentiated-motion
+vocabulary the home page already had, not a new one.** The home page's stat strip counts up,
+its timeline draws its own connecting rule, and its teaser cards materialize their border — the
+two case-study pages had none of this (plain, un-animated content). Rather than invent a fourth
+recipe, the existing three extend to the content types that actually appear there:
+- **Stat tiles** (`StatTile`, both `sm` and `lg`) now render their number through the same
+  `CountUpNumber` component the home page's stat strip already uses — count-up-from-zero is now
+  a property of the shared component, not something re-implemented per page.
+- **Table rows** (the four-state table, the regulatory-pathway table) materialize their bottom
+  border row-by-row via `Reveal`'s stagger, instead of fading in as one static block. `Reveal`
+  gained an `as` prop (defaults to `div`) specifically for this — a `<tr>` can't be wrapped in a
+  div without breaking the table, so it renders as the row itself. The default opacity/translateY
+  is turned off for these rows (`opacity:1; transform:none`) — only the border draws in, which is
+  what makes it read as "this table populated itself" rather than a generic fade repeated four
+  times. `:last-child` is always excluded (it has no border-bottom to begin with).
+- **The pull-quote callout** ("100% critical-task success...") draws a vertical accent bar
+  top-to-bottom via the same `scaleY` technique as the timeline's connecting rule, also with its
+  own fade/translate turned off — the bar drawing in front of a static quote reads as "this got
+  underlined for you," not another fade block.
+
 ```css
 :root {
   --duration-micro:      150ms; /* hover/focus state changes */

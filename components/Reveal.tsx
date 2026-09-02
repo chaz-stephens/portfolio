@@ -1,12 +1,21 @@
 "use client";
 
-import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type ElementType,
+  type ReactNode,
+} from "react";
 
 interface RevealProps {
   children: ReactNode;
   /** Position within a staggered group; delay is capped at the 5th item (index 4). */
   index?: number;
   className?: string;
+  /** Rendered element — "tr" for table-row reveals, which can't be wrapped in a div. */
+  as?: ElementType;
 }
 
 const STAGGER_MS = 80;
@@ -33,8 +42,9 @@ function getReducedMotionServerSnapshot() {
  * useSyncExternalStore, not a plain effect, so there's no setState-in-effect on mount) by
  * skipping the observer entirely and rendering at final state immediately.
  */
-export default function Reveal({ children, index = 0, className = "" }: RevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
+export default function Reveal({ children, index = 0, className = "", as }: RevealProps) {
+  const Tag = as || "div";
+  const ref = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
   const prefersReducedMotion = useSyncExternalStore(
     subscribeReducedMotion,
@@ -62,12 +72,12 @@ export default function Reveal({ children, index = 0, className = "" }: RevealPr
   const isVisible = visible || prefersReducedMotion;
 
   return (
-    <div
+    <Tag
       ref={ref}
       className={`reveal ${isVisible ? "reveal-visible" : ""} ${className}`.trim()}
       style={{ transitionDelay: `${Math.min(index, STAGGER_CAP) * STAGGER_MS}ms` }}
     >
       {children}
-    </div>
+    </Tag>
   );
 }

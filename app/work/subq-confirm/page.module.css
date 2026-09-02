@@ -110,7 +110,38 @@
   border-bottom: none;
 }
 
+/* Table rows materialize their border row-by-row on scroll entrance, instead of the table
+   appearing as one plain fade block — the same "distinct entrance per content type" idea as
+   the home page's timeline-draw and card-border-materialize (DESIGN_SPEC.md §5). Overrides
+   Reveal's default opacity/transform (rows stay fully visible; only the rule draws in) since
+   a table row fading and sliding reads as broken, not considered. :last-child is excluded
+   throughout — it has no border-bottom to begin with (immediately above). */
+:global(.js) .tableRow {
+  opacity: 1;
+  transform: none;
+}
+
+:global(.js) .tableRow:not(:last-child) td,
+:global(.js) .tableRow:not(:last-child) th {
+  border-bottom-color: transparent;
+  transition: border-bottom-color var(--duration-reveal) var(--ease-reveal);
+}
+
+:global(.js) .tableRow:global(.reveal-visible):not(:last-child) td,
+:global(.js) .tableRow:global(.reveal-visible):not(:last-child) th {
+  border-bottom-color: var(--color-border-hairline);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :global(.js) .tableRow:not(:last-child) td,
+  :global(.js) .tableRow:not(:last-child) th {
+    transition: none;
+    border-bottom-color: var(--color-border-hairline);
+  }
+}
+
 .callout {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
@@ -123,6 +154,43 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-ink);
+  /* No opacity/transform fade on this one — the accent bar drawing in (below) is its
+     entrance, the same "distinct language per content type" idea as the table rows above. */
+  opacity: 1;
+  transform: none;
+}
+
+/* A vertical accent bar draws top-to-bottom on scroll entrance, the same scaleY technique
+   as the home page timeline's connecting rule (DESIGN_SPEC.md §5) — a pull-quote's entrance
+   reads as "this got underlined for you," not another fade block. */
+.callout::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: -1px;
+  bottom: -1px;
+  width: 2px;
+  background: var(--color-accent);
+  transform: scaleY(0);
+  transform-origin: top;
+}
+
+:global(.js) .callout::before {
+  transition: transform 900ms var(--ease-reveal);
+}
+
+:global(.js) .callout:global(.reveal-visible)::before {
+  transform: scaleY(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .callout::before {
+    transform: scaleY(1);
+  }
+
+  :global(.js) .callout::before {
+    transition: none;
+  }
 }
 
 .cta {

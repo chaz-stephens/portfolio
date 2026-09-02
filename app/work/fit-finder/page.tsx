@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import StatTile from "@/components/StatTile";
 import styles from "./page.module.css";
@@ -55,9 +56,15 @@ export default function FitFinderCaseStudy() {
               </p>
             </div>
             <div className={styles.statRow}>
-              <StatTile number="1,115+" label="CATALOG MODELS" size="lg" />
-              <StatTile number="TOP" label="TRAFFIC ON SITE" accent size="lg" />
-              <StatTile number="IN REVIEW" label="GOOGLE PLAY STORE" size="lg" />
+              <Reveal index={0}>
+                <StatTile number="1,115+" label="CATALOG MODELS" size="lg" />
+              </Reveal>
+              <Reveal index={1}>
+                <StatTile number="TOP" label="TRAFFIC ON SITE" accent size="lg" />
+              </Reveal>
+              <Reveal index={2}>
+                <StatTile number="IN REVIEW" label="GOOGLE PLAY STORE" size="lg" />
+              </Reveal>
             </div>
           </div>
         </section>
