@@ -22,6 +22,18 @@
   transition: box-shadow var(--duration-micro) var(--ease-standard);
 }
 
+.cellFeatured:has(.cellLink):hover {
+  box-shadow: 6px 6px 0 0 var(--color-accent);
+}
+
+/* Fills the cell so the whole card/cell is clickable, not just the text — used for stats with
+   a real proof link (a DOI, a patent record), so a small count reads as a verifiable fact. */
+.cellLink {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
 :global(.wash-swap) .cellFeatured {
   animation: statFeaturedWashPulse var(--duration-transition) var(--ease-standard);
 }
@@ -39,13 +51,31 @@
 }
 
 .featuredNumber {
-  display: block;
+  position: relative;
+  display: inline-block;
   font-family: var(--font-sans);
   font-weight: 900;
   font-size: 3rem;
   line-height: 1;
   color: var(--color-accent);
   font-variant-numeric: tabular-nums;
+}
+
+.featuredNumber::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 200ms var(--ease-standard);
+}
+
+.cellFeatured:hover .featuredNumber::after {
+  transform: scaleX(1);
 }
 
 .featuredLabel {
@@ -183,8 +213,13 @@
     transition: none;
   }
 
+  .cellFeatured:has(.cellLink):hover {
+    box-shadow: var(--shadow-resting-accent);
+  }
+
   .number,
   .number::after,
+  .featuredNumber::after,
   .label {
     transition: none;
   }

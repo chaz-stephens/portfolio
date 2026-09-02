@@ -6,10 +6,29 @@ interface StatStripItem {
   number: string;
   label: string;
   accent?: boolean;
+  /** External proof link (a DOI, a patent record) — makes a bare count a verifiable fact. */
+  href?: string;
 }
 
 interface StatStripProps {
   items: StatStripItem[];
+}
+
+function StatContent({
+  item,
+  numberClassName,
+  labelClassName,
+}: {
+  item: StatStripItem;
+  numberClassName: string;
+  labelClassName: string;
+}) {
+  return (
+    <>
+      <CountUpNumber value={item.number} className={numberClassName} />
+      <span className={labelClassName}>{item.label}</span>
+    </>
+  );
 }
 
 // Size-chart stat strip (DESIGN_SPEC.md §4, home page only). The accent-flagged stat (the
@@ -17,7 +36,9 @@ interface StatStripProps {
 // number — instead of just a color tint inside an otherwise-identical grid cell; the fresh-
 // eyes critique's "reads as lazy" complaint was that four unequal-importance stats got
 // identical typographic treatment. The remaining stats sit on a shared hairline rule,
-// separated by the timeline's own bar-tack tick motif rather than a plain divider.
+// separated by the timeline's own bar-tack tick motif rather than a plain divider. Stats with
+// an `href` (the patent, the flagship publication) render as links to the real record, so a
+// small count reads as a verifiable fact rather than an unsubstantiated number.
 export default function StatStrip({ items }: StatStripProps) {
   const featuredIndex = items.findIndex((item) => item.accent);
   const featured = featuredIndex >= 0 ? items[featuredIndex] : null;
@@ -27,15 +48,43 @@ export default function StatStrip({ items }: StatStripProps) {
     <div className={styles.strip}>
       {featured ? (
         <Reveal index={0} className={styles.cellFeatured}>
-          <CountUpNumber value={featured.number} className={styles.featuredNumber} />
-          <span className={styles.featuredLabel}>{featured.label}</span>
+          {featured.href ? (
+            <a
+              href={featured.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.cellLink}
+            >
+              <StatContent
+                item={featured}
+                numberClassName={styles.featuredNumber}
+                labelClassName={styles.featuredLabel}
+              />
+            </a>
+          ) : (
+            <StatContent
+              item={featured}
+              numberClassName={styles.featuredNumber}
+              labelClassName={styles.featuredLabel}
+            />
+          )}
         </Reveal>
       ) : null}
       <div className={styles.group}>
         {rest.map((item, i) => (
           <Reveal key={item.label} index={featured ? i + 1 : i} className={styles.cell}>
-            <CountUpNumber value={item.number} className={styles.number} />
-            <span className={styles.label}>{item.label}</span>
+            {item.href ? (
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.cellLink}
+              >
+                <StatContent item={item} numberClassName={styles.number} labelClassName={styles.label} />
+              </a>
+            ) : (
+              <StatContent item={item} numberClassName={styles.number} labelClassName={styles.label} />
+            )}
           </Reveal>
         ))}
       </div>

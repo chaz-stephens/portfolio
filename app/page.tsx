@@ -35,7 +35,7 @@ const SKILLS = [
   {
     label: "AI Fluency",
     items: [
-      "Practical use of AI tools (Claude) in daily workflow",
+      "Practical use of AI tools (Claude, Gemini, Copilot) in daily workflow",
       "Google Generative AI Leader certification (in progress)",
     ],
   },
@@ -61,7 +61,7 @@ const EXPERIENCE = [
     role: "Scientific Program Manager",
     dates: "March 2017 – March 2021",
     description:
-      "Managed biomarker studies and clinical trial operations for the Cancer Therapy Evaluation Program across 100+ trials.",
+      "Managed biomarker studies and clinical trial operations for the Cancer Therapy Evaluation Program across 100+ trials, recognized with NCI's Distinguished Achievement Award in 2018 and 2020.",
   },
   {
     company: "Smithers Avanza",
@@ -174,8 +174,17 @@ export default function Home() {
               items={[
                 { number: "9+", label: "YRS EXP" },
                 { number: "100+", label: "CLINICAL TRIALS" },
-                { number: "1", label: "PATENT", accent: true },
-                { number: "2", label: "PUBLISHED" },
+                {
+                  number: "1",
+                  label: "PATENT",
+                  accent: true,
+                  href: "https://patents.google.com/patent/US11096952B2/en",
+                },
+                {
+                  number: "2",
+                  label: "PUBLISHED",
+                  href: "https://doi.org/10.1371/journal.pone.0109208",
+                },
               ]}
             />
 

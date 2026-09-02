@@ -693,9 +693,18 @@ privilege instead of just a color tint; the rest drop the single bordered contai
 - Responsive: below 640px the featured stat takes the full row width and the rest wrap two-per-
   row; the dashed dividers/ticks drop (no adjacent-cell relationship to mark at that width).
 
-**Hover (tactile, informational not a link):** unchanged — a cell's label transitions
-`--color-ink-muted` → `--color-ink` and a 1px underline draws under the number, 200ms,
-`--ease-standard`.
+**Hover:** a cell's label transitions `--color-ink-muted` → `--color-ink` and a 1px underline
+draws under the number, 200ms, `--ease-standard`.
+
+**Proof links (this pass).** Stakeholder feedback: the stats "feel a little hollow and
+insignificant when they're such small numbers." A bare count is a claim; a count that links to
+the real record (a DOI, a patent) is a verifiable fact, which is what actually gives a small
+number weight — not a bigger font or a brighter color. Any item with an `href` renders its whole
+cell as a plain external link (`color: inherit`, no underline on the link itself, the existing
+hover-underline on the number is the only visual cue) rather than adding new link chrome. The
+patent stat links to its Google Patents record; the publication count links to the more
+significant of the two papers (PLoS One, per the same significance call already made when
+ordering them on the resume) rather than trying to represent two DOIs in one stat.
 
 ### Capabilities grid (new this pass)
 
