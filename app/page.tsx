@@ -11,26 +11,36 @@ const EXPERIENCE = [
     company: "Merck",
     role: "Associate Director, Global Clinical Data Standards",
     dates: "January 2023 – Present",
+    description:
+      "Led the company-wide SDTM Implementation Guide v3.4 rollout and direct the cross-functional governance network for immunology and vaccine clinical data.",
   },
   {
     company: "Quest Diagnostics",
     role: "Senior Project Manager, Oncology Clinical Franchise",
     dates: "March 2021 – January 2023",
+    description:
+      "Oversaw cross-functional teams delivering cancer diagnostic products from concept through post-launch.",
   },
   {
     company: "National Cancer Institute",
     role: "Scientific Program Manager",
     dates: "March 2017 – March 2021",
+    description:
+      "Managed biomarker studies and clinical trial operations for the Cancer Therapy Evaluation Program across 100+ trials.",
   },
   {
     company: "Smithers Avanza",
     role: "Study Coordinator II",
     dates: "June 2016 – March 2017",
+    description:
+      "Supported assay transfer, validation, and quality control across all phases of contract lab work.",
   },
   {
     company: "Champions Oncology",
     role: "Project Leader",
     dates: "September 2015 – May 2016",
+    description:
+      "Served as point-of-contact project manager for pharmaceutical clients' xenograft studies, from proposal through execution.",
   },
 ];
 
@@ -135,6 +145,7 @@ export default function Home() {
                   <span className={styles.timelineDate}>{job.dates}</span>
                   <span className={styles.timelineRole}>{job.role}</span>
                   <span className={styles.timelineCompany}>{job.company}</span>
+                  <p className={styles.timelineDescription}>{job.description}</p>
                 </Reveal>
               ))}
             </div>
