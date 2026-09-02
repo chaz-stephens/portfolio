@@ -92,6 +92,9 @@
 }
 
 .title {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
   margin-top: var(--space-3);
   font-family: var(--font-sans);
   font-weight: 800;
@@ -99,6 +102,21 @@
   line-height: 1.15;
   letter-spacing: -0.01em;
   color: var(--color-ink);
+}
+
+/* Whole-card link affordance (matches StatStrip's .linkMark treatment): a static arrow next
+   to the title signals "this opens full details" up front, not only on hover. */
+.arrow {
+  font-size: 1.25rem;
+  color: var(--color-ink-muted);
+  transition: color var(--duration-micro) var(--ease-standard),
+    transform var(--duration-micro) var(--ease-standard);
+}
+
+.card:hover .arrow,
+.card:focus-visible .arrow {
+  color: var(--color-accent);
+  transform: translate(2px, -2px);
 }
 
 .description {
@@ -206,6 +224,11 @@
   .card:active {
     transform: none;
     box-shadow: var(--shadow-bold-accent);
+  }
+
+  .card:hover .arrow,
+  .card:focus-visible .arrow {
+    transform: none;
   }
 
   :global(.wash-swap) .card {

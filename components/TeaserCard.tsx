@@ -25,7 +25,12 @@ export default function TeaserCard({ href, metadata, title, description, stats }
     <Link href={href} className={styles.card}>
       <span className={styles.seam} aria-hidden="true" />
       <span className={styles.metadata}>{metadata.join(" / ")}</span>
-      <h3 className={styles.title}>{title}</h3>
+      <h3 className={styles.title}>
+        {title}
+        <span className={styles.arrow} aria-hidden="true">
+          ↗
+        </span>
+      </h3>
       <p className={styles.description}>{description}</p>
       <div className={styles.statRow}>
         {stats.map((stat) => (

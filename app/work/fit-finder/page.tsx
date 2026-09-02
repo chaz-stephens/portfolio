@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import StatTile from "@/components/StatTile";
+import ImageLightbox from "@/components/ImageLightbox";
 import styles from "./page.module.css";
 
 const TITLE = "Fit Finder: Product Case Study | Chaz Stephens";
@@ -116,34 +117,31 @@ export default function FitFinderCaseStudy() {
               review.
             </p>
             <Reveal>
-              <img
+              <ImageLightbox
                 src="/fit-finder/tool-browse.png"
                 alt="Fit Finder's web tool filter UI, with controls for waist, inseam, rise, and fit category"
                 width={1440}
                 height={900}
                 className={styles.mediaWeb}
-                loading="lazy"
               />
             </Reveal>
             <div className={styles.mediaPhones}>
               <Reveal index={0}>
-                <img
+                <ImageLightbox
                   src="/fit-finder/app-my-closet.png"
                   alt="Fit Finder Android app Closet Insights screen, comparing a saved pair's measurements against the user's profile"
                   width={1080}
                   height={1460}
                   className={styles.mediaPhone}
-                  loading="lazy"
                 />
               </Reveal>
               <Reveal index={1}>
-                <img
+                <ImageLightbox
                   src="/fit-finder/app-premium.png"
                   alt="Fit Finder Android app premium upgrade screen, listing Closet, Wishlist, Insights, and notification features"
                   width={1080}
                   height={1920}
                   className={styles.mediaPhone}
-                  loading="lazy"
                 />
               </Reveal>
             </div>
