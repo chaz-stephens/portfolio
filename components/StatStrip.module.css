@@ -22,7 +22,8 @@
   transition: box-shadow var(--duration-micro) var(--ease-standard);
 }
 
-.cellFeatured:has(.cellLink):hover {
+.cellFeatured:has(.cellLink):hover,
+.cellFeatured:has(.cellLink:focus-visible) {
   box-shadow: 6px 6px 0 0 var(--color-accent);
 }
 
@@ -69,7 +70,8 @@
   transition: color 200ms var(--ease-standard);
 }
 
-.cellLink:hover .linkMark {
+.cellLink:hover .linkMark,
+.cellLink:focus-visible .linkMark {
   color: var(--color-accent);
 }
 
@@ -105,7 +107,8 @@
   transform: scaleX(1);
 }
 
-.cellLink:hover .featuredNumber::after {
+.cellLink:hover .featuredNumber::after,
+.cellLink:focus-visible .featuredNumber::after {
   background: var(--color-accent);
 }
 
@@ -198,7 +201,8 @@
   transform: scaleX(1);
 }
 
-.cellLink:hover .number::after {
+.cellLink:hover .number::after,
+.cellLink:focus-visible .number::after {
   background: var(--color-accent);
 }
 
@@ -214,7 +218,8 @@
   transition: color 200ms var(--ease-standard);
 }
 
-.cellLink:hover .label {
+.cellLink:hover .label,
+.cellLink:focus-visible .label {
   color: var(--color-ink);
 }
 
@@ -251,7 +256,8 @@
     transition: none;
   }
 
-  .cellFeatured:has(.cellLink):hover {
+  .cellFeatured:has(.cellLink):hover,
+  .cellFeatured:has(.cellLink:focus-visible) {
     box-shadow: var(--shadow-resting-accent);
   }
 
