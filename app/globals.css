@@ -74,10 +74,16 @@
      for the case study's restrained register. See DESIGN_SPEC.md §3. */
   --shadow-offset: 4px;
   --shadow-offset-sm: 2px;
+  --shadow-offset-lg: 8px;
   --shadow-resting-accent: var(--shadow-offset) var(--shadow-offset) 0 0
     var(--color-accent);
   --shadow-resting-neutral: var(--shadow-offset-sm) var(--shadow-offset-sm) 0 0
     var(--color-border-hairline);
+  /* The one bold, high-coverage accent moment per page (fresh-eyes critique: an
+     accent-colored shadow on every bordered surface diluted the color to trim rather than a
+     considered accent). Reserved for the teaser cards — the actual proof-of-work. */
+  --shadow-bold-accent: var(--shadow-offset-lg) var(--shadow-offset-lg) 0 0
+    var(--color-accent);
 
   --page-pad: 20px;
 }
@@ -118,25 +124,9 @@
   }
 }
 
-/* Accent-shadowed surface contract (DESIGN_SPEC.md §3, §4 "places accent appears" #7).
-   Applied to the primary button, both teaser cards, the size-chart strip, the hero
-   spec-strip, and the wash switcher — every home-page surface that should visibly confirm
-   a wash change, not just the two or three small elements the previous pass touched. */
-.accentSurface {
-  box-shadow: var(--shadow-resting-accent);
-  transition: box-shadow var(--duration-micro) var(--ease-standard),
-    transform var(--duration-micro) var(--ease-standard);
-}
-
-.accentSurface:hover {
-  box-shadow: 6px 6px 0 0 var(--color-accent);
-}
-
-.accentSurface:active {
-  box-shadow: 0 0 0 0 var(--color-accent);
-  transform: translate(var(--shadow-offset), var(--shadow-offset));
-}
-
+/* Neutral-shadowed surface contract (DESIGN_SPEC.md §3). Applied to the wash switcher and
+   hero spec-strip — secondary/tertiary surfaces that stay quiet so the teaser cards' bold
+   accent shadow (see --shadow-bold-accent) is the one loud accent moment per page. */
 .neutralSurface {
   box-shadow: var(--shadow-resting-neutral);
   transition: box-shadow var(--duration-micro) var(--ease-standard),
@@ -152,10 +142,10 @@
   transform: translate(var(--shadow-offset-sm), var(--shadow-offset-sm));
 }
 
-/* Wash-swap pulse (DESIGN_SPEC.md §5): every accent-shadowed surface gets a synchronized
-   scale pulse for the duration of the color transition, toggled via a `wash-swap` class
-   WashSwitcher adds to <html> for 500ms on each click. One shared animation, not a
-   per-component script. */
+/* Wash-swap pulse (DESIGN_SPEC.md §5): the primary button's synchronized scale pulse for the
+   duration of the color transition, toggled via a `wash-swap` class WashSwitcher adds to
+   <html> for 500ms on each click (the teaser cards and size-chart strip use their own
+   identically-shaped keyframes, since they carry their own bold/neutral shadow tokens). */
 @keyframes washPulse {
   0% {
     transform: scale(1);
@@ -168,30 +158,13 @@
   }
 }
 
-.wash-swap .accentSurface {
-  animation: washPulse var(--duration-transition) var(--ease-standard);
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .accentSurface,
-  .accentSurface:hover,
-  .accentSurface:active,
   .neutralSurface,
   .neutralSurface:hover,
   .neutralSurface:active {
     transition: none;
     transform: none;
-    box-shadow: var(--shadow-resting-accent);
-  }
-
-  .neutralSurface,
-  .neutralSurface:hover,
-  .neutralSurface:active {
     box-shadow: var(--shadow-resting-neutral);
-  }
-
-  .wash-swap .accentSurface {
-    animation: none;
   }
 }
 
@@ -324,13 +297,15 @@ table {
 }
 
 /* Primary (Resume, case-study PDF CTA) — the button direct feedback singled out as
-   "reads like an error." Fill/text/border unchanged; radius + a hard accent shadow is the
-   whole fix (DESIGN_SPEC.md §4/§7). */
+   "reads like an error." Its accent identity comes from the fill, not the shadow (fresh-eyes
+   critique: an accent-colored shadow on every bordered surface was diluting the color to
+   trim) — shadow is the neutral/tertiary register, same as the ghost button. The hover lift
+   is what gives it more presence than a secondary content card, not the shadow color. */
 .btn-primary {
   background: var(--color-accent);
   color: var(--color-ink);
   border-color: var(--color-accent);
-  box-shadow: var(--shadow-resting-accent);
+  box-shadow: var(--shadow-resting-neutral);
 }
 
 .btn-primary:hover,
@@ -338,12 +313,13 @@ table {
   background: transparent;
   border-color: var(--color-accent);
   color: var(--color-accent);
-  box-shadow: 6px 6px 0 0 var(--color-accent);
+  box-shadow: 4px 4px 0 0 var(--color-border-hairline);
+  transform: translateY(-1px);
 }
 
 .btn-primary:active {
-  box-shadow: 0 0 0 0 var(--color-accent);
-  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  box-shadow: 0 0 0 0 var(--color-border-hairline);
+  transform: translate(var(--shadow-offset-sm), var(--shadow-offset-sm));
 }
 
 .wash-swap .btn-primary {
@@ -381,7 +357,7 @@ table {
   .btn-primary,
   .btn-primary:hover,
   .btn-primary:active {
-    box-shadow: var(--shadow-resting-accent);
+    box-shadow: var(--shadow-resting-neutral);
   }
   .btn-ghost,
   .btn-ghost:hover,

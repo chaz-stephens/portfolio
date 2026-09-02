@@ -53,9 +53,13 @@
     grid-template-columns: minmax(0, 1fr) 320px;
     column-gap: var(--space-9);
     row-gap: var(--space-4);
+    /* H1 spans both columns instead of being boxed into the left track (fresh-eyes
+       critique: display:body ratio was only 7.5:1 confined to a 656px column — letting
+       the name run the full 1200px container is the cheapest, biggest lever on making
+       the hero feel monumental instead of polite). */
     grid-template-areas:
-      "kicker      spec"
-      "name        spec"
+      "kicker      kicker"
+      "name        name"
       "positioning spec"
       "bio         spec"
       "buttons     spec";
@@ -93,6 +97,14 @@
 @media (min-width: 768px) {
   .name {
     font-size: 7.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Now that the name spans the full 1200px container instead of a 656px column, it can
+     afford to be larger — pushes display:body ratio from 7.5:1 to 10:1. */
+  .name {
+    font-size: 10rem;
   }
 }
 
@@ -138,6 +150,34 @@
   padding-bottom: var(--space-9);
 }
 
+.statsKicker {
+  display: block;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+.statsHeadline {
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-8);
+  max-width: 720px;
+  font-family: var(--font-sans);
+  font-weight: 900;
+  font-size: 2.5rem;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: var(--color-ink);
+}
+
+@media (min-width: 768px) {
+  .statsHeadline {
+    font-size: 4rem;
+  }
+}
+
 .timelineWrap {
   margin-top: var(--space-9);
 }
@@ -153,12 +193,36 @@
 }
 
 .timeline {
+  position: relative;
   margin-top: var(--space-5);
   padding-left: var(--space-6);
-  border-left: var(--border-width-hairline) solid var(--color-border-hairline);
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
+}
+
+/* Timeline entries draw their connecting rule as they enter (fresh-eyes critique #5) —
+   a distinct entrance language from the plain fade+translateY used for stat cells and the
+   teaser cards. No-JS/reduced-motion fallback: fully drawn, matching the old static border. */
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--border-width-hairline);
+  height: 100%;
+  background: var(--color-border-hairline);
+  transform: scaleY(1);
+  transform-origin: top;
+}
+
+:global(.js) .timeline::before {
+  transform: scaleY(0);
+  transition: transform 900ms var(--ease-reveal);
+}
+
+.timeline:has(:global(.reveal-visible))::before {
+  transform: scaleY(1);
 }
 
 .timelineItem {
@@ -248,4 +312,11 @@
 .contactSection {
   padding-top: var(--space-9);
   padding-bottom: var(--space-11);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :global(.js) .timeline::before {
+    transition: none;
+    transform: scaleY(1);
+  }
 }

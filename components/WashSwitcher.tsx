@@ -75,7 +75,7 @@ export default function WashSwitcher() {
           <button
             key={w.id}
             type="button"
-            className={`${styles.swatch} accentSurface ${active === w.id ? styles.active : ""}`}
+            className={`${styles.swatch} neutralSurface ${active === w.id ? styles.active : ""}`}
             style={{ backgroundColor: w.hex }}
             onClick={() => selectWash(w.id)}
             aria-label={`${w.label} accent`}

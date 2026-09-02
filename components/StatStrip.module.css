@@ -19,7 +19,7 @@
   grid-template-columns: repeat(4, 1fr);
   border: var(--border-width-bold) solid var(--color-border-bold);
   border-radius: var(--radius-surface);
-  box-shadow: var(--shadow-resting-accent);
+  box-shadow: var(--shadow-resting-neutral);
 }
 
 :global(.wash-swap) .strip {

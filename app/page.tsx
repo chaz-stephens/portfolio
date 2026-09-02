@@ -125,10 +125,16 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Career stats + work-history timeline — the density-break flip to light canvas */}
+        {/* Career stats + work-history timeline — the density-break flip to light canvas.
+            A real H2 crescendo here (the home page previously peaked once at the hero, then
+            never exceeded 40px again — the case study alternates a 64px H2 every 700-900px;
+            this gives the home page a second beat with the same rhythm). */}
         <section className={`theme-light container ${styles.section} ${styles.statsSection}`}>
+          <span className={styles.statsKicker}>CAREER SPEC</span>
+          <h2 className={styles.statsHeadline}>
+            From bench science to shipped product.
+          </h2>
           <StatStrip
-            kicker="CAREER SPEC"
             items={[
               { number: "9+", label: "YRS EXP" },
               { number: "100+", label: "CLINICAL TRIALS" },

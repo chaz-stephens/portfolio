@@ -1,3 +1,4 @@
+import CountUpNumber from "./CountUpNumber";
 import styles from "./HeroSpecStrip.module.css";
 
 // The hero's right-column device (DESIGN_SPEC.md §4/§6) — replaces the empty space beside
@@ -19,11 +20,11 @@ export default function HeroSpecStrip({
   statLabel,
 }: HeroSpecStripProps) {
   return (
-    <div className={`${styles.strip} accentSurface`}>
+    <div className={`${styles.strip} neutralSurface`}>
       <span className={styles.kicker}>{kicker}</span>
       <p className={styles.line}>{line}</p>
       <div className={styles.stat}>
-        <span className={styles.statNumber}>{statNumber}</span>
+        <CountUpNumber value={statNumber} className={styles.statNumber} />
         <span className={styles.statLabel}>{statLabel}</span>
       </div>
     </div>

@@ -6,21 +6,41 @@
   border-radius: var(--radius-surface);
   padding: var(--space-6);
   clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
-  box-shadow: var(--shadow-resting-accent);
+  /* The one bold, high-coverage accent moment per page (fresh-eyes critique #4) — every
+     other bordered surface now carries a neutral shadow, so this is the single loudest
+     accent element on the home page, and the wash switcher's payoff lands here. */
+  box-shadow: var(--shadow-bold-accent);
   transition: border-color var(--duration-micro) var(--ease-standard),
     transform var(--duration-micro) var(--ease-standard),
     box-shadow var(--duration-micro) var(--ease-standard);
+}
+
+/* Border-color materialize on scroll entrance (fresh-eyes critique #5) — a distinct entrance
+   language from the plain fade+translateY used for stat cells and the hero. No-JS/reduced-
+   motion fallback: the full ink border below is the safe default and simply never fades out. */
+:global(.js) .card {
+  border-color: transparent;
+  transition: border-color var(--duration-reveal) var(--ease-reveal),
+    transform var(--duration-micro) var(--ease-standard),
+    box-shadow var(--duration-micro) var(--ease-standard);
+}
+
+:global(.js) :global(.reveal-visible) .card {
+  border-color: var(--color-border-bold);
 }
 
 .card:hover,
 .card:focus-visible {
   border-color: var(--color-accent);
   transform: translateY(-2px);
-  box-shadow: 6px 6px 0 0 var(--color-accent);
+  box-shadow: 12px 12px 0 0 var(--color-accent);
+  transition: border-color var(--duration-micro) var(--ease-standard),
+    transform var(--duration-micro) var(--ease-standard),
+    box-shadow var(--duration-micro) var(--ease-standard);
 }
 
 .card:active {
-  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  transform: translate(var(--shadow-offset-lg), var(--shadow-offset-lg));
   box-shadow: 0 0 0 0 var(--color-accent);
 }
 
@@ -133,8 +153,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .card {
+  .card,
+  :global(.js) .card {
     transition: border-color var(--duration-micro) var(--ease-standard);
+    border-color: var(--color-border-bold);
   }
 
   .card,
@@ -142,7 +164,7 @@
   .card:focus-visible,
   .card:active {
     transform: none;
-    box-shadow: var(--shadow-resting-accent);
+    box-shadow: var(--shadow-bold-accent);
   }
 
   :global(.wash-swap) .card {

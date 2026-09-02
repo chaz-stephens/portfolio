@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import CountUpNumber from "./CountUpNumber";
 import styles from "./StatStrip.module.css";
 
 interface StatStripItem {
@@ -26,9 +27,10 @@ export default function StatStrip({ kicker, items }: StatStripProps) {
       <div className={styles.strip}>
         {items.map((item, i) => (
           <Reveal key={item.label} index={i} className={styles.cell}>
-            <span className={`${styles.number} ${item.accent ? styles.accent : ""}`}>
-              {item.number}
-            </span>
+            <CountUpNumber
+              value={item.number}
+              className={`${styles.number} ${item.accent ? styles.accent : ""}`}
+            />
             <span className={styles.label}>{item.label}</span>
           </Reveal>
         ))}
