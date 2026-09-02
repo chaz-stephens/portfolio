@@ -31,14 +31,15 @@ export default function StatTile({
       {caption ? <span className={styles.caption}>{caption}</span> : null}
     </>
   );
+  const tileClassName = `${styles.tile} ${accent ? styles.tileAccent : ""}`;
 
   if (href) {
     return (
-      <Link href={href} className={`${styles.tile} ${styles.link}`}>
+      <Link href={href} className={`${tileClassName} ${styles.link}`}>
         {content}
       </Link>
     );
   }
 
-  return <div className={styles.tile}>{content}</div>;
+  return <div className={tileClassName}>{content}</div>;
 }

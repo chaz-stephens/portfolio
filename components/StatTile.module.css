@@ -51,6 +51,21 @@
   color: var(--color-accent);
 }
 
+/* Filled panel, not just a colored number: a plain --color-accent number reads fine in
+   Raw/Indigo/Stone, but in Ecru it sits only ~1.1:1 from the surrounding ink text, so the
+   "this is the one to notice" signal disappears in that wash. Same fill/text tokens the
+   button and TeaserCard's accent stat already use, so it's wash-safe everywhere. */
+.tile.tileAccent {
+  background: var(--color-btn-fill);
+  border-color: var(--color-btn-fill);
+}
+
+.tileAccent .number,
+.tileAccent .label,
+.tileAccent .caption {
+  color: var(--color-on-accent);
+}
+
 .label {
   display: block;
   margin-top: var(--space-2);

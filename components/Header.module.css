@@ -109,10 +109,21 @@
 }
 
 .contactLink {
+  position: relative;
   font-size: 0.875rem;
   color: var(--color-ink-secondary);
   text-decoration: underline;
   transition: color var(--duration-micro) var(--ease-standard);
+}
+
+/* Invisible hit-slop: plain underlined text has no padding to grow into without changing how
+   it looks, so the tappable area extends past the visible glyphs instead. 6px each side keeps
+   Email and LinkedIn's expanded zones clear of each other and of the wash switcher across the
+   24px (--space-5) gaps on both sides. */
+.contactLink::before {
+  content: "";
+  position: absolute;
+  inset: -8px -6px;
 }
 
 .contactLink:hover,
