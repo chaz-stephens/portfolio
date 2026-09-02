@@ -14,9 +14,9 @@
 
   /* Denim-wash accent palette — fixed hex definitions. Never referenced directly by
      components; the JS switcher repoints --color-accent / --color-accent-on-light below. */
-  --wash-raw: #b17030;
+  --wash-raw: #7a5cff;
   --wash-indigo: #4c6edb;
-  --wash-black: #767c86;
+  --wash-stone: #767c86;
   --wash-ecru: #d8c9a3;
   --wash-ecru-ink: #7a6a42;
 
@@ -39,8 +39,7 @@
 
   /* Fonts */
   --font-sans: var(--font-archivo), "Archivo", system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), "JetBrains Mono", ui-monospace,
-    monospace;
+  --font-label: var(--font-archivo-narrow), "Archivo Narrow", system-ui, sans-serif;
 
   /* Spacing */
   --space-1: 4px;

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo, JetBrains_Mono } from "next/font/google";
+import { Archivo, Archivo_Narrow } from "next/font/google";
 import "./globals.css";
 
 const archivo = Archivo({
@@ -9,10 +9,14 @@ const archivo = Archivo({
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
+// Label/kicker face — same superfamily as the display face (same foundry, same grotesque
+// skeleton) rather than a second, unrelated typeface. Deliberately not a monospace: heavy
+// mono-for-labels is a common "AI-generated portfolio" tell. Only 600/700 are loaded; label
+// styles must not use font-weight 500 (it would fall back to a synthetic/regular weight).
+const archivoNarrow = Archivo_Narrow({
   subsets: ["latin"],
-  weight: ["500", "700"],
-  variable: "--font-jetbrains-mono",
+  weight: ["600", "700"],
+  variable: "--font-archivo-narrow",
   display: "swap",
 });
 
@@ -47,7 +51,7 @@ export const metadata: Metadata = {
 // DESIGN_SPEC.md §1a). Runs before any CSS renders, so no-JS visitors and first-time
 // visitors both see the CSS default (Indigo) with no flash-then-jump on repeat visits.
 const WASH_SCRIPT = `(function(){try{
-  var WASHES={raw:"#B17030",indigo:"#4C6EDB",black:"#767C86",ecru:"#D8C9A3"};
+  var WASHES={raw:"#7A5CFF",indigo:"#4C6EDB",stone:"#767C86",ecru:"#D8C9A3"};
   var ECRU_INK="#7A6A42";
   var stored=localStorage.getItem("ia-wash");
   var wash=WASHES[stored]?stored:"indigo";
@@ -63,7 +67,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${archivo.variable} ${jetbrainsMono.variable}`}
+      className={`${archivo.variable} ${archivoNarrow.variable}`}
       suppressHydrationWarning
     >
       <head>

@@ -6,10 +6,10 @@
 
 .kicker {
   display: block;
-  font-family: var(--font-mono);
-  font-weight: 500;
+  font-family: var(--font-label);
+  font-weight: 600;
   font-size: 0.75rem;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-ink-muted);
 }
@@ -53,8 +53,8 @@
 .number {
   position: relative;
   display: inline-block;
-  font-family: var(--font-mono);
-  font-weight: 700;
+  font-family: var(--font-sans);
+  font-weight: 900;
   font-size: 2.5rem;
   line-height: 1.05;
   color: var(--color-ink);
@@ -85,10 +85,10 @@
 
 .label {
   margin-top: var(--space-2);
-  font-family: var(--font-mono);
-  font-weight: 500;
+  font-family: var(--font-label);
+  font-weight: 600;
   font-size: 0.75rem;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-ink-muted);
   transition: color 200ms var(--ease-standard);

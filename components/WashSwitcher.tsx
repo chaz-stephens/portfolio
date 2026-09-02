@@ -10,9 +10,9 @@ import styles from "./WashSwitcher.module.css";
 // than component state, so selecting a wash doesn't need a setState-in-effect round trip.
 
 const WASHES = [
-  { id: "raw", label: "Raw", hex: "#B17030", gloss: "Raw — unwashed indigo, copper-orange fade" },
-  { id: "indigo", label: "Indigo", hex: "#4C6EDB", gloss: "Indigo — the classic denim blue" },
-  { id: "black", label: "Black", hex: "#767C86", gloss: "Black — sulfur-black overdye" },
+  { id: "raw", label: "Raw", hex: "#7A5CFF", gloss: "Raw — unwashed indigo dye, deep violet-blue before break-in and fade" },
+  { id: "indigo", label: "Indigo", hex: "#4C6EDB", gloss: "Indigo — the classic denim blue, fully saturated dye" },
+  { id: "stone", label: "Stone", hex: "#767C86", gloss: "Stone — stone-washed denim, faded blue-gray" },
   { id: "ecru", label: "Ecru", hex: "#D8C9A3", gloss: "Ecru — undyed cotton, warm off-white" },
 ] as const;
 

@@ -102,7 +102,7 @@
   font-size: 0.8125rem;
   line-height: 1.5;
   color: var(--color-ink-secondary);
-  font-family: var(--font-mono);
+  font-family: var(--font-label);
   font-variant-numeric: tabular-nums;
 }
 
@@ -118,7 +118,7 @@
   padding: var(--space-2) var(--space-4);
   border: var(--border-width-hairline) solid var(--color-border-hairline);
   border-radius: var(--radius-chip);
-  font-family: var(--font-mono);
+  font-family: var(--font-label);
   font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -132,7 +132,7 @@
 .ctaCaption {
   display: block;
   margin-top: var(--space-3);
-  font-family: var(--font-mono);
+  font-family: var(--font-label);
   font-size: 0.6875rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;

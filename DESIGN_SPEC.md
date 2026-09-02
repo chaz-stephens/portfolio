@@ -24,7 +24,7 @@ before reading a word.
 
 **Revision note (this pass):** the live site tested as credible but static — "not fun, interactive,
 or memorable." This spec adds a personality layer on top of the system above, not a replacement of
-it: a monogram, a live-switchable accent (denim washes — Raw / Indigo / Black / Ecru), tag- and
+it: a monogram, a live-switchable accent (denim washes — Raw / Indigo / Stone / Ecru), tag- and
 spec-sheet-styled components, and real scroll/hover motion. The metaphor is tailoring/denim, used
 lightly, drawn from Chaz's own work (he runs a denim publication; one case study is literally a
 garment-measurement tool) — not borrowed decoration. It lands hardest on the home page, which is
@@ -113,39 +113,50 @@ the CSS. This is the site's signature interactive toy: attention-grabbing, zero 
 purpose, pure delight, built from Chaz's own material (real denim wash names) rather than a
 borrowed gimmick.
 
-**The four washes, exact hex — Raw and Black revised this pass, Indigo and Ecru unchanged:**
+**Revision note (this pass) — real denim vocabulary, not invented color stories.** Stakeholder
+feedback: "I still don't understand the 'denim wash' color choices, they don't align with actual
+denim washes." Two problems, addressed together: Raw's previous value (`#B17030`, a burnt-orange/
+copper) was never actually the color of raw denim — that's closer to the tan patina raw denim
+develops after months of wear, not the fabric itself, which is a dark, saturated indigo with a
+violet cast before it oxidizes and fades toward true blue with wash and UV exposure. And "Black"
+(`#767C86`) was never black — it's a cool blue-gray, which is exactly what real stone-washing
+(tumbling denim with pumice) produces, so it's renamed to **Stone** rather than forced toward an
+unusable near-black hex (which would vanish against this site's `#0a0a0a` canvas regardless of the
+label). Indigo and Ecru were already accurate and are unchanged.
+
+**The four washes, exact hex — Raw revised, Black renamed to Stone (same hex), Indigo and Ecru unchanged:**
 
 | Wash | Hex | Where it comes from |
 |---|---|---|
-| **Indigo** *(default)* | `#4C6EDB` | Unchanged. A true, recognizable blue, and the quiet nod to Indigo & Asphalt. Loads on first visit, before any JS preference is read. |
-| **Raw** | `#B17030` | Revised. The old `#C85A1E` tested as "red," not raw denim — it sat at a saturated ~21° hue, which reads hot/red at that saturation regardless of the denim-fading rationale behind it. This value moves the hue to ~30° (the point most viewers place squarely in "orange," not "red-orange") and drops saturation from 74% to ~57% — the same register as real copper (`#B87333`, hue ~29°) — so it reads as burnt-orange/copper/tan on sight, no denim-nerd footnote required. |
-| **Black** | `#767C86` | Revised. The old `#6E7A52` was a technically-real sulfur-black-fade color, but it reads as olive/green, not black, on sight — which is the whole test a labeled swatch has to pass. This value is a genuinely dark, desaturated graphite/gunmetal (hue ~215°, saturation ~11% — barely a hue at all) — visible against the near-black canvas the same way the old value was, but reading as "a dark neutral, i.e. black" instead of drifting into a different color family. |
+| **Indigo** *(default)* | `#4C6EDB` | Unchanged. The classic denim blue, fully saturated dye — a true, recognizable blue, and the quiet nod to Indigo & Asphalt. Loads on first visit, before any JS preference is read. |
+| **Raw** | `#7A5CFF` | Revised. Unwashed indigo dye reads with a violet cast before oxidation and wear lighten it toward true blue — this is that violet-leaning cobalt, not the copper-orange the previous value used (which described raw denim's *worn* patina, not its base color). |
+| **Stone** | `#767C86` | Renamed from "Black." The hex is unchanged — it was never black, it's a cool blue-gray at ~29% lightness, and a genuinely black hex is unusable as an accent against a `#0a0a0a` canvas regardless of label. Stone-washing (pumice-tumbled denim) is the real, well-known treatment this exact color already matches. |
 | **Ecru** | `#D8C9A3` | Unchanged. Undyed cotton — pale, warm, off-white. The one wash that needs a special case, below. |
 
 ```css
 :root {
   /* Fixed wash palette — never referenced directly by components, see the two-tier rule below */
-  --wash-raw:      #B17030;
+  --wash-raw:      #7A5CFF;
   --wash-indigo:   #4C6EDB;
-  --wash-black:    #767C86;
+  --wash-stone:    #767C86;
   --wash-ecru:     #D8C9A3;
   --wash-ecru-ink: #7A6A42; /* Ecru's light-canvas-safe twin, see below */
 }
 ```
 
-**Contrast, WCAG-checked** (relative luminance basis, same method as the previous pass):
+**Contrast, WCAG-checked** (relative luminance basis):
 
 | Pair | Dark canvas | Light canvas |
 |---|---|---|
-| Raw text/graphic on canvas | 4.93:1 | 3.84:1 |
-| Indigo text/graphic on canvas | 4.31:1 | 4.41:1 |
-| Black (graphite) text/graphic on canvas | 4.71:1 | 4.02:1 |
-| Ecru text/graphic on canvas | 12.07:1 | **1.57:1 — fails outright** |
-| Ecru's light-canvas twin (`--wash-ecru-ink`, `#7A6A42`) on light canvas | — | 5.07:1 |
+| Raw text/graphic on canvas | ~4.5:1 | ~4.2:1 |
+| Indigo text/graphic on canvas | ~4.3:1 | ~4.4:1 |
+| Stone text/graphic on canvas | ~4.7:1 | ~4.0:1 |
+| Ecru text/graphic on canvas | ~12.1:1 | **~1.6:1 — fails outright** |
+| Ecru's light-canvas twin (`--wash-ecru-ink`, `#7A6A42`) on light canvas | — | ~5.1:1 |
 
 All four washes clear the 3:1 floor the universal accent-text rule (below) requires, on both
-canvases. Raw's 3.84:1 on the light canvas is the tightest of the four — still comfortably clear
-of the floor, and an improvement in balance over the old value's 4.65/4.08 split.
+canvases; Stone's ~4.0:1 on the light canvas is the tightest of the four but still comfortably
+clear of the floor.
 
 **Simplified universal accent-text rule (tightened from the original spec):** because the accent
 value now changes underneath the same CSS, this system adopts one rule that holds for all four
@@ -155,14 +166,14 @@ accent text, on either canvas, regardless of wash. This is a slightly stricter v
 per-canvas rule, traded for not needing conditional accessibility logic per color.
 
 **The Ecru exception:** true Ecru (`#D8C9A3`) is light enough that it fails even the large-text/
-non-text threshold against the light canvas (1.57:1 — nowhere close to the 3:1 floor). On the dark
-canvas it's excellent (12:1) and used as-is. On the light canvas, any accent usage — text or
+non-text threshold against the light canvas (~1.6:1 — nowhere close to the 3:1 floor). On the dark
+canvas it's excellent (~12:1) and used as-is. On the light canvas, any accent usage — text or
 graphical — substitutes `--wash-ecru-ink` (`#7A6A42`, a dark khaki) instead. This is the only wash
-with a light-canvas twin; Raw, Indigo, and Black are close enough in luminance to work identically
+with a light-canvas twin; Raw, Indigo, and Stone are close enough in luminance to work identically
 on both canvases under the rule above.
 
 **Token architecture — two tiers, don't skip this:** `--wash-raw` / `--wash-indigo` /
-`--wash-black` / `--wash-ecru` / `--wash-ecru-ink` are the fixed palette definition and never
+`--wash-stone` / `--wash-ecru` / `--wash-ecru-ink` are the fixed palette definition and never
 change. `--color-accent` and `--color-accent-on-light` are the live semantic pointer the switcher
 repoints. **Components reference `--color-accent` / `--color-accent-on-light` only — never a
 `--wash-*` token directly.** Referencing a wash token in a component would hardcode that one wash
@@ -178,7 +189,7 @@ home page now carries — the switcher already looks like the substantial contro
 before it's touched. The active swatch gets a permanent 2px ink ring plus the same corner-stitch tick
 detail used on the monogram (§4) — a deliberate visual echo tying the badge and the switcher to one
 "stitch" language. Label treatment (the actual subject of this pass's feedback) is specified below,
-replacing the old always-shown-desktop-only `RAW INDIGO BLACK ECRU` row.
+replacing the old always-shown-desktop-only `RAW INDIGO STONE ECRU` row.
 
 **Naming comprehension fix (this pass) — the concept wasn't landing, not the colors.** Stakeholder
 feedback after the hex fixes: "still not sure I understand the names of the color swatches." The hex
@@ -201,7 +212,7 @@ on mobile, where visitors previously got a bare row of colored squares and nothi
 `title` tooltips are unreliable on touch and shouldn't be the only affordance for what's likely the
 majority of first-time traffic.
 
-The per-swatch `RAW  INDIGO  BLACK  ECRU` mono row is retired, not doubled up alongside the new
+The per-swatch `RAW  INDIGO  STONE  ECRU` label row is retired, not doubled up alongside the new
 caption — it was already visible at ≥1024px in the version the stakeholder reviewed and still didn't
 land, so a second text row stacked under `DENIM WASH` would cost header height (right at the 64–72px
 budget, §4) for a mechanism already shown not to work. Individual identification moves entirely to
@@ -214,9 +225,9 @@ special-case it, every swatch's `title` is extended from a bare label to a short
 verbatim from the "Where it comes from" column in the hex table above, not newly written:
 
 ```
-title="Raw — unwashed indigo, copper-orange fade"
-title="Indigo — the classic denim blue"
-title="Black — sulfur-black overdye"
+title="Raw — unwashed indigo dye, deep violet-blue before break-in and fade"
+title="Indigo — the classic denim blue, fully saturated dye"
+title="Stone — stone-washed denim, faded blue-gray"
 title="Ecru — undyed cotton, warm off-white"
 ```
 
@@ -231,10 +242,12 @@ rejected: it's a second mechanism (state, a dismiss action, a re-appearance rule
 static two-word label already solves for free, and a dismissible product tour is exactly the
 SaaS-onboarding register this system exists to avoid (§0). The per-swatch gloss stays hover/title-
 only, matching the system's existing "curiosity rewarded on hover, not forced on first paint"
-pattern (the monogram's hover-only accent flash, §4, is the same idiom). No wash gets renamed: once
-the category is named once, `RAW` and `BLACK` read as denim vocabulary instead of isolated color
-adjectives, and appending "Denim" to each label (`RAW DENIM`, `INDIGO DENIM`...) would be redundant
-with the caption — `INDIGO DENIM` is nonsensical as a phrase besides.
+pattern (the monogram's hover-only accent flash, §4, is the same idiom). No wash gets renamed *for
+this comprehension fix*: once the category is named once, `RAW` and `INDIGO` read as denim
+vocabulary instead of isolated color adjectives, and appending "Denim" to each label (`RAW DENIM`,
+`INDIGO DENIM`...) would be redundant with the caption — `INDIGO DENIM` is nonsensical as a phrase
+besides. (`BLACK` was later renamed to `STONE` in a separate pass, §1a revision note above — that
+rename was a factual-accuracy fix, not a comprehension one, and doesn't change the reasoning here.)
 
 **Why this lands in two seconds where the current version doesn't:** today a first-time visitor sees
 four colored squares in the header, with either four unexplained mono words above them (≥1024px,
@@ -289,7 +302,7 @@ itself. `@property` and `color-mix()` are both solid baseline in 2026 evergreen 
 unsupported, the swap simply becomes instant with no interpolation — acceptable degradation for a
 decorative toy, not a functional regression.
 
-**Persistence:** `localStorage`, key `ia-wash`, values `raw` / `indigo` / `black` / `ecru`. Read
+**Persistence:** `localStorage`, key `ia-wash`, values `raw` / `indigo` / `stone` / `ecru`. Read
 and applied via a small blocking inline script in `<head>` — before first paint, before any CSS
 renders — that sets `--color-accent` (and `--color-accent-on-light`, computed per the Ecru rule
 above) as inline styles on `document.documentElement`. This avoids a flash of default Indigo
@@ -299,11 +312,25 @@ see the correct color too.
 
 ## 2. Type system
 
-**Archivo (identity + body, weights 400–900) / JetBrains Mono (stat numbers, data labels).**
-Two typefaces. Loaded via `next/font/google`.
+**Revision note (this pass) — mono retired, one superfamily instead of two typefaces.**
+Stakeholder feedback: "I'd also prefer not to use the mono fonts since it's so heavily used by AI."
+Heavy monospace-for-labels is a recognizable "AI-generated portfolio" tell, so JetBrains Mono is
+removed entirely — no mono typeface anywhere on the site. Its two jobs split differently:
+
+- **Labels/kickers/tags** move to **Archivo Narrow** (600/700) — the same foundry, same grotesque
+  skeleton as the display face, so it reads as a *width variant of the site's own headline voice*,
+  not a second typeface grafted on (the exact problem with the JetBrains Mono pairing it replaces).
+  Condensed-and-tracked-out is also literally how garment tags and spec sheets set copy when space
+  is tight, which earns the tag metaphor instead of borrowing it from a terminal font.
+- **Stat numbers** move to **Archivo 900** (the weight already loaded for display type) — no
+  second face needed. Archivo's default numerals are already lining and tabular-width; adding
+  `font-variant-numeric: tabular-nums` is belt-and-suspenders, not a workaround.
+
+**Archivo (identity + body + stat numbers, weights 400–900) / Archivo Narrow (labels, weights
+600–700).** One superfamily. Loaded via `next/font/google`.
 
 ```ts
-import { Archivo, JetBrains_Mono } from 'next/font/google'
+import { Archivo, Archivo_Narrow } from 'next/font/google'
 
 const archivo = Archivo({
   subsets: ['latin'],
@@ -312,10 +339,10 @@ const archivo = Archivo({
   display: 'swap',
 })
 
-const jetbrainsMono = JetBrains_Mono({
+const archivoNarrow = Archivo_Narrow({
   subsets: ['latin'],
-  weight: ['500', '700'],
-  variable: '--font-mono',
+  weight: ['600', '700'],
+  variable: '--font-archivo-narrow',
   display: 'swap',
 })
 ```
@@ -323,34 +350,39 @@ const jetbrainsMono = JetBrains_Mono({
 ```css
 :root {
   --font-sans: var(--font-sans), 'Archivo', system-ui, sans-serif;
-  --font-mono: var(--font-mono), 'JetBrains Mono', ui-monospace, monospace;
+  --font-label: var(--font-archivo-narrow), 'Archivo Narrow', system-ui, sans-serif;
 }
 ```
 
+Only 600/700 are loaded for the label face — **label styles must never use font-weight 500**, it
+would fall back to a synthetic/regular weight. Tracking and weight floor are both bumped from the
+old mono values: condensed letterforms sit tighter by construction, so the same `0.10em`/500 that
+opened up JetBrains Mono's wide, even-spaced glyphs reads thin and cramped on a narrow face —
+labels use `0.12em`/600 instead (see type scale below).
+
 **Why this reads cutting-edge, not default:** the "heavy contrast" the brief asks for is built
 into one family's weight range, not into a second decorative font. Archivo runs 400 (body) to
-900/Black (hero, H2, H3) — the jump from a light paragraph to a Black-weight headline on the
-same typeface *is* the visual contrast system, which is a bolder move than pairing two
-mid-weight humanist sans fonts the way Inter/Poppins/Montserrat templates do (everything sitting
-at 400–600, hierarchy carried by size alone). JetBrains Mono is reserved for anything numeric:
-fixed-width digits solve the literal problem of a case study dense with exact figures ($5.25B,
-$110M, 71%) shifting width mid-sentence, and a monospace numeral register reads as
-engineering/instrument-panel precision — apt for a device case study, and distinct from a
-typical portfolio's all-prose numbers.
+900/Black (hero, H2, H3, stat numbers) — the jump from a light paragraph to a Black-weight
+headline on the same typeface *is* the visual contrast system, which is a bolder move than pairing
+two mid-weight humanist sans fonts the way Inter/Poppins/Montserrat templates do (everything
+sitting at 400–600, hierarchy carried by size alone). Archivo Narrow's job is purely structural
+(separating label/data text from headline/body text at a glance) — it doesn't add a second
+personality to the system, which is exactly why it survives the mono cut where a fresh, unrelated
+typeface pick wouldn't have.
 
 **Type scale** (base 16px, ~1.25–1.33 step, rounded to role):
 
 | Role | Size (px/rem) | Family / weight | Line-height | Tracking | Notes |
 |---|---|---|---|---|---|
-| Label / kicker | 12 / 0.75rem | Mono 500 | 1.4 | 0.10em | uppercase, `--color-ink-muted`; accent only where §4 sanctions it |
+| Label / kicker | 12 / 0.75rem | Archivo Narrow 600 | 1.4 | 0.12em | uppercase, `--color-ink-muted`; accent only where §4 sanctions it |
 | Caption / table cell | 13 / 0.8125rem | Sans 400 | 1.5 | normal | fine print, table body |
 | Body | 16 / 1rem | Sans 400 | 1.65 | normal | default paragraph |
 | Body large | 20 / 1.25rem | Sans 400 | 1.55 | normal | ledes, hero one-liner |
 | H4 | 24 / 1.5rem | Sans 700 | 1.25 | -0.005em | card/tile titles |
 | H3 | 32 / 2rem | Sans 800 | 1.15 | -0.01em | sub-sections, tertiary headings |
-| Stat number (sm) | 40 / 2.5rem | Mono 700 | 1.05 | normal | home teaser stat tiles |
+| Stat number (sm) | 40 / 2.5rem | Sans 900 | 1.05 | normal | home teaser stat tiles |
 | H2 (section headline) | 48→64 / 3→4rem | Sans 900 | 1.05 | -0.02em | mobile → desktop |
-| Stat number (lg) | 64 / 4rem | Mono 700 | 1.0 | normal | case-study in-body stat tiles |
+| Stat number (lg) | 64 / 4rem | Sans 900 | 1.0 | normal | case-study in-body stat tiles |
 | H1 (hero) | 72→120 / 4.5→7.5rem | Sans 900 | 0.95 | -0.03em | mobile → desktop; the single boldest move on the site |
 
 Every numeral gets `font-variant-numeric: tabular-nums` — including inline dollar figures that

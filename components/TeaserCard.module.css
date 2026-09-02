@@ -77,10 +77,10 @@
 
 .metadata {
   display: block;
-  font-family: var(--font-mono);
-  font-weight: 500;
+  font-family: var(--font-label);
+  font-weight: 600;
   font-size: 0.75rem;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-ink-muted);
 }
