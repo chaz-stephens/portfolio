@@ -49,19 +49,22 @@ export const metadata: Metadata = {
 };
 
 // Anti-FOUC: reads the persisted denim-wash choice and sets --color-accent /
-// --color-accent-on-light / --color-on-accent as inline styles on <html> before first paint
-// (see DESIGN_SPEC.md §1a). Runs before any CSS renders, so no-JS visitors and first-time
-// visitors both see the CSS default (Indigo) with no flash-then-jump on repeat visits.
+// --color-accent-on-light / --color-on-accent / --color-btn-fill as inline styles on <html>
+// before first paint (see DESIGN_SPEC.md §1a). Runs before any CSS renders, so no-JS visitors
+// and first-time visitors both see the CSS default (Indigo) with no flash-then-jump on repeat
+// visits.
 const WASH_SCRIPT = `(function(){try{
   var WASHES={raw:"#7A5CFF",indigo:"#4C6EDB",stone:"#98A8D8",ecru:"#EBE6D6"};
   var INKS={stone:"#253B7F",ecru:"#7A6A42"};
   var ON_ACCENT_DARK={stone:1,ecru:1};
+  var FILLS={raw:"#624ACC",indigo:"#3D58AF",stone:"#7A86AD",ecru:"#BCB8AB"};
   var stored=localStorage.getItem("ia-wash");
   var wash=WASHES[stored]?stored:"indigo";
   var root=document.documentElement;
   root.style.setProperty("--color-accent",WASHES[wash]);
   root.style.setProperty("--color-accent-on-light",INKS[wash]||WASHES[wash]);
   root.style.setProperty("--color-on-accent",ON_ACCENT_DARK[wash]?"#0a0a0a":"#f4f4f0");
+  root.style.setProperty("--color-btn-fill",FILLS[wash]);
   root.dataset.wash=wash;
 }catch(e){}
 document.documentElement.classList.add("js");

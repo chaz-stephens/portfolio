@@ -1,6 +1,14 @@
 .card {
   position: relative;
-  display: block;
+  /* Equal-height pair: the grid stretches this card's .reveal wrapper to match its sibling,
+     but a plain block card just sits at its own content height inside that taller wrapper —
+     SubQ-Confirm's longer description and Fit Finder's wrapping "IN REVIEW" stat label are
+     different enough to leave one card ~11px shorter, an inconsistency worth just as much
+     as an overflow bug. flex + height:100% fills the stretched wrapper; the stat row's
+     margin-top:auto (below) keeps it bottom-aligned across both cards either way. */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   background: transparent;
   border: var(--border-width-bold) solid var(--color-border-bold);
   border-radius: var(--radius-surface);
@@ -105,7 +113,8 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0;
-  margin-top: var(--space-5);
+  margin-top: auto;
+  padding-top: var(--space-5);
 }
 
 /* Nested-in-teaser-card exception (DESIGN_SPEC.md §4, Stat tile): the card already carries

@@ -36,6 +36,14 @@
      the page canvas, this one keeps canvas-colored text legible on the accent fill. */
   --color-on-accent: var(--color-ink);
 
+  /* Button fill: a JS-set literal (mirrors --color-on-accent), not the --color-accent-deep
+     formula directly. --color-accent itself smooth-fades over --duration-transition (below) on
+     wash switch, and .btn-primary's text snaps instantly (no transition, see .btn) — a fill
+     that kept tracking the fading --color-accent would spend part of that fade under
+     mismatched, sub-4.5:1 text/fill pairs (measured as low as 3:1 for several frames). Setting
+     both fill and text as JS literals keeps them snapping together, always a passing pair. */
+  --color-btn-fill: var(--color-accent-deep);
+
   --color-focus: var(--color-accent);
 
   /* Motion */
@@ -298,8 +306,12 @@ table {
   border-radius: var(--radius-control);
   border: var(--border-width-bold) solid transparent;
   white-space: nowrap;
-  transition: background 150ms ease, border-color 150ms ease, color 150ms ease,
-    box-shadow var(--duration-micro) var(--ease-standard),
+  /* background/border-color/color are NOT transitioned (bug fix): crossfading fill and text
+     color at the same time, on a light wash (Stone/Ecru), passes through a mid-transition
+     frame where the text sits near mid-gray on a half-blended fill — measured as low as
+     1.14:1 contrast at the midpoint of a 150ms fade that starts and ends above 4.5:1. Instant
+     swap removes the dip entirely; shadow/lift still animate for hover feedback. */
+  transition: box-shadow var(--duration-micro) var(--ease-standard),
     transform var(--duration-micro) var(--ease-standard);
 }
 
@@ -312,9 +324,9 @@ table {
   /* Deep, not flat accent: the flat wash fails WCAG AA text contrast in every fill color
      (as low as 1.13:1 against Ecru with fixed white text) — deep20 plus the on-accent text
      swap below clears 4.5:1 in all four washes. */
-  background: var(--color-accent-deep);
+  background: var(--color-btn-fill);
   color: var(--color-on-accent);
-  border-color: var(--color-accent-deep);
+  border-color: var(--color-btn-fill);
   box-shadow: var(--shadow-resting-neutral);
 }
 

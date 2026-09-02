@@ -12,11 +12,16 @@ import styles from "./WashSwitcher.module.css";
 // `ink` is a darker/lighter twin used only for --color-accent-on-light, for any wash whose
 // true hex is too light to read as accent-colored text/graphics on the light canvas (§1a) —
 // Raw and Indigo are saturated enough to work as-is on both canvases; Stone and Ecru aren't.
+// `fill` (80% wash / 20% black, precomputed) is the button's fill+border. It's a literal, not
+// a live color-mix() of --color-accent: --color-accent smooth-fades on wash change, and if the
+// fill tracked that fade while the text (below) snapped instantly, the pair would spend part of
+// the fade mismatched — measured as low as 3:1 contrast for several frames. A literal set in
+// the same call as --color-on-accent keeps fill and text snapping together, always a passing pair.
 const WASHES = [
-  { id: "raw", label: "Raw", hex: "#7A5CFF", gloss: "Raw: unwashed indigo dye, deep violet-blue before break-in and fade" },
-  { id: "indigo", label: "Indigo", hex: "#4C6EDB", gloss: "Indigo: the classic denim blue, fully saturated dye" },
-  { id: "stone", label: "Stone", hex: "#98A8D8", ink: "#253B7F", gloss: "Stone: stone-washed denim, faded to a lighter blue" },
-  { id: "ecru", label: "Ecru", hex: "#EBE6D6", ink: "#7A6A42", gloss: "Ecru: undyed cotton, warm off-white" },
+  { id: "raw", label: "Raw", hex: "#7A5CFF", fill: "#624ACC", gloss: "Raw: unwashed indigo dye, deep violet-blue before break-in and fade" },
+  { id: "indigo", label: "Indigo", hex: "#4C6EDB", fill: "#3D58AF", gloss: "Indigo: the classic denim blue, fully saturated dye" },
+  { id: "stone", label: "Stone", hex: "#98A8D8", fill: "#7A86AD", ink: "#253B7F", gloss: "Stone: stone-washed denim, faded to a lighter blue" },
+  { id: "ecru", label: "Ecru", hex: "#EBE6D6", fill: "#BCB8AB", ink: "#7A6A42", gloss: "Ecru: undyed cotton, warm off-white" },
 ] as const;
 
 const WASH_SWAP_CLASS = "wash-swap";
@@ -52,6 +57,7 @@ function selectWash(id: WashId) {
   // Same "ink" flag that picks the light-canvas accent twin also picks the on-accent-fill
   // text color: Stone/Ecru are light enough that button text needs to flip dark.
   root.style.setProperty("--color-on-accent", "ink" in wash ? "#0a0a0a" : "#f4f4f0");
+  root.style.setProperty("--color-btn-fill", wash.fill);
   root.dataset.wash = id;
   try {
     localStorage.setItem(STORAGE_KEY, id);
