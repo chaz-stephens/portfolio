@@ -61,6 +61,25 @@
   margin-top: var(--space-6);
 }
 
+/* Real overflow, confirmed at 768px (tablet): the size="lg" 4rem number is sized for the
+   desktop-width column this row gets above ~900px. Below that, three columns leave too
+   little room for "IN REVIEW" and "1,115+" — measured pushing the page itself 49px past the
+   viewport at 768px, the same "number wider than its tile" bug the home page's teaser cards
+   already had fixed, just never carried over to this page's own copy of the pattern.
+   Attribute-substring selector: StatTile's class names are one fused CSS-module token, so a
+   plain :global(.number) doesn't match (same reasoning as TeaserCard.module.css's version of
+   this fix). */
+.statRow [class*="tile"] [class*="number"] {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+@media (max-width: 900px) {
+  .statRow [class*="tile"] [class*="number"] {
+    font-size: 2.5rem;
+  }
+}
+
 @media (max-width: 640px) {
   .statRow {
     grid-template-columns: 1fr;

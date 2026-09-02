@@ -45,6 +45,7 @@ export default function FitFinderCaseStudy() {
               total="05"
               title="Fit Finder"
               lede="A body-measurement matching tool that helps people find jeans that actually fit, conceived and built independently. It's now the highest-traffic product on the site, outperforming every other piece of content combined."
+              level={1}
             />
             <div className={styles.metaBlock}>
               <p className={styles.metaLine}>

@@ -7,6 +7,10 @@ interface SectionHeadingProps {
   total: string;
   title: string;
   lede?: string;
+  /** Section 01 is the page's own title and needs to be the page's one <h1>; every other
+      section is a subsection of it. Defaults to 2 so existing call sites don't need to
+      change. */
+  level?: 1 | 2;
 }
 
 export default function SectionHeading({
@@ -14,14 +18,16 @@ export default function SectionHeading({
   total,
   title,
   lede,
+  level = 2,
 }: SectionHeadingProps) {
+  const Heading = level === 1 ? "h1" : "h2";
   return (
     <div>
       <span className={styles.folio}>
         {number}
         <span className={styles.folioTotal}>/{total}</span>
       </span>
-      <h2 className={styles.heading}>{title}</h2>
+      <Heading className={styles.heading}>{title}</Heading>
       {lede ? <p className={styles.lede}>{lede}</p> : null}
     </div>
   );

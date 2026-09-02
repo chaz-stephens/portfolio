@@ -45,6 +45,7 @@ export default function SubQConfirmCaseStudy() {
               total="07"
               title="SubQ-Confirm"
               lede="A delivery-confirmation subsystem for wearable insulin pumps, designed for integration by pump manufacturers. Built as an individual capstone project for a graduate Medical Device Product Management course, covering the full lifecycle a PM owns: clinical need and market sizing, product requirements, FDA regulatory and reimbursement strategy, clinical evidence planning, risk and human factors, and go-to-market economics."
+              level={1}
             />
             <div className={styles.metaBlock}>
               <p className={styles.metaLine}>
