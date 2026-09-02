@@ -127,7 +127,7 @@ export default function FitFinderCaseStudy() {
                 src="/fit-finder/app-my-closet.png"
                 alt="Fit Finder Android app Closet Insights screen, comparing a saved pair's measurements against the user's profile"
                 width={1080}
-                height={1920}
+                height={1460}
                 className={styles.mediaPhone}
                 loading="lazy"
               />
