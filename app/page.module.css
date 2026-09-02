@@ -323,7 +323,11 @@
 
 .teaserGrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  /* minmax(0, 1fr), not a bare 1fr: grid items default to min-width:auto, which refuses to
+     shrink a track below its content's intrinsic width — with a title/description/stat-row
+     inside, that pushed both cards wider than their actual 1fr share and overflowed the
+     viewport at desktop widths. */
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-6);
 }
 
