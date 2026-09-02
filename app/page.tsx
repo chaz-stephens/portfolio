@@ -4,7 +4,42 @@ import Reveal from "@/components/Reveal";
 import StatStrip from "@/components/StatStrip";
 import TeaserCard from "@/components/TeaserCard";
 import HeroSpecStrip from "@/components/HeroSpecStrip";
+import SkillsGrid from "@/components/SkillsGrid";
 import styles from "./page.module.css";
+
+const SKILLS = [
+  {
+    label: "Product & Program Management",
+    items: [
+      "PMP-certified",
+      "Agile & Waterfall",
+      "Product requirements definition",
+      "Market sizing & competitive analysis",
+      "Go-to-market strategy",
+      "Cross-functional governance leadership",
+    ],
+  },
+  {
+    label: "Regulatory & Clinical",
+    items: [
+      "FDA 510(k) pathway",
+      "ICH/GCP compliance",
+      "Risk & human-factors analysis",
+      "Clinical data standards (SDTM)",
+    ],
+  },
+  {
+    label: "Built & Shipped",
+    items: ["Web + Android product development", "Stripe billing integration", "End-to-end product ownership"],
+  },
+  {
+    label: "AI Fluency",
+    items: [
+      "Practical use of AI tools (Claude) in daily workflow",
+      "Google Generative AI Leader certification (in progress)",
+    ],
+  },
+];
 
 const EXPERIENCE = [
   {
@@ -155,6 +190,11 @@ export default function Home() {
                 </Reveal>
               ))}
             </div>
+          </div>
+
+          <div className={styles.skillsWrap}>
+            <span className={styles.skillsKicker}>CAPABILITIES</span>
+            <SkillsGrid categories={SKILLS} />
           </div>
         </section>
 

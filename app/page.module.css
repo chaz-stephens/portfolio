@@ -201,6 +201,20 @@
   gap: var(--space-6);
 }
 
+.skillsWrap {
+  margin-top: var(--space-9);
+}
+
+.skillsKicker {
+  display: block;
+  font-family: var(--font-label);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
 /* Timeline entries draw their connecting rule as they enter (fresh-eyes critique #5) —
    a distinct entrance language from the plain fade+translateY used for stat cells and the
    teaser cards. No-JS/reduced-motion fallback: fully drawn, matching the old static border. */

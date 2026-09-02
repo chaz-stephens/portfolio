@@ -1,0 +1,42 @@
+.grid {
+  margin-top: var(--space-5);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-6);
+}
+
+.category {
+  display: flex;
+  flex-direction: column;
+}
+
+.categoryLabel {
+  display: block;
+  padding-bottom: var(--space-2);
+  margin-bottom: var(--space-3);
+  border-bottom: var(--border-width-hairline) solid var(--color-border-hairline);
+  font-family: var(--font-label);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+.chipList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chip {
+  padding: 6px 12px;
+  border: var(--border-width-hairline) solid var(--color-border-hairline);
+  border-radius: var(--radius-chip);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--color-ink-secondary);
+}
