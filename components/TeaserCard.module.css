@@ -122,6 +122,24 @@
   border-right: var(--border-width-hairline) solid var(--color-border-hairline);
 }
 
+/* Real, confirmed bug (visible in production Chrome, not just narrow-viewport testing):
+   StatTile's base --font-sans/900/2.5rem number size, correct for the case-study pages'
+   standalone stat tiles (much wider per-tile there), is too wide for this component's 3-
+   across layout inside a max-520px card — "1,115+"/"$110M"/"$5.25B" measured wider than
+   their own tile at every desktop width from the mobile-stack breakpoint up through the
+   container's own max-width, overlapping the neighboring tile. A smaller size closes most
+   of the gap; break-word is the actual guarantee — it wraps within the tile's own column
+   instead of overflowing into the next one if a future stat is even longer than today's.
+   Attribute-substring selector, not :global(.number): Next's CSS Modules class names are one
+   fused token (e.g. "StatTile-module__Ugvj_G__number"), so a plain :global(.number) selector
+   — used elsewhere in this file for the border-stripping rule below, and equally inert there
+   for the same reason — never actually matches it. */
+.statRow [class*="tile"] [class*="number"] {
+  font-size: 1.25rem;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
 .statRow :global(.tile):first-child {
   padding-left: 0;
 }
