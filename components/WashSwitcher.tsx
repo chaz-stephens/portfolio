@@ -49,6 +49,9 @@ function selectWash(id: WashId) {
   const root = document.documentElement;
   root.style.setProperty("--color-accent", wash.hex);
   root.style.setProperty("--color-accent-on-light", "ink" in wash ? wash.ink : wash.hex);
+  // Same "ink" flag that picks the light-canvas accent twin also picks the on-accent-fill
+  // text color: Stone/Ecru are light enough that button text needs to flip dark.
+  root.style.setProperty("--color-on-accent", "ink" in wash ? "#0a0a0a" : "#f4f4f0");
   root.dataset.wash = id;
   try {
     localStorage.setItem(STORAGE_KEY, id);

@@ -6,7 +6,7 @@
 
 /* Names the category once, right-aligned above the swatch row, at every breakpoint — the
    comprehension fix (DESIGN_SPEC.md §1a). Reuses the existing mono label-kicker type role,
-   no new token. Fits inside the swatch cluster's own footprint (4x24px + 3x6px = 114px) at
+   no new token. Fits inside the swatch cluster's own footprint (4x24px + 3x8px = 120px) at
    any width, so it never wraps or forces a header height change. */
 .caption {
   display: block;
@@ -20,7 +20,7 @@
 
 .swatches {
   display: flex;
-  gap: 6px;
+  gap: 8px;
 }
 
 .swatch {
@@ -36,6 +36,15 @@
   cursor: pointer;
   transition: transform var(--duration-micro) var(--ease-standard),
     box-shadow var(--duration-micro) var(--ease-standard);
+}
+
+/* Invisible hit-slop: the visible swatch stays 24px (the spec-sheet grid unit), but the
+   tappable area grows to 32px. 4px inset on a side plus the 8px row gap above means adjacent
+   swatches' slop zones meet exactly at the midpoint of the gap and never overlap. */
+.swatch::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
 }
 
 .swatch:hover,

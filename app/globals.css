@@ -29,6 +29,13 @@
   --color-accent-bright: color-mix(in srgb, var(--color-accent) 80%, white 20%);
   --color-accent-deep: color-mix(in srgb, var(--color-accent) 80%, black 20%);
 
+  /* Text/icon color for content sitting on an accent-filled surface (buttons). Raw and
+     Indigo stay readable in --color-ink (near-white); Stone and Ecru are too light for that,
+     so the wash switcher repoints this to near-black instead — same mechanism and trigger as
+     --color-accent-on-light, different job: that token keeps accent-colored text legible on
+     the page canvas, this one keeps canvas-colored text legible on the accent fill. */
+  --color-on-accent: var(--color-ink);
+
   --color-focus: var(--color-accent);
 
   /* Motion */
@@ -61,7 +68,7 @@
   --radius-chip: 2px;
 
   --container-max: 1200px;
-  --prose-max: 720px;
+  --prose-max: 520px; /* case-study body copy measured ~90-111ch at 720px, ~98ch at 640px; targets <80ch */
 
   --border-width-hairline: 1px;
   --border-width-bold: 2px;
@@ -302,9 +309,12 @@ table {
    trim) — shadow is the neutral/tertiary register, same as the ghost button. The hover lift
    is what gives it more presence than a secondary content card, not the shadow color. */
 .btn-primary {
-  background: var(--color-accent);
-  color: var(--color-ink);
-  border-color: var(--color-accent);
+  /* Deep, not flat accent: the flat wash fails WCAG AA text contrast in every fill color
+     (as low as 1.13:1 against Ecru with fixed white text) — deep20 plus the on-accent text
+     swap below clears 4.5:1 in all four washes. */
+  background: var(--color-accent-deep);
+  color: var(--color-on-accent);
+  border-color: var(--color-accent-deep);
   box-shadow: var(--shadow-resting-neutral);
 }
 
