@@ -38,11 +38,13 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: "Chaz Stephens",
     type: "website",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: TITLE }],
   },
   twitter: {
     card: "summary_large_image",
     title: TITLE,
     description: DESCRIPTION,
+    images: ["/og-image.png"],
   },
 };
 
