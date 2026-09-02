@@ -178,8 +178,22 @@
   }
 }
 
-.timelineWrap {
+/* Two-column at desktop: the timeline previously left a wide, unused margin to its right at
+   the 1200px container width (StatStrip and the section itself already spanned full width,
+   but the timeline's own content never did) — capabilities now fills that space alongside it
+   instead of stacking below in more vertical scroll. */
+.experienceGrid {
   margin-top: var(--space-9);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-9);
+}
+
+@media (min-width: 1024px) {
+  .experienceGrid {
+    grid-template-columns: 3fr 2fr;
+    align-items: start;
+  }
 }
 
 .timelineKicker {
@@ -199,10 +213,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
-}
-
-.skillsWrap {
-  margin-top: var(--space-9);
 }
 
 .skillsKicker {

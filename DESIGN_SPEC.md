@@ -476,6 +476,19 @@ monochrome rather than borrowed from a color system:
    deliberate beat than a tint change, and it's a real convention in this reference category
    (agency/studio sites), not an invented workaround. This flip stays an instant hard cut — it is
    never eased or animated (see §5); only content *within* a section gets scroll motion.
+
+   **Revision note (this pass) — the inversion wasn't actually full-bleed.** Every section had
+   `container` (max-width + centering + horizontal padding) applied directly to the `<section>`
+   element that also carries the background color, so the color itself was boxed to 1200px and
+   centered — at any viewport wider than ~1240px, the surrounding dark page showed on both sides
+   of what was meant to read as a full white (or black) canvas flip. Stakeholder feedback: the
+   career-spec section "look[ed] awkward being misaligned with the white box" next to the teaser
+   cards below it, which happened to share the same boxed geometry but no visible color change to
+   expose it. Fix, applied to every section on the home page and both case-study pages: `container`
+   moves off the `<section>` (which now only carries `background`/`color`/vertical padding, and
+   is a direct, unconstrained child of `<main>`) onto a new inner `<div className="container">`
+   wrapping that section's actual content. The color now genuinely spans the full viewport width;
+   content inside stays centered and padded exactly as before.
 2. **Border, radius, and shadow — not background fill — carry the "heavy contrast."** Stat tiles
    and cards never get a raised gray surface (`--color-canvas-raised` is intentionally identical to
    `--color-canvas` — there is no elevated-surface color in this system, unchanged from the previous
@@ -655,32 +668,51 @@ one place Stat tile's own contract is superseded by its container's.
 
 ### Size-chart stat strip (home page career stats)
 
-Numeric career stats (years experience, patents, publications, Fit Finder's catalog size, etc.)
-presented the way measurements sit on a spec sheet — one ruled strip, not a grid of separate
-boxes. This is the deliberate difference from Stat tile above: a size chart is one table with
-column dividers, not N independent bordered tiles.
+**Revision note (this pass) — the equal-cell grid read as a generic stats-bar template.**
+Stakeholder feedback: "the one big block 'career spec' still reads as lazy design." Diagnosis:
+every axis of visual weight was tied together (border, radius, column width, shadow, number
+size), so four stats of unequal real-world rarity (a patent vs. a years-of-experience count) got
+identical treatment — that equivalence, not the presence of a border, is what read as templated.
+The fix pulls the one accent-flagged stat out of the equal grid entirely and gives it structural
+privilege instead of just a color tint; the rest drop the single bordered container.
 
 **Structure**, top to bottom:
-- Optional kicker row: mono label (e.g. `CAREER SPEC`), `--color-ink-muted`, `--space-3` gap,
-  then a `--border-width-hairline` rule underneath — a head rule, like a chart's title row.
-- One horizontal strip, wrapped in the standard bold-outline card contract (2px solid
-  `--color-border-bold`, no fill, `--radius-surface`, `--shadow-resting-accent`, §3) — a single
-  container, not per-stat containers.
-- Inside: equal-width cells in a row, each holding one measurement. Number: Mono 700, tabular,
-  Stat number (sm) role, centered in its cell. `--space-2` gap. Label below: mono label role,
-  uppercase, tracked, `--color-ink-muted`, also centered (e.g. `YRS EXP`, `PATENTS`, `PUBLISHED`,
-  `CATALOG SKUS`).
-- Cell dividers: `--border-width-hairline` solid `--color-border-hairline` vertical rules between
-  adjacent cells — internal divisions inside one bordered group, not new bordered surfaces. This
-  is what makes it read as a chart's column rules rather than a card grid.
-- Responsive: wraps to 2 columns under 640px with the same hairline-divider logic; strip never
-  breaks into individual per-stat cards at any width.
+- No kicker row on this component (the section's own H2 crescendo, §6, already carries that
+  role) — just the strip itself, sharing one `--border-width-hairline` bottom rule.
+- The accent-flagged stat renders as a distinct sibling, not a cell in the mapped array: its own
+  bordered box (`--border-width-bold` solid `--color-border-bold`, `--radius-surface`), a 2px
+  dashed *top* edge in `--color-accent` (the same "garment tag" stitch language as the teaser
+  card's seam), and `--shadow-resting-accent` — the one deliberately-scoped exception to "the
+  bold 8px accent shadow belongs only to the teaser cards" rule, at the quieter 4px resting
+  register. Its number is larger (Stat number role, `--font-sans` 900) and accent-colored.
+- The remaining stats sit in a plain flex row, no border, no shadow, no box — divided by a
+  dashed hairline plus the timeline's own bar-tack X-cross tick (a small gradient-built pseudo-
+  element, not a text glyph) at each divider, so the strip borrows the system's existing tactile
+  vocabulary instead of a plain divider rule. Numbers: `--font-sans` 800 (smaller than the
+  featured stat), tabular. Labels: label role, uppercase, tracked, `--color-ink-muted`.
+- Responsive: below 640px the featured stat takes the full row width and the rest wrap two-per-
+  row; the dashed dividers/ticks drop (no adjacent-cell relationship to mark at that width).
 
-**Hover (tactile, informational not a link):** on a cell's hover, its label transitions
+**Hover (tactile, informational not a link):** unchanged — a cell's label transitions
 `--color-ink-muted` → `--color-ink` and a 1px underline draws under the number, 200ms,
-`--ease-standard`. No border/accent color change beyond the shadow's own hover-deepen (§3) — this
-component isn't in the seven sanctioned accent-color uses beyond its shadow, and doesn't need to
-be; the tactile confirmation carries it.
+`--ease-standard`.
+
+### Capabilities grid (new this pass)
+
+Grouped skill/tool chips beside the experience timeline (§6), content sourced strictly from the
+actual resume and case studies — no invented tools. Deliberately in the neutral/tertiary register
+throughout: no border-bold container, no shadow of any kind, so it doesn't compete with either
+the featured stat cell above it or the teaser cards' bold accent moment elsewhere on the page.
+
+- Grid of category blocks, `repeat(auto-fit, minmax(240px, 1fr))`, `--space-6` gap — collapses
+  naturally from 4 columns at full container width to 1–2 in the narrower right-hand column of
+  the two-column experience/capabilities layout (§6), with no separate breakpoint logic needed.
+- Each category: a label-role heading (uppercase, tracked, `--color-ink-muted`) over a
+  `--border-width-hairline` rule, then its chips in a wrapped flex row.
+- Chip: `--radius-chip` corners, `--border-width-hairline` solid `--color-border-hairline`,
+  `--color-ink-secondary` text, no fill — plain text content, not a data point, so it carries
+  none of the stat-tile/stat-strip elevation contract.
+- Categories reveal staggered on scroll, same mechanism as the timeline entries beside them.
 
 ### Case-study teaser card (tag-styled)
 
@@ -890,10 +922,21 @@ doing, alongside the shadow-recoloring described in §1a:
    positioning changes needed — the card's contract is width-agnostic by construction (§4).
 2. **Career stats** — the size-chart stat strip (§4), reveal-animated in on scroll, cells
    staggered 80ms.
-3. **Work-history / experience timeline** — reuses existing tokens rather than inventing a new
-   component family: a vertical `--border-width-hairline` rule, entries as mono date labels +
-   Sans role/company text, each entry reveal-animated on scroll with the same stagger logic as
-   the stats. No new visual system here; this is existing typography and spacing applied to new
+3. **Work-history / experience timeline, plus capabilities beside it — revised this pass.**
+   Reuses existing tokens rather than inventing a new component family: a vertical
+   `--border-width-hairline` rule, entries as label-role date text + Sans role/company text, each
+   entry reveal-animated on scroll with the same stagger logic as the stats.
+
+   **Structure, ≥1024px — two-column grid**, `grid-template-columns: 3fr 2fr`, `--space-9` (96px)
+   column gap. Direct feedback: at the full 1200px container width, the timeline's own content
+   never used more than its left-hand column, leaving a wide unused margin to its right ("I was
+   thinking the capabilities would go in all of the blank space to the right of the experience
+   blocks"). A capability/skills chip-list (§4) fills that column instead of stacking below in
+   more vertical scroll — the same "fill it with a real second element instead of leaving it
+   empty" fix already applied to the hero (§6, item 1) and the empty hero spec-strip card (§3).
+   **Structure, <1024px:** single column, timeline then capabilities, stacked in that order.
+
+   No new visual system for the timeline itself — existing typography and spacing applied to new
    content, kept deliberately plain so it doesn't compete with the stats and teasers around it.
 4. **Case-study teasers** — both, SubQ-Confirm and Fit Finder, in the tag-styled card from §4,
    reveal-animated on scroll.

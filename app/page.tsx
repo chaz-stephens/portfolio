@@ -164,100 +164,108 @@ export default function Home() {
             A real H2 crescendo here (the home page previously peaked once at the hero, then
             never exceeded 40px again — the case study alternates a 64px H2 every 700-900px;
             this gives the home page a second beat with the same rhythm). */}
-        <section className={`theme-light container ${styles.section} ${styles.statsSection}`}>
-          <span className={styles.statsKicker}>CAREER SPEC</span>
-          <h2 className={styles.statsHeadline}>
-            From bench science to shipped product.
-          </h2>
-          <StatStrip
-            items={[
-              { number: "9+", label: "YRS EXP" },
-              { number: "100+", label: "CLINICAL TRIALS" },
-              { number: "1", label: "PATENT", accent: true },
-              { number: "2", label: "PUBLISHED" },
-            ]}
-          />
+        <section className={`theme-light ${styles.section} ${styles.statsSection}`}>
+          <div className="container">
+            <span className={styles.statsKicker}>CAREER SPEC</span>
+            <h2 className={styles.statsHeadline}>
+              From bench science to shipped product.
+            </h2>
+            <StatStrip
+              items={[
+                { number: "9+", label: "YRS EXP" },
+                { number: "100+", label: "CLINICAL TRIALS" },
+                { number: "1", label: "PATENT", accent: true },
+                { number: "2", label: "PUBLISHED" },
+              ]}
+            />
 
-          <div className={styles.timelineWrap}>
-            <span className={styles.timelineKicker}>EXPERIENCE</span>
-            <div className={styles.timeline}>
-              {EXPERIENCE.map((job, i) => (
-                <Reveal key={job.company} index={i} className={styles.timelineItem}>
-                  <span className={styles.timelineDate}>{job.dates}</span>
-                  <span className={styles.timelineRole}>{job.role}</span>
-                  <span className={styles.timelineCompany}>{job.company}</span>
-                  <p className={styles.timelineDescription}>{job.description}</p>
-                </Reveal>
-              ))}
+            <div className={styles.experienceGrid}>
+              <div className={styles.timelineWrap}>
+                <span className={styles.timelineKicker}>EXPERIENCE</span>
+                <div className={styles.timeline}>
+                  {EXPERIENCE.map((job, i) => (
+                    <Reveal key={job.company} index={i} className={styles.timelineItem}>
+                      <span className={styles.timelineDate}>{job.dates}</span>
+                      <span className={styles.timelineRole}>{job.role}</span>
+                      <span className={styles.timelineCompany}>{job.company}</span>
+                      <p className={styles.timelineDescription}>{job.description}</p>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+
+              <div className={styles.skillsWrap}>
+                <span className={styles.skillsKicker}>CAPABILITIES</span>
+                <SkillsGrid categories={SKILLS} />
+              </div>
             </div>
-          </div>
-
-          <div className={styles.skillsWrap}>
-            <span className={styles.skillsKicker}>CAPABILITIES</span>
-            <SkillsGrid categories={SKILLS} />
           </div>
         </section>
 
         {/* Case-study teasers — flip back to dark before contact/footer */}
-        <section className={`container ${styles.section} ${styles.teasersSection}`}>
-          <div className={styles.teaserGrid}>
-            <Reveal index={0}>
-              <TeaserCard
-                href="/work/subq-confirm"
-                metadata={["PRODUCT MGMT", "AUG 2026", "MDPM CAPSTONE"]}
-                title="SubQ-Confirm"
-                description="A delivery-confirmation subsystem concept for wearable insulin pumps, developed end-to-end from clinical need through FDA pathway and go-to-market."
-                stats={[
-                  { number: "$110M", label: "SOM · 5 YEAR", accent: true },
-                  { number: "71%", label: "GROSS MARGIN" },
-                  { number: "$5.25B", label: "TAM · GLOBAL" },
-                ]}
-              />
-            </Reveal>
-            <Reveal index={1}>
-              <TeaserCard
-                href="/work/fit-finder"
-                metadata={["SOLE BUILDER", "LIVE PRODUCT", "WEB + ANDROID + STRIPE"]}
-                title="Fit Finder"
-                description="A body-measurement matching tool that helps people find jeans that actually fit, built and shipped independently."
-                stats={[
-                  { number: "1,115+", label: "CATALOG MODELS" },
-                  { number: "TOP", label: "TRAFFIC ON SITE", accent: true },
-                  { number: "IN REVIEW", label: "GOOGLE PLAY STORE" },
-                ]}
-              />
-            </Reveal>
+        <section className={`${styles.section} ${styles.teasersSection}`}>
+          <div className="container">
+            <div className={styles.teaserGrid}>
+              <Reveal index={0}>
+                <TeaserCard
+                  href="/work/subq-confirm"
+                  metadata={["PRODUCT MGMT", "AUG 2026", "MDPM CAPSTONE"]}
+                  title="SubQ-Confirm"
+                  description="A delivery-confirmation subsystem concept for wearable insulin pumps, developed end-to-end from clinical need through FDA pathway and go-to-market."
+                  stats={[
+                    { number: "$110M", label: "SOM · 5 YEAR", accent: true },
+                    { number: "71%", label: "GROSS MARGIN" },
+                    { number: "$5.25B", label: "TAM · GLOBAL" },
+                  ]}
+                />
+              </Reveal>
+              <Reveal index={1}>
+                <TeaserCard
+                  href="/work/fit-finder"
+                  metadata={["SOLE BUILDER", "LIVE PRODUCT", "WEB + ANDROID + STRIPE"]}
+                  title="Fit Finder"
+                  description="A body-measurement matching tool that helps people find jeans that actually fit, built and shipped independently."
+                  stats={[
+                    { number: "1,115+", label: "CATALOG MODELS" },
+                    { number: "TOP", label: "TRAFFIC ON SITE", accent: true },
+                    { number: "IN REVIEW", label: "GOOGLE PLAY STORE" },
+                  ]}
+                />
+              </Reveal>
+            </div>
           </div>
         </section>
 
         {/* Contact — button row repeated at point of exit */}
-        <section className={`container ${styles.section} ${styles.contactSection}`}>
-          <Reveal>
-            <div className={styles.buttonRow}>
-              <a
-                href="/resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary"
-              >
-                Resume
-              </a>
-              <a
-                href="mailto:castephens90@gmail.com"
-                className="btn btn-ghost"
-              >
-                Email
-              </a>
-              <a
-                href="https://www.linkedin.com/in/chaz-stephens/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-ghost"
-              >
-                LinkedIn
-              </a>
-            </div>
-          </Reveal>
+        <section className={`${styles.section} ${styles.contactSection}`}>
+          <div className="container">
+            <Reveal>
+              <div className={styles.buttonRow}>
+                <a
+                  href="/resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary"
+                >
+                  Resume
+                </a>
+                <a
+                  href="mailto:castephens90@gmail.com"
+                  className="btn btn-ghost"
+                >
+                  Email
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/chaz-stephens/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-ghost"
+                >
+                  LinkedIn
+                </a>
+              </div>
+            </Reveal>
+          </div>
         </section>
       </main>
       <Footer

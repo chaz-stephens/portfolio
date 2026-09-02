@@ -1,32 +1,32 @@
-.kickerRow {
-  padding-bottom: var(--space-3);
-  margin-bottom: var(--space-5);
+.strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: var(--space-5);
+  padding-bottom: var(--space-4);
   border-bottom: var(--border-width-hairline) solid var(--color-border-hairline);
 }
 
-.kicker {
-  display: block;
-  font-family: var(--font-label);
-  font-weight: 600;
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-ink-muted);
-}
-
-.strip {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+/* The one accent-shadowed surface outside the teaser cards — deliberately quieter (4px
+   resting, not the 8px bold register reserved for teasers) and scoped to exactly one cell,
+   so it reads as a considered highlight rather than diluting the "one bold accent moment"
+   rule the shadow-hierarchy pass established. */
+.cellFeatured {
+  flex: 0 0 auto;
+  padding: var(--space-4) var(--space-5);
   border: var(--border-width-bold) solid var(--color-border-bold);
+  border-top: 2px dashed var(--color-accent);
   border-radius: var(--radius-surface);
-  box-shadow: var(--shadow-resting-neutral);
+  box-shadow: var(--shadow-resting-accent);
+  text-align: center;
+  transition: box-shadow var(--duration-micro) var(--ease-standard);
 }
 
-:global(.wash-swap) .strip {
-  animation: stripWashPulse var(--duration-transition) var(--ease-standard);
+:global(.wash-swap) .cellFeatured {
+  animation: statFeaturedWashPulse var(--duration-transition) var(--ease-standard);
 }
 
-@keyframes stripWashPulse {
+@keyframes statFeaturedWashPulse {
   0% {
     transform: scale(1);
   }
@@ -38,25 +38,80 @@
   }
 }
 
-.cell {
+.featuredNumber {
+  display: block;
+  font-family: var(--font-sans);
+  font-weight: 900;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.featuredLabel {
+  display: block;
+  margin-top: var(--space-2);
+  font-family: var(--font-label);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink-secondary);
+}
+
+.group {
+  flex: 1;
+  min-width: 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: var(--space-5) var(--space-3);
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.cell {
+  position: relative;
+  flex: 1;
+  min-width: 100px;
+  padding: 0 var(--space-4);
   text-align: center;
 }
 
-.cell + .cell {
-  border-left: var(--border-width-hairline) solid var(--color-border-hairline);
+/* Bar-tack tick between cells — the same X-cross language as the timeline's per-entry tick
+   and the wash switcher's active-swatch corner (DESIGN_SPEC.md §4), not a plain divider. */
+.cell:not(:first-child) {
+  border-left: var(--border-width-hairline) dashed var(--color-border-hairline);
+}
+
+.cell:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -4px;
+  width: 8px;
+  height: 8px;
+  transform: translateY(-50%);
+  background: linear-gradient(
+      45deg,
+      transparent 45%,
+      var(--color-ink-muted) 45%,
+      var(--color-ink-muted) 55%,
+      transparent 55%
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 45%,
+      var(--color-ink-muted) 45%,
+      var(--color-ink-muted) 55%,
+      transparent 55%
+    );
 }
 
 .number {
   position: relative;
   display: inline-block;
   font-family: var(--font-sans);
-  font-weight: 900;
-  font-size: 2.5rem;
-  line-height: 1.05;
+  font-weight: 800;
+  font-size: 1.85rem;
+  line-height: 1;
   color: var(--color-ink);
   font-variant-numeric: tabular-nums;
   transition: color 200ms var(--ease-standard);
@@ -79,12 +134,9 @@
   transform: scaleX(1);
 }
 
-.number.accent {
-  color: var(--color-accent);
-}
-
 .label {
   margin-top: var(--space-2);
+  display: block;
   font-family: var(--font-label);
   font-weight: 600;
   font-size: 0.75rem;
@@ -100,26 +152,44 @@
 
 @media (max-width: 640px) {
   .strip {
-    grid-template-columns: repeat(2, 1fr);
+    flex-direction: column;
   }
 
-  .cell:nth-child(2n + 1) {
+  .cellFeatured {
+    flex-basis: auto;
+  }
+
+  .group {
+    justify-content: space-between;
+  }
+
+  .cell {
+    min-width: 45%;
+    flex: 0 0 45%;
+    text-align: left;
+  }
+
+  .cell:not(:first-child) {
     border-left: none;
   }
 
-  .cell:nth-child(n + 3) {
-    border-top: var(--border-width-hairline) solid var(--color-border-hairline);
+  .cell:not(:first-child)::before {
+    display: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .cellFeatured {
+    transition: none;
+  }
+
   .number,
   .number::after,
   .label {
     transition: none;
   }
 
-  :global(.wash-swap) .strip {
+  :global(.wash-swap) .cellFeatured {
     animation: none;
   }
 }
