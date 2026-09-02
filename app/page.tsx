@@ -119,7 +119,7 @@ export default function Home() {
                 full example of that, end to end, and produced the
                 SubQ-Confirm case study below: market sizing, product
                 requirements, and a go-to-market plan for a real
-                patient-facing need. I hold a patent and two peer-reviewed
+                patient-facing need. I hold a patent and three peer-reviewed
                 publications from my earlier research, and I write Indigo
                 &amp; Asphalt, an independent menswear publication, on the
                 side.
@@ -181,7 +181,7 @@ export default function Home() {
                   href: "https://patents.google.com/patent/US11096952B2/en",
                 },
                 {
-                  number: "2",
+                  number: "3",
                   label: "PUBLISHED",
                   href: "https://doi.org/10.1371/journal.pone.0109208",
                 },

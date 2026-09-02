@@ -16,8 +16,9 @@
      components; the JS switcher repoints --color-accent / --color-accent-on-light below. */
   --wash-raw: #7a5cff;
   --wash-indigo: #4c6edb;
-  --wash-stone: #767c86;
-  --wash-ecru: #d8c9a3;
+  --wash-stone: #98a8d8;
+  --wash-stone-ink: #253b7f;
+  --wash-ecru: #ebe6d6;
   --wash-ecru-ink: #7a6a42;
 
   /* Accent — one color, sparing use only (see component specs). --color-accent is a live

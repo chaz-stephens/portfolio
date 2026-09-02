@@ -53,13 +53,13 @@ export const metadata: Metadata = {
 // DESIGN_SPEC.md §1a). Runs before any CSS renders, so no-JS visitors and first-time
 // visitors both see the CSS default (Indigo) with no flash-then-jump on repeat visits.
 const WASH_SCRIPT = `(function(){try{
-  var WASHES={raw:"#7A5CFF",indigo:"#4C6EDB",stone:"#767C86",ecru:"#D8C9A3"};
-  var ECRU_INK="#7A6A42";
+  var WASHES={raw:"#7A5CFF",indigo:"#4C6EDB",stone:"#98A8D8",ecru:"#EBE6D6"};
+  var INKS={stone:"#253B7F",ecru:"#7A6A42"};
   var stored=localStorage.getItem("ia-wash");
   var wash=WASHES[stored]?stored:"indigo";
   var root=document.documentElement;
   root.style.setProperty("--color-accent",WASHES[wash]);
-  root.style.setProperty("--color-accent-on-light",wash==="ecru"?ECRU_INK:WASHES[wash]);
+  root.style.setProperty("--color-accent-on-light",INKS[wash]||WASHES[wash]);
   root.dataset.wash=wash;
 }catch(e){}
 document.documentElement.classList.add("js");

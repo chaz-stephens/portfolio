@@ -124,23 +124,40 @@ violet cast before it oxidizes and fades toward true blue with wash and UV expos
 unusable near-black hex (which would vanish against this site's `#0a0a0a` canvas regardless of the
 label). Indigo and Ecru were already accurate and are unchanged.
 
-**The four washes, exact hex — Raw revised, Black renamed to Stone (same hex), Indigo and Ecru unchanged:**
+**Second revision note (next pass) — Stone read as gray, not blue; Ecru read as cream, not
+off-white.** Direct feedback: "I think of stonewash closer to a lighter blue than gray. And ecru
+as an off-white, not like a cream." Real stonewashing is pumice-tumbled *indigo* denim — the
+result is a faded blue, not a neutral gray, so the previous `#767C86` (hue ~215°, only ~11%
+saturation — barely a hue at all) undersold the blue. Stone moves to `#98A8D8`, a genuinely light,
+readably-blue wash — the same hue family as Indigo, just faded and lightened, the way pumice
+actually lightens indigo dye. That value is far too light to pass as accent-colored text/graphics
+on the light canvas (~2.3:1, well under the 3:1 floor), so Stone now gets the same two-tier
+treatment Ecru already has: a light-canvas twin, `--wash-stone-ink` (`#253B7F`, the same hue at
+low lightness/high contrast — ~10:1 on the light canvas), used only where Stone renders as accent
+text/graphics on white. Ecru moves from `#D8C9A3` (a saturated tan/khaki — closer to "sand" than
+"off-white") to `#EBE6D6`, a much paler, barely-warm neutral — genuinely close to white with a
+warm cast, matching the textile meaning of "ecru" rather than a beige. Ecru's existing light-canvas
+ink twin (`--wash-ecru-ink`, `#7A6A42`) is unchanged — same hue family, still reads as the dark-
+khaki complement to the new paler value.
+
+**The four washes, exact hex:**
 
 | Wash | Hex | Where it comes from |
 |---|---|---|
-| **Indigo** *(default)* | `#4C6EDB` | Unchanged. The classic denim blue, fully saturated dye — a true, recognizable blue, and the quiet nod to Indigo & Asphalt. Loads on first visit, before any JS preference is read. |
-| **Raw** | `#7A5CFF` | Revised. Unwashed indigo dye reads with a violet cast before oxidation and wear lighten it toward true blue — this is that violet-leaning cobalt, not the copper-orange the previous value used (which described raw denim's *worn* patina, not its base color). |
-| **Stone** | `#767C86` | Renamed from "Black." The hex is unchanged — it was never black, it's a cool blue-gray at ~29% lightness, and a genuinely black hex is unusable as an accent against a `#0a0a0a` canvas regardless of label. Stone-washing (pumice-tumbled denim) is the real, well-known treatment this exact color already matches. |
-| **Ecru** | `#D8C9A3` | Unchanged. Undyed cotton — pale, warm, off-white. The one wash that needs a special case, below. |
+| **Indigo** *(default)* | `#4C6EDB` | The classic denim blue, fully saturated dye — a true, recognizable blue, and the quiet nod to Indigo & Asphalt. Loads on first visit, before any JS preference is read. |
+| **Raw** | `#7A5CFF` | Unwashed indigo dye reads with a violet cast before oxidation and wear lighten it toward true blue — this is that violet-leaning cobalt, not the copper-orange an earlier value used (which described raw denim's *worn* patina, not its base color). |
+| **Stone** | `#98A8D8` (`#253B7F` on light canvas) | Stone-washing (pumice-tumbled denim) fades indigo to a lighter blue, not to gray — this is that faded blue, same hue family as Indigo, just lightened. Renamed from "Black," which the hex never actually matched. |
+| **Ecru** | `#EBE6D6` (`#7A6A42` on light canvas) | Undyed cotton — genuinely close to white with a warm cast, not a tan or beige. |
 
 ```css
 :root {
   /* Fixed wash palette — never referenced directly by components, see the two-tier rule below */
-  --wash-raw:      #7A5CFF;
-  --wash-indigo:   #4C6EDB;
-  --wash-stone:    #767C86;
-  --wash-ecru:     #D8C9A3;
-  --wash-ecru-ink: #7A6A42; /* Ecru's light-canvas-safe twin, see below */
+  --wash-raw:       #7A5CFF;
+  --wash-indigo:    #4C6EDB;
+  --wash-stone:     #98A8D8;
+  --wash-stone-ink: #253B7F; /* Stone's light-canvas-safe twin */
+  --wash-ecru:      #EBE6D6;
+  --wash-ecru-ink:  #7A6A42; /* Ecru's light-canvas-safe twin */
 }
 ```
 
@@ -150,13 +167,14 @@ label). Indigo and Ecru were already accurate and are unchanged.
 |---|---|---|
 | Raw text/graphic on canvas | ~4.5:1 | ~4.2:1 |
 | Indigo text/graphic on canvas | ~4.3:1 | ~4.4:1 |
-| Stone text/graphic on canvas | ~4.7:1 | ~4.0:1 |
-| Ecru text/graphic on canvas | ~12.1:1 | **~1.6:1 — fails outright** |
+| Stone text/graphic on canvas | ~8.1:1 | **~2.3:1 — fails outright** |
+| Stone's light-canvas twin (`--wash-stone-ink`, `#253B7F`) on light canvas | — | ~10.0:1 |
+| Ecru text/graphic on canvas | ~15.9:1 | **fails outright, even further below floor than before** |
 | Ecru's light-canvas twin (`--wash-ecru-ink`, `#7A6A42`) on light canvas | — | ~5.1:1 |
 
-All four washes clear the 3:1 floor the universal accent-text rule (below) requires, on both
-canvases; Stone's ~4.0:1 on the light canvas is the tightest of the four but still comfortably
-clear of the floor.
+Raw and Indigo clear the 3:1 floor the universal accent-text rule (below) requires on both
+canvases unaided; Stone and Ecru now both need their light-canvas twin to clear it there — see the
+exception below, extended this pass to cover Stone as well as Ecru.
 
 **Simplified universal accent-text rule (tightened from the original spec):** because the accent
 value now changes underneath the same CSS, this system adopts one rule that holds for all four
@@ -165,15 +183,19 @@ as a non-text graphical element (rules, borders, icons) at any size.** Never sma
 accent text, on either canvas, regardless of wash. This is a slightly stricter version of the old
 per-canvas rule, traded for not needing conditional accessibility logic per color.
 
-**The Ecru exception:** true Ecru (`#D8C9A3`) is light enough that it fails even the large-text/
-non-text threshold against the light canvas (~1.6:1 — nowhere close to the 3:1 floor). On the dark
-canvas it's excellent (~12:1) and used as-is. On the light canvas, any accent usage — text or
-graphical — substitutes `--wash-ecru-ink` (`#7A6A42`, a dark khaki) instead. This is the only wash
-with a light-canvas twin; Raw, Indigo, and Stone are close enough in luminance to work identically
-on both canvases under the rule above.
+**The light-canvas-twin exception (now two washes, not one).** True Stone and true Ecru are both
+light enough to fail the large-text/non-text threshold against the light canvas outright. On the
+dark canvas both render at their true, full-saturation-appropriate hex and are excellent (8:1 and
+15:1+). On the light canvas, any accent usage — text or graphical — substitutes the wash's ink
+twin instead (`--wash-stone-ink` / `--wash-ecru-ink`). Raw and Indigo are close enough in luminance
+to work identically on both canvases under the rule above and need no twin. The swatch buttons
+themselves always show the true hex regardless of canvas — the twin only governs `--color-accent-
+on-light`, i.e. what a visitor's chosen wash looks like when it's used as accent-colored text or a
+border on a light-canvas section elsewhere on the page.
 
 **Token architecture — two tiers, don't skip this:** `--wash-raw` / `--wash-indigo` /
-`--wash-stone` / `--wash-ecru` / `--wash-ecru-ink` are the fixed palette definition and never
+`--wash-stone` / `--wash-stone-ink` / `--wash-ecru` / `--wash-ecru-ink` are the fixed palette
+definition and never
 change. `--color-accent` and `--color-accent-on-light` are the live semantic pointer the switcher
 repoints. **Components reference `--color-accent` / `--color-accent-on-light` only — never a
 `--wash-*` token directly.** Referencing a wash token in a component would hardcode that one wash
@@ -227,7 +249,7 @@ verbatim from the "Where it comes from" column in the hex table above, not newly
 ```
 title="Raw — unwashed indigo dye, deep violet-blue before break-in and fade"
 title="Indigo — the classic denim blue, fully saturated dye"
-title="Stone — stone-washed denim, faded blue-gray"
+title="Stone — stone-washed denim, faded to a lighter blue"
 title="Ecru — undyed cotton, warm off-white"
 ```
 
@@ -304,8 +326,8 @@ decorative toy, not a functional regression.
 
 **Persistence:** `localStorage`, key `ia-wash`, values `raw` / `indigo` / `stone` / `ecru`. Read
 and applied via a small blocking inline script in `<head>` — before first paint, before any CSS
-renders — that sets `--color-accent` (and `--color-accent-on-light`, computed per the Ecru rule
-above) as inline styles on `document.documentElement`. This avoids a flash of default Indigo
+renders — that sets `--color-accent` (and `--color-accent-on-light`, computed per the light-canvas-
+twin exception above) as inline styles on `document.documentElement`. This avoids a flash of default Indigo
 followed by a jump to the saved wash on repeat visits, the same anti-FOUC pattern a dark-mode
 toggle uses. No preference stored → Indigo, full stop, matching the CSS default so no-JS visitors
 see the correct color too.
