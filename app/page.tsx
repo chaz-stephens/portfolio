@@ -182,7 +182,7 @@ export default function Home() {
                 },
                 {
                   number: "3",
-                  label: "PUBLISHED",
+                  label: "PUBLICATIONS",
                   href: "https://doi.org/10.1371/journal.pone.0109208",
                 },
               ]}

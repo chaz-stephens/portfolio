@@ -50,6 +50,29 @@
   }
 }
 
+/* Wraps a number with its optional link mark (below) so the two sit on one baseline without
+   making the number itself a flex container — .number/.featuredNumber keep their own
+   position:relative for the underline pseudo-element below. */
+.numberRow {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-1);
+}
+
+/* Persistent (not hover-only) affordance for a linked stat: nobody discovers a hover reveal
+   on a number that looks exactly like every unlinked one next to it. */
+.linkMark {
+  font-family: var(--font-label);
+  font-weight: 600;
+  font-size: 0.75em;
+  color: var(--color-ink-muted);
+  transition: color 200ms var(--ease-standard);
+}
+
+.cellLink:hover .linkMark {
+  color: var(--color-accent);
+}
+
 .featuredNumber {
   position: relative;
   display: inline-block;
@@ -74,8 +97,16 @@
   transition: transform 200ms var(--ease-standard);
 }
 
-.cellFeatured:hover .featuredNumber::after {
+/* Scoped to .cellLink, not .cellFeatured: the featured cell without a link (none today, but
+   the type allows it) shouldn't grow a link-style underline it can't back up. Always-on for
+   a linked number — see .linkMark above for why hover-only isn't enough — hover only deepens
+   the color as extra feedback. */
+.cellLink .featuredNumber::after {
   transform: scaleX(1);
+}
+
+.cellLink:hover .featuredNumber::after {
+  background: var(--color-accent);
 }
 
 .featuredLabel {
@@ -160,8 +191,15 @@
   transition: transform 200ms var(--ease-standard);
 }
 
-.cell:hover .number::after {
+/* Scoped to .cellLink, not .cell: this used to fire on every cell's hover regardless of
+   whether it had a link, which drew a link-style underline under stats that were never
+   clickable (a false affordance in the other direction from the always-off default). */
+.cellLink .number::after {
   transform: scaleX(1);
+}
+
+.cellLink:hover .number::after {
+  background: var(--color-accent);
 }
 
 .label {
@@ -176,7 +214,7 @@
   transition: color 200ms var(--ease-standard);
 }
 
-.cell:hover .label {
+.cellLink:hover .label {
   color: var(--color-ink);
 }
 

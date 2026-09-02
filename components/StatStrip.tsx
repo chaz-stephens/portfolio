@@ -25,7 +25,16 @@ function StatContent({
 }) {
   return (
     <>
-      <CountUpNumber value={item.number} className={numberClassName} />
+      <span className={styles.numberRow}>
+        <CountUpNumber value={item.number} className={numberClassName} />
+        {/* Persistent link mark (not hover-only): a number that looks identical to every
+            other stat until you happen to hover it isn't an affordance anyone finds. */}
+        {item.href ? (
+          <span className={styles.linkMark} aria-hidden="true">
+            ↗
+          </span>
+        ) : null}
+      </span>
       <span className={labelClassName}>{item.label}</span>
     </>
   );
