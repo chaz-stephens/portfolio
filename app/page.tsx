@@ -90,7 +90,7 @@ export default function Home() {
         <div className={`container ${styles.hero}`}>
           <div className={styles.heroGrid}>
             <span className={styles.kicker}>
-              PRODUCT DEVELOPMENT &amp; STRATEGY
+              Product development &amp; strategy
             </span>
             <h1 className={styles.name}>Chaz Stephens</h1>
             <p className={styles.positioning}>
@@ -127,7 +127,7 @@ export default function Home() {
             </div>
             <div className={styles.heroRight}>
               <HeroSpecStrip
-                kicker="CURRENT FOCUS"
+                kicker="Current focus"
                 line="Turning clinical complexity into concrete product decisions."
                 statNumber="10+"
                 statLabel="YRS IN CANCER BIOLOGY"
@@ -166,7 +166,7 @@ export default function Home() {
             this gives the home page a second beat with the same rhythm). */}
         <section className={`theme-light ${styles.section} ${styles.statsSection}`}>
           <div className="container">
-            <span className={styles.statsKicker}>CAREER SPEC</span>
+            <span className={styles.statsKicker}>Career spec</span>
             <h2 className={styles.statsHeadline}>
               From bench science to shipped product.
             </h2>
@@ -190,7 +190,7 @@ export default function Home() {
 
             <div className={styles.experienceGrid}>
               <div className={styles.timelineWrap}>
-                <span className={styles.timelineKicker}>EXPERIENCE</span>
+                <span className={styles.timelineKicker}>Experience</span>
                 <div className={styles.timeline}>
                   {EXPERIENCE.map((job, i) => (
                     <Reveal key={job.company} index={i} className={styles.timelineItem}>
@@ -204,7 +204,7 @@ export default function Home() {
               </div>
 
               <div className={styles.skillsWrap}>
-                <span className={styles.skillsKicker}>CAPABILITIES</span>
+                <span className={styles.skillsKicker}>Capabilities</span>
                 <SkillsGrid categories={SKILLS} />
               </div>
             </div>
@@ -218,20 +218,20 @@ export default function Home() {
               <Reveal index={0}>
                 <TeaserCard
                   href="/work/subq-confirm"
-                  metadata={["PRODUCT MGMT", "AUG 2026", "MDPM CAPSTONE"]}
+                  metadata={["Product management", "August 2026", "MDPM capstone"]}
                   title="SubQ-Confirm"
                   description="A delivery-confirmation subsystem concept for wearable insulin pumps, developed end-to-end from clinical need through FDA pathway and go-to-market."
                   stats={[
-                    { number: "$110M", label: "SOM · 5 YEAR", accent: true },
+                    { number: "$110M", label: "SOM, 5 YEAR", accent: true },
                     { number: "71%", label: "GROSS MARGIN" },
-                    { number: "$5.25B", label: "TAM · GLOBAL" },
+                    { number: "$5.25B", label: "TAM, GLOBAL" },
                   ]}
                 />
               </Reveal>
               <Reveal index={1}>
                 <TeaserCard
                   href="/work/fit-finder"
-                  metadata={["SOLE BUILDER", "LIVE PRODUCT", "WEB + ANDROID + STRIPE"]}
+                  metadata={["Sole builder", "Live product", "Web + Android + Stripe"]}
                   title="Fit Finder"
                   description="A body-measurement matching tool that helps people find jeans that actually fit, built and shipped independently."
                   stats={[
@@ -278,8 +278,8 @@ export default function Home() {
         </section>
       </main>
       <Footer
-        tags={["PORTFOLIO", "PRODUCT & PROGRAM MANAGEMENT", "CHAZ STEPHENS © 2026"]}
-        activeTag="PORTFOLIO"
+        tags={["Portfolio", "Product & program management", "Chaz Stephens © 2026"]}
+        activeTag="Portfolio"
       />
     </>
   );

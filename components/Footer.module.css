@@ -18,10 +18,8 @@
 .tags {
   font-family: var(--font-label);
   font-weight: 600;
-  font-size: 0.6875rem;
-  letter-spacing: 0.08em;
+  font-size: 0.75rem;
   line-height: 1.5;
-  text-transform: uppercase;
   color: var(--color-ink-muted);
 }
 
@@ -36,9 +34,8 @@
 
 .contacts a {
   font-family: var(--font-label);
-  font-size: 0.6875rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.75rem;
   color: var(--color-ink-muted);
 }
 

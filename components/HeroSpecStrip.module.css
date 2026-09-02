@@ -14,9 +14,7 @@
   border-bottom: var(--border-width-hairline) solid var(--color-border-hairline);
   font-family: var(--font-label);
   font-weight: 600;
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: 0.8125rem;
   color: var(--color-ink-muted);
 }
 

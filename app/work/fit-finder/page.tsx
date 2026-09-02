@@ -41,7 +41,8 @@ export default function FitFinderCaseStudy() {
         <section className={`${styles.section} ${styles.s1}`}>
           <div className="container">
             <SectionHeading
-              kicker="01 · OVERVIEW"
+              number="01"
+              total="05"
               title="Fit Finder"
               lede="A body-measurement matching tool that helps people find jeans that actually fit, conceived and built independently. It's now the highest-traffic product on the site, outperforming every other piece of content combined."
             />
@@ -73,7 +74,8 @@ export default function FitFinderCaseStudy() {
         <section className={`theme-light ${styles.section} ${styles.s2}`}>
           <div className="container">
             <SectionHeading
-              kicker="02 · THE PROBLEM"
+              number="02"
+              total="05"
               title="Sizing on a jeans tag is close to meaningless"
             />
             <p className={styles.body}>
@@ -95,7 +97,8 @@ export default function FitFinderCaseStudy() {
         <section className={`${styles.section} ${styles.s3}`}>
           <div className="container">
             <SectionHeading
-              kicker="03 · WHAT SHIPPED"
+              number="03"
+              total="05"
               title="A free tool, a premium layer, and a native app"
             />
             <p className={styles.body}>
@@ -144,7 +147,8 @@ export default function FitFinderCaseStudy() {
         <section className={`theme-light ${styles.section} ${styles.s4}`}>
           <div className="container">
             <SectionHeading
-              kicker="04 · BUILT FROM REAL USAGE, NOT A SPEC"
+              number="04"
+              total="05"
               title="Two features that came from watching how people actually used it"
             />
             <p className={styles.body}>
@@ -163,7 +167,8 @@ export default function FitFinderCaseStudy() {
         <section className={`${styles.section} ${styles.s5}`}>
           <div className="container">
             <SectionHeading
-              kicker="05 · WHAT THIS DEMONSTRATES"
+              number="05"
+              total="05"
               title="A different kind of evidence than a class project"
             />
             <p className={styles.body}>
@@ -185,15 +190,15 @@ export default function FitFinderCaseStudy() {
                 Try Fit Finder
               </a>
               <span className={styles.ctaCaption}>
-                LIVE WEB TOOL · INDIGOANDASPHALT.COM
+                Live web tool, indigoandasphalt.com
               </span>
             </div>
           </div>
         </section>
       </main>
       <Footer
-        tags={["CASE STUDY", "FIT FINDER", "2026"]}
-        activeTag="FIT FINDER"
+        tags={["Case study", "Fit Finder", "2026"]}
+        activeTag="Fit Finder"
       />
     </>
   );

@@ -13,10 +13,8 @@
   text-align: right;
   font-family: var(--font-label);
   font-weight: 600;
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   line-height: 1.4;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
   color: var(--color-ink-muted);
 }
 

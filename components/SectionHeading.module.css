@@ -1,11 +1,17 @@
-.kicker {
+/* Folio number, not a caps label: a running page count through the case study's real
+   sequence (01/07, 02/07, ...), the way a printed tech-pack numbers its spec pages. The
+   heading below already states what the section is, so nothing here repeats it in words. */
+.folio {
   display: block;
-  font-family: var(--font-label);
-  font-weight: 600;
-  font-size: 0.75rem;
-  line-height: 1.4;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-family: var(--font-sans);
+  font-weight: 900;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--color-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.folioTotal {
   color: var(--color-ink-muted);
 }
 

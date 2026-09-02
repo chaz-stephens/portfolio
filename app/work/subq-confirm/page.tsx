@@ -41,7 +41,8 @@ export default function SubQConfirmCaseStudy() {
         <section className={`${styles.section} ${styles.s1}`}>
           <div className="container">
             <SectionHeading
-              kicker="01 · OVERVIEW"
+              number="01"
+              total="07"
               title="SubQ-Confirm"
               lede="A delivery-confirmation subsystem for wearable insulin pumps, designed for integration by pump manufacturers. Built as an individual capstone project for a graduate Medical Device Product Management course, covering the full lifecycle a PM owns: clinical need and market sizing, product requirements, FDA regulatory and reimbursement strategy, clinical evidence planning, risk and human factors, and go-to-market economics."
             />
@@ -61,7 +62,8 @@ export default function SubQConfirmCaseStudy() {
         <section className={`theme-light ${styles.section} ${styles.s2}`}>
           <div className="container">
             <SectionHeading
-              kicker="02 · THE PROBLEM"
+              number="02"
+              total="07"
               title="Silent infusion-site failures go undetected"
             />
             <p className={styles.body}>
@@ -79,7 +81,7 @@ export default function SubQConfirmCaseStudy() {
               <Reveal index={0}>
                 <StatTile
                   number="$5.25B"
-                  label="TAM · GLOBAL"
+                  label="TAM, GLOBAL"
                   caption="3.5M pump users worldwide × ~$1,500/yr of confirmation disposables"
                   size="lg"
                 />
@@ -87,7 +89,7 @@ export default function SubQConfirmCaseStudy() {
               <Reveal index={1}>
                 <StatTile
                   number="$2.25B"
-                  label="SAM · UNITED STATES"
+                  label="SAM, UNITED STATES"
                   caption="1.5M US pump users; closed-loop beachhead ~900K ≈ $1.35B"
                   size="lg"
                 />
@@ -95,7 +97,7 @@ export default function SubQConfirmCaseStudy() {
               <Reveal index={2}>
                 <StatTile
                   number="$110M"
-                  label="SOM · 5 YEAR"
+                  label="SOM, 5 YEAR"
                   caption="5% of the US pump base (~75,000 users on subscription sets)"
                   accent
                   size="lg"
@@ -109,7 +111,8 @@ export default function SubQConfirmCaseStudy() {
         <section className={`${styles.section} ${styles.s3}`}>
           <div className="container">
             <SectionHeading
-              kicker="03 · THE SOLUTION"
+              number="03"
+              total="07"
               title="Dual-modality sensing in the infusion set"
             />
             <p className={styles.body}>
@@ -172,7 +175,8 @@ export default function SubQConfirmCaseStudy() {
         <section className={`theme-light ${styles.section} ${styles.s4}`}>
           <div className="container">
             <SectionHeading
-              kicker="04 · REGULATORY & REIMBURSEMENT"
+              number="04"
+              total="07"
               title="A sequenced pathway for two components"
             />
             <p className={styles.body}>
@@ -216,7 +220,8 @@ export default function SubQConfirmCaseStudy() {
         <section className={`${styles.section} ${styles.s5}`}>
           <div className="container">
             <SectionHeading
-              kicker="05 · EVIDENCE & RISK"
+              number="05"
+              total="07"
               title="Evidence sized to event incidence, not enrollment"
             />
             <p className={styles.body}>
@@ -257,7 +262,8 @@ export default function SubQConfirmCaseStudy() {
         <section className={`theme-light ${styles.section} ${styles.s6}`}>
           <div className="container">
             <SectionHeading
-              kicker="06 · GO-TO-MARKET"
+              number="06"
+              total="07"
               title="Commercialization through the OEM channel"
             />
             <p className={styles.body}>
@@ -282,13 +288,13 @@ export default function SubQConfirmCaseStudy() {
               <Reveal index={0}>
                 <StatTile
                   number="71%"
-                  label="GROSS MARGIN · DISPOSABLE"
+                  label="GROSS MARGIN, DISPOSABLE"
                   accent
                   size="lg"
                 />
               </Reveal>
               <Reveal index={1}>
-                <StatTile number="66%" label="GROSS MARGIN · MODULE" size="lg" />
+                <StatTile number="66%" label="GROSS MARGIN, MODULE" size="lg" />
               </Reveal>
               <Reveal index={2}>
                 <StatTile
@@ -305,7 +311,8 @@ export default function SubQConfirmCaseStudy() {
         <section className={`${styles.section} ${styles.s7}`}>
           <div className="container">
             <SectionHeading
-              kicker="07 · WHAT THIS DEMONSTRATES"
+              number="07"
+              total="07"
               title="Full-lifecycle product management, end to end"
             />
             <p className={styles.body}>
@@ -329,15 +336,15 @@ export default function SubQConfirmCaseStudy() {
                 Download the full pitch deck (PDF)
               </a>
               <span className={styles.ctaCaption}>
-                EXECUTIVE PITCH · AUGUST 2026 · PDF
+                Executive pitch, August 2026, PDF
               </span>
             </div>
           </div>
         </section>
       </main>
       <Footer
-        tags={["CASE STUDY", "SUBQ-CONFIRM", "MDPM CAPSTONE", "2026"]}
-        activeTag="SUBQ-CONFIRM"
+        tags={["Case study", "SubQ-Confirm", "MDPM capstone", "2026"]}
+        activeTag="SubQ-Confirm"
       />
     </>
   );
