@@ -97,6 +97,33 @@
   }
 }
 
+/* Photos get their own reveal signature (DESIGN_SPEC.md §5's differentiated-motion rule
+   extended to this page's one media-heavy section): a settle-into-focus scale instead of the
+   plain translateY every other reveal uses, since a screenshot benefits from looking like it's
+   coming into focus, not sliding up. */
+:global(.js) .mediaWeb,
+:global(.js) .mediaPhone {
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity var(--duration-reveal) var(--ease-reveal),
+    transform var(--duration-reveal) var(--ease-reveal);
+}
+
+:global(.js) :global(.reveal-visible) .mediaWeb,
+:global(.js) :global(.reveal-visible) .mediaPhone {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mediaWeb,
+  .mediaPhone {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 .cta {
   margin-top: var(--space-6);
 }

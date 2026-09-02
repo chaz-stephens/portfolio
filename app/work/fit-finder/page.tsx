@@ -114,31 +114,37 @@ export default function FitFinderCaseStudy() {
               cleared alpha testing and is currently in Google Play Store
               review.
             </p>
-            <img
-              src="/fit-finder/tool-browse.png"
-              alt="Fit Finder's web tool filter UI, with controls for waist, inseam, rise, and fit category"
-              width={1440}
-              height={900}
-              className={styles.mediaWeb}
-              loading="lazy"
-            />
+            <Reveal>
+              <img
+                src="/fit-finder/tool-browse.png"
+                alt="Fit Finder's web tool filter UI, with controls for waist, inseam, rise, and fit category"
+                width={1440}
+                height={900}
+                className={styles.mediaWeb}
+                loading="lazy"
+              />
+            </Reveal>
             <div className={styles.mediaPhones}>
-              <img
-                src="/fit-finder/app-my-closet.png"
-                alt="Fit Finder Android app Closet Insights screen, comparing a saved pair's measurements against the user's profile"
-                width={1080}
-                height={1460}
-                className={styles.mediaPhone}
-                loading="lazy"
-              />
-              <img
-                src="/fit-finder/app-premium.png"
-                alt="Fit Finder Android app premium upgrade screen, listing Closet, Wishlist, Insights, and notification features"
-                width={1080}
-                height={1920}
-                className={styles.mediaPhone}
-                loading="lazy"
-              />
+              <Reveal index={0}>
+                <img
+                  src="/fit-finder/app-my-closet.png"
+                  alt="Fit Finder Android app Closet Insights screen, comparing a saved pair's measurements against the user's profile"
+                  width={1080}
+                  height={1460}
+                  className={styles.mediaPhone}
+                  loading="lazy"
+                />
+              </Reveal>
+              <Reveal index={1}>
+                <img
+                  src="/fit-finder/app-premium.png"
+                  alt="Fit Finder Android app premium upgrade screen, listing Closet, Wishlist, Insights, and notification features"
+                  width={1080}
+                  height={1920}
+                  className={styles.mediaPhone}
+                  loading="lazy"
+                />
+              </Reveal>
             </div>
           </div>
         </section>
