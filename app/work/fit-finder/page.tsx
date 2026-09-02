@@ -6,7 +6,7 @@ import SectionHeading from "@/components/SectionHeading";
 import StatTile from "@/components/StatTile";
 import styles from "./page.module.css";
 
-const TITLE = "Fit Finder — Product Case Study | Chaz Stephens";
+const TITLE = "Fit Finder: Product Case Study | Chaz Stephens";
 const DESCRIPTION =
   "Fit Finder: a body-measurement matching tool that helps people find jeans that actually fit, conceived and built independently. Now the highest-traffic product on the site, outperforming every other piece of content combined.";
 
@@ -41,17 +41,17 @@ export default function FitFinderCaseStudy() {
         <section className={`${styles.section} ${styles.s1}`}>
           <div className="container">
             <SectionHeading
-              kicker="01 — OVERVIEW"
+              kicker="01 · OVERVIEW"
               title="Fit Finder"
               lede="A body-measurement matching tool that helps people find jeans that actually fit, conceived and built independently. It's now the highest-traffic product on the site, outperforming every other piece of content combined."
             />
             <div className={styles.metaBlock}>
               <p className={styles.metaLine}>
-                <strong>Role</strong> — Sole builder — product concept,
+                <strong>Role:</strong> Sole builder. Product concept,
                 catalog/data pipeline, premium feature design, mobile app.
               </p>
               <p className={styles.metaLine}>
-                <strong>Status</strong> — Live web tool; Android app has
+                <strong>Status:</strong> Live web tool; Android app has
                 completed alpha testing and is in Google Play Store review.
               </p>
             </div>
@@ -73,7 +73,7 @@ export default function FitFinderCaseStudy() {
         <section className={`theme-light ${styles.section} ${styles.s2}`}>
           <div className="container">
             <SectionHeading
-              kicker="02 — THE PROBLEM"
+              kicker="02 · THE PROBLEM"
               title="Sizing on a jeans tag is close to meaningless"
             />
             <p className={styles.body}>
@@ -95,7 +95,7 @@ export default function FitFinderCaseStudy() {
         <section className={`${styles.section} ${styles.s3}`}>
           <div className="container">
             <SectionHeading
-              kicker="03 — WHAT SHIPPED"
+              kicker="03 · WHAT SHIPPED"
               title="A free tool, a premium layer, and a native app"
             />
             <p className={styles.body}>
@@ -144,7 +144,7 @@ export default function FitFinderCaseStudy() {
         <section className={`theme-light ${styles.section} ${styles.s4}`}>
           <div className="container">
             <SectionHeading
-              kicker="04 — BUILT FROM REAL USAGE, NOT A SPEC"
+              kicker="04 · BUILT FROM REAL USAGE, NOT A SPEC"
               title="Two features that came from watching how people actually used it"
             />
             <p className={styles.body}>
@@ -163,7 +163,7 @@ export default function FitFinderCaseStudy() {
         <section className={`${styles.section} ${styles.s5}`}>
           <div className="container">
             <SectionHeading
-              kicker="05 — WHAT THIS DEMONSTRATES"
+              kicker="05 · WHAT THIS DEMONSTRATES"
               title="A different kind of evidence than a class project"
             />
             <p className={styles.body}>

@@ -13,10 +13,10 @@ import styles from "./WashSwitcher.module.css";
 // true hex is too light to read as accent-colored text/graphics on the light canvas (§1a) —
 // Raw and Indigo are saturated enough to work as-is on both canvases; Stone and Ecru aren't.
 const WASHES = [
-  { id: "raw", label: "Raw", hex: "#7A5CFF", gloss: "Raw — unwashed indigo dye, deep violet-blue before break-in and fade" },
-  { id: "indigo", label: "Indigo", hex: "#4C6EDB", gloss: "Indigo — the classic denim blue, fully saturated dye" },
-  { id: "stone", label: "Stone", hex: "#98A8D8", ink: "#253B7F", gloss: "Stone — stone-washed denim, faded to a lighter blue" },
-  { id: "ecru", label: "Ecru", hex: "#EBE6D6", ink: "#7A6A42", gloss: "Ecru — undyed cotton, warm off-white" },
+  { id: "raw", label: "Raw", hex: "#7A5CFF", gloss: "Raw: unwashed indigo dye, deep violet-blue before break-in and fade" },
+  { id: "indigo", label: "Indigo", hex: "#4C6EDB", gloss: "Indigo: the classic denim blue, fully saturated dye" },
+  { id: "stone", label: "Stone", hex: "#98A8D8", ink: "#253B7F", gloss: "Stone: stone-washed denim, faded to a lighter blue" },
+  { id: "ecru", label: "Ecru", hex: "#EBE6D6", ink: "#7A6A42", gloss: "Ecru: undyed cotton, warm off-white" },
 ] as const;
 
 const WASH_SWAP_CLASS = "wash-swap";

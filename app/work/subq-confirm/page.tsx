@@ -6,7 +6,7 @@ import SectionHeading from "@/components/SectionHeading";
 import StatTile from "@/components/StatTile";
 import styles from "./page.module.css";
 
-const TITLE = "SubQ-Confirm — Medical Device Case Study | Chaz Stephens";
+const TITLE = "SubQ-Confirm: Medical Device Case Study | Chaz Stephens";
 const DESCRIPTION =
   "SubQ-Confirm: a delivery-confirmation subsystem concept for wearable insulin pumps, developed end-to-end from clinical need through FDA pathway and go-to-market.";
 
@@ -41,17 +41,17 @@ export default function SubQConfirmCaseStudy() {
         <section className={`${styles.section} ${styles.s1}`}>
           <div className="container">
             <SectionHeading
-              kicker="01 — OVERVIEW"
+              kicker="01 · OVERVIEW"
               title="SubQ-Confirm"
               lede="A delivery-confirmation subsystem for wearable insulin pumps, designed for integration by pump manufacturers. Built as an individual capstone project for a graduate Medical Device Product Management course, covering the full lifecycle a PM owns: clinical need and market sizing, product requirements, FDA regulatory and reimbursement strategy, clinical evidence planning, risk and human factors, and go-to-market economics."
             />
             <div className={styles.metaBlock}>
               <p className={styles.metaLine}>
-                <strong>Role</strong> — Sole product manager: market analysis,
+                <strong>Role:</strong> Sole product manager. Market analysis,
                 PRD, regulatory strategy, risk analysis, business case.
               </p>
               <p className={styles.metaLine}>
-                <strong>Timeline</strong> — August 2026.
+                <strong>Timeline:</strong> August 2026.
               </p>
             </div>
           </div>
@@ -61,13 +61,13 @@ export default function SubQConfirmCaseStudy() {
         <section className={`theme-light ${styles.section} ${styles.s2}`}>
           <div className="container">
             <SectionHeading
-              kicker="02 — THE PROBLEM"
+              kicker="02 · THE PROBLEM"
               title="Silent infusion-site failures go undetected"
             />
             <p className={styles.body}>
-              People using wearable insulin pumps can have a site failure — the
+              People using wearable insulin pumps can have a site failure (the
               cannula backs out, the tissue can&apos;t absorb, or insulin leaks
-              at the hub — 18 to 36 hours into wear, and current pumps never
+              at the hub) 18 to 36 hours into wear, and current pumps never
               know it. Occlusion alarms only watch line pressure, so leakage and
               displacement stay invisible until blood glucose climbs and, in the
               worst cases, ketoacidosis develops. Clinicians can&apos;t tell
@@ -96,7 +96,7 @@ export default function SubQConfirmCaseStudy() {
                 <StatTile
                   number="$110M"
                   label="SOM · 5 YEAR"
-                  caption="5% of the US pump base — ~75,000 users on subscription sets"
+                  caption="5% of the US pump base (~75,000 users on subscription sets)"
                   accent
                   size="lg"
                 />
@@ -109,7 +109,7 @@ export default function SubQConfirmCaseStudy() {
         <section className={`${styles.section} ${styles.s3}`}>
           <div className="container">
             <SectionHeading
-              kicker="03 — THE SOLUTION"
+              kicker="03 · THE SOLUTION"
               title="Dual-modality sensing in the infusion set"
             />
             <p className={styles.body}>
@@ -119,7 +119,7 @@ export default function SubQConfirmCaseStudy() {
               bridges them. A reusable module snaps onto the set and runs the
               detection logic, sending an authenticated signal to the pump. The
               partner pump surfaces the fault on its own existing alarm system
-              within 500 milliseconds — SubQ-Confirm never issues a delivery
+              within 500 milliseconds. SubQ-Confirm never issues a delivery
               command itself.
             </p>
             <p className={styles.body}>
@@ -128,7 +128,7 @@ export default function SubQConfirmCaseStudy() {
               site leak (pressure below 60% of normal, site wet), and
               cannula-out (pressure low, site dry). A leak only reports after 3
               of 5 consecutive deliveries stay below that threshold within 30
-              seconds — the debounce that keeps sweat and showering from
+              seconds, the debounce that keeps sweat and showering from
               triggering a false alarm. Constraints were set to disappear into
               existing pump wear: under 5 grams, under 3mm added height,
               IP-rated to 1m for 30 minutes, and a minimum 96-hour run time
@@ -172,13 +172,13 @@ export default function SubQConfirmCaseStudy() {
         <section className={`theme-light ${styles.section} ${styles.s4}`}>
           <div className="container">
             <SectionHeading
-              kicker="04 — REGULATORY & REIMBURSEMENT"
+              kicker="04 · REGULATORY & REIMBURSEMENT"
               title="A sequenced pathway for two components"
             />
             <p className={styles.body}>
               The disposable set and the electronics module needed different
               FDA tracks. The set follows a straightforward 510(k) against an
-              existing predicate (BD FlowSmart / MiniMed Pro-Set) — same device
+              existing predicate (BD FlowSmart / MiniMed Pro-Set): same device
               class, same regulation, and the added hub sensor changes no lumen
               dimension or delivery accuracy. The electronics module has no
               matching product code, so it goes through either an accessory
@@ -216,29 +216,29 @@ export default function SubQConfirmCaseStudy() {
         <section className={`${styles.section} ${styles.s5}`}>
           <div className="container">
             <SectionHeading
-              kicker="05 — EVIDENCE & RISK"
+              kicker="05 · EVIDENCE & RISK"
               title="Evidence sized to event incidence, not enrollment"
             />
             <p className={styles.body}>
-              Clearance doesn&apos;t need a powered clinical trial — substantial
+              Clearance doesn&apos;t need a powered clinical trial; substantial
               equivalence rests on bench verification: a gel-block rig run
               through all four detection states 30 times each, plus
               induced-fault testing confirming every fault code reaches the
               pump within 500ms. A 30-subject pre-market cohort checks
               tolerability and false-positive rate, not accuracy. Real accuracy
-              evidence — sensitivity and specificity of the alarm — accrues
+              evidence (sensitivity and specificity of the alarm) accrues
               post-market through a 465-subject registry, co-funded with the
               OEM partner, tracking DKA admissions per 1,000 user-years against
               baseline.
             </p>
             <p className={styles.body}>
               Risk and human factors: the top hazards all trace back to the
-              same failure shape — a silent, undetected non-alarm. A module
+              same failure shape: a silent, undetected non-alarm. A module
               that seats but doesn&apos;t latch, electrodes that never make
               contact, a lost wireless link, or a detached electrode reading as
               &ldquo;no fault&rdquo; would each let monitoring quietly stop
               while the user believes it&apos;s active. Every one of these was
-              closed at the design or software stage — a keyed snap that
+              closed at the design or software stage: a keyed snap that
               can&apos;t seat wrong, a power-on self-test of electrode
               continuity, an authenticated link with a heartbeat and its own
               loss-of-monitoring alarm, and a third &ldquo;indeterminate&rdquo;
@@ -257,12 +257,12 @@ export default function SubQConfirmCaseStudy() {
         <section className={`theme-light ${styles.section} ${styles.s6}`}>
           <div className="container">
             <SectionHeading
-              kicker="06 — GO-TO-MARKET"
+              kicker="06 · GO-TO-MARKET"
               title="Commercialization through the OEM channel"
             />
             <p className={styles.body}>
               SubQ-Confirm sells through pump manufacturers, not direct to
-              patients — no sales force of its own. The set runs a
+              patients; it has no sales force of its own. The set runs a
               razor-and-blade model: a $10–12 per-set premium to the OEM
               against roughly $3.20 in cost of goods, a 71% gross margin, while
               the reusable module is placed as capital at $180 against $62 in
@@ -305,7 +305,7 @@ export default function SubQConfirmCaseStudy() {
         <section className={`${styles.section} ${styles.s7}`}>
           <div className="container">
             <SectionHeading
-              kicker="07 — WHAT THIS DEMONSTRATES"
+              kicker="07 · WHAT THIS DEMONSTRATES"
               title="Full-lifecycle product management, end to end"
             />
             <p className={styles.body}>
