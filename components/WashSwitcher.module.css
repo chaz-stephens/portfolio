@@ -4,8 +4,20 @@
   gap: 4px;
 }
 
-.labels {
-  display: none;
+/* Names the category once, right-aligned above the swatch row, at every breakpoint — the
+   comprehension fix (DESIGN_SPEC.md §1a). Reuses the existing mono label-kicker type role,
+   no new token. Fits inside the swatch cluster's own footprint (4x24px + 3x6px = 114px) at
+   any width, so it never wraps or forces a header height change. */
+.caption {
+  display: block;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
 }
 
 .swatches {
@@ -61,25 +73,6 @@
       var(--color-ink) 55%,
       transparent 55%
     );
-}
-
-@media (min-width: 1024px) {
-  .labels {
-    display: flex;
-    gap: 12px;
-  }
-
-  .labelText {
-    flex: 1 0 24px;
-    white-space: nowrap;
-    font-family: var(--font-mono);
-    font-weight: 500;
-    font-size: 0.625rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    text-align: center;
-    color: var(--color-ink-muted);
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

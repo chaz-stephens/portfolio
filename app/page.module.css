@@ -62,9 +62,12 @@
     align-items: start;
   }
 
+  /* Deliberately NOT stretched to match the left column's height (see DESIGN_SPEC.md §6:
+     "an asymmetric, editorial composition, not a forced symmetric one"). Stretching a
+     3-item card to match an 800px column was the actual cause of "huge for how empty it
+     is" — the card hugs its own content and pins to the top instead. */
   .heroRight {
-    align-self: stretch;
-    align-items: stretch;
+    align-self: start;
   }
 }
 
@@ -159,9 +162,36 @@
 }
 
 .timelineItem {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
+}
+
+/* A bar-tack tick on the rule at each entry — the same corner-stitch language as the
+   monogram and wash switcher (DESIGN_SPEC.md §4), so the timeline carries the system's
+   signature tactile detail instead of reading as a bare hairline with text hanging off it. */
+.timelineItem::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: calc(-1 * var(--space-6) - 4px);
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(
+      45deg,
+      transparent 45%,
+      var(--color-ink) 45%,
+      var(--color-ink) 55%,
+      transparent 55%
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 45%,
+      var(--color-ink) 45%,
+      var(--color-ink) 55%,
+      transparent 55%
+    );
 }
 
 .timelineDate {

@@ -175,11 +175,75 @@ previous pass drew a visually smaller 20px swatch inside a 24px hit area, which 
 a single click happened). Each filled with its wash hex, `--radius-control` corners (§3), and the
 same hard-edged accent shadow (`--shadow-resting-accent`, §3) every other interactive control on the
 home page now carries — the switcher already looks like the substantial control it's meant to be,
-before it's touched. At ≥1024px a small mono label row (`RAW  INDIGO  BLACK  ECRU`, 10px, tracked,
-`--color-ink-muted`) sits above the row; below that breakpoint the labels drop to `aria-label` +
-native `title` tooltip only, icon row stays. The active swatch gets a permanent 2px ink ring plus
-the same corner-stitch tick detail used on the monogram (§4) — a deliberate visual echo tying the
-badge and the switcher to one "stitch" language.
+before it's touched. The active swatch gets a permanent 2px ink ring plus the same corner-stitch tick
+detail used on the monogram (§4) — a deliberate visual echo tying the badge and the switcher to one
+"stitch" language. Label treatment (the actual subject of this pass's feedback) is specified below,
+replacing the old always-shown-desktop-only `RAW INDIGO BLACK ECRU` row.
+
+**Naming comprehension fix (this pass) — the concept wasn't landing, not the colors.** Stakeholder
+feedback after the hex fixes: "still not sure I understand the names of the color swatches." The hex
+values are correct now (table above); what's missing is context — nothing on the page tells a
+first-time visitor these are denim-wash names, that a portfolio has them on purpose, or what a
+"wash" is. The label row this replaces (`RAW  INDIGO  BLACK  ECRU`, mono, shown ≥1024px only) was
+already shipped when this feedback came in — naming the individual swatches correctly doesn't help
+if the category they belong to is never named. That's the gap this pass closes, not a second attempt
+at clearer individual words.
+
+**Fix — one new element, reusing the existing mono-label-kicker role (§2), no new token, no new
+component.** A static two-word caption, `DENIM WASH`, sits directly above the swatch row, right-
+aligned to the row's own width, at **every** breakpoint including the icon-only collapse under
+640px. Same role as every other kicker on the page (`Label / kicker`, §2: 12px Mono 500, 1.4
+line-height, 0.10em tracking, uppercase, `--color-ink-muted`) — an existing, already-contrast-
+checked type role, not a new one. At ~70–90px wide it sits comfortably inside the swatch cluster's
+own footprint (4×24px + 3×6px gaps = 114px) at any width, so it never wraps or forces a layout
+change. This is the one behavior change from the previous pass: comprehension no longer disappears
+on mobile, where visitors previously got a bare row of colored squares and nothing else — native
+`title` tooltips are unreliable on touch and shouldn't be the only affordance for what's likely the
+majority of first-time traffic.
+
+The per-swatch `RAW  INDIGO  BLACK  ECRU` mono row is retired, not doubled up alongside the new
+caption — it was already visible at ≥1024px in the version the stakeholder reviewed and still didn't
+land, so a second text row stacked under `DENIM WASH` would cost header height (right at the 64–72px
+budget, §4) for a mechanism already shown not to work. Individual identification moves entirely to
+`aria-label` (always, for screen readers) and an extended `title` tooltip (hover-capable devices,
+below), which is where per-swatch specificity belongs as optional depth rather than default clutter.
+
+**Ecru gets one more inch, every swatch gets the same mechanism.** Ecru is the one name without a
+plausible plain-English guess — nobody derives "undyed cotton" from the word alone. Rather than
+special-case it, every swatch's `title` is extended from a bare label to a short gloss, pulled
+verbatim from the "Where it comes from" column in the hex table above, not newly written:
+
+```
+title="Raw — unwashed indigo, copper-orange fade"
+title="Indigo — the classic denim blue"
+title="Black — sulfur-black overdye"
+title="Ecru — undyed cotton, warm off-white"
+```
+
+`aria-label` stays the bare wash name (`"Raw"`, `"Ecru"`, etc.) — concise for assistive tech; the
+gloss is a mouse-hover bonus, not a replacement for it.
+
+**Interaction model — always-visible caption, hover-optional gloss, no first-visit flow, no
+rename.** `DENIM WASH` is static chrome, on screen every time the header renders — the same
+permanence as `CAREER SPEC` or `CURRENT FOCUS` elsewhere on this page (§4), not a tooltip, not a
+dismissible hint, not a one-time onboarding beat. A first-visit-only popover was considered and
+rejected: it's a second mechanism (state, a dismiss action, a re-appearance rule) solving what a
+static two-word label already solves for free, and a dismissible product tour is exactly the
+SaaS-onboarding register this system exists to avoid (§0). The per-swatch gloss stays hover/title-
+only, matching the system's existing "curiosity rewarded on hover, not forced on first paint"
+pattern (the monogram's hover-only accent flash, §4, is the same idiom). No wash gets renamed: once
+the category is named once, `RAW` and `BLACK` read as denim vocabulary instead of isolated color
+adjectives, and appending "Denim" to each label (`RAW DENIM`, `INDIGO DENIM`...) would be redundant
+with the caption — `INDIGO DENIM` is nonsensical as a phrase besides.
+
+**Why this lands in two seconds where the current version doesn't:** today a first-time visitor sees
+four colored squares in the header, with either four unexplained mono words above them (≥1024px,
+already tested and reported as unclear) or nothing at all (<1024px, the untested majority case).
+After this fix, the same visitor sees `DENIM WASH` once, in the same quiet mono-label voice already
+used for every other kicker on the page — that's the whole concept: *this control is a set of real
+denim colors, on a denim writer's site, and clicking one reskins the page.* Getting the joke doesn't
+require knowing what a wash is technically or recalling what "ecru" means; both become optional
+depth for a visitor who hovers, not the price of admission for the one who doesn't.
 
 **Making the payoff match the attention it commands (the actual complaint):** the fix isn't a
 bigger button, it's a bigger effect. §3 rebuilds this system's elevation model around a hard-edged
@@ -509,8 +573,9 @@ it does not participate in the section-inversion rhythm. Height 64–72px, `--bo
 solid `--color-border-hairline` bottom edge, no scroll-elevation shadow. Left: monogram badge +
 wordmark (see above). Right: inline contact links (email, LinkedIn — icon + label, never
 icon-only/color-only), the wash switcher (§1a), then the primary Resume button. No hamburger:
-three pages don't need one; stack or icon-only under 640px, wash switcher collapses to icon-only
-with tooltips first.
+three pages don't need one; stack or icon-only under 640px — the wash switcher keeps its
+`DENIM WASH` caption at every width and drops individual swatch names to `aria-label` + `title`
+tooltip only (§1a).
 
 ### Section heading pattern
 Label (`SECTION NUMBER — TITLE`, e.g. `04 — REGULATORY & REIMBURSEMENT`) in the mono label role,
@@ -887,3 +952,6 @@ made.
   exception check for the new color, and confirming it clears the name-recognition test above
 - No tag-styled cards, spec-sheet stat strips, or wash-switcher duplication inside case-study
   body content — that personality layer is chrome- and home-page-only (§6)
+- No relying on native `title` tooltips as the sole naming affordance for the wash switcher on
+  touch devices — they don't reliably surface on tap; the `DENIM WASH` caption (§1a) must render
+  unconditionally, `title` is hover-only bonus depth, not the mechanism

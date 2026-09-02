@@ -94,8 +94,8 @@ export default function Home() {
               <HeroSpecStrip
                 kicker="CURRENT FOCUS"
                 line="Turning clinical complexity into concrete product decisions."
-                statNumber="9+"
-                statLabel="YRS IN PROGRAM MGMT"
+                statNumber="10+"
+                statLabel="YRS IN CANCER BIOLOGY"
               />
             </div>
             <div className={styles.buttonRow}>
@@ -130,10 +130,10 @@ export default function Home() {
           <StatStrip
             kicker="CAREER SPEC"
             items={[
-              { number: "9+", label: "YRS EXP", accent: true },
-              { number: "1", label: "PATENT" },
+              { number: "9+", label: "YRS EXP" },
+              { number: "100+", label: "CLINICAL TRIALS" },
+              { number: "1", label: "PATENT", accent: true },
               { number: "2", label: "PUBLISHED" },
-              { number: "1,115+", label: "CATALOG SKUS" },
             ]}
           />
 

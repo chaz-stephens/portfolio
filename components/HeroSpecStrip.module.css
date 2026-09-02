@@ -30,15 +30,6 @@
   margin-top: var(--space-5);
 }
 
-/* When the card stretches to fill the hero's right column at desktop (see page.module.css),
-   push the headline stat to the bottom instead of leaving dead space beneath it. */
-@media (min-width: 1024px) {
-  .stat {
-    margin-top: auto;
-    padding-top: var(--space-5);
-  }
-}
-
 .statNumber {
   display: block;
   font-family: var(--font-mono);

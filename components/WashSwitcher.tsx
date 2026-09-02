@@ -10,10 +10,10 @@ import styles from "./WashSwitcher.module.css";
 // than component state, so selecting a wash doesn't need a setState-in-effect round trip.
 
 const WASHES = [
-  { id: "raw", label: "Raw", hex: "#B17030" },
-  { id: "indigo", label: "Indigo", hex: "#4C6EDB" },
-  { id: "black", label: "Black", hex: "#767C86" },
-  { id: "ecru", label: "Ecru", hex: "#D8C9A3" },
+  { id: "raw", label: "Raw", hex: "#B17030", gloss: "Raw — unwashed indigo, copper-orange fade" },
+  { id: "indigo", label: "Indigo", hex: "#4C6EDB", gloss: "Indigo — the classic denim blue" },
+  { id: "black", label: "Black", hex: "#767C86", gloss: "Black — sulfur-black overdye" },
+  { id: "ecru", label: "Ecru", hex: "#D8C9A3", gloss: "Ecru — undyed cotton, warm off-white" },
 ] as const;
 
 const WASH_SWAP_CLASS = "wash-swap";
@@ -66,13 +66,10 @@ export default function WashSwitcher() {
 
   return (
     <div className={styles.switcher} role="group" aria-label="Accent color, denim wash">
-      <div className={styles.labels} aria-hidden="true">
-        {WASHES.map((w) => (
-          <span key={w.id} className={styles.labelText}>
-            {w.label}
-          </span>
-        ))}
-      </div>
+      {/* Names the category once, always visible — the actual comprehension fix. Individual
+          swatch names moved to aria-label + an extended hover title (below); a second text
+          row here was tried already (§1a) and didn't land. */}
+      <span className={styles.caption}>Denim Wash</span>
       <div className={styles.swatches}>
         {WASHES.map((w) => (
           <button
@@ -83,7 +80,7 @@ export default function WashSwitcher() {
             onClick={() => selectWash(w.id)}
             aria-label={`${w.label} accent`}
             aria-pressed={active === w.id}
-            title={w.label}
+            title={w.gloss}
           />
         ))}
       </div>
