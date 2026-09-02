@@ -118,6 +118,7 @@
    not applied to .positioning: justify does nothing useful on a one-line block and looks
    broken on a short paragraph's ragged last line. */
 .bio {
+  max-width: var(--prose-max);
   font-size: 1rem;
   line-height: 1.65;
   color: var(--color-ink-secondary);
@@ -300,7 +301,7 @@
 
 .timelineDescription {
   margin-top: var(--space-2);
-  max-width: 640px;
+  max-width: var(--prose-max);
   font-size: 0.9375rem;
   line-height: 1.6;
   color: var(--color-ink-secondary);
