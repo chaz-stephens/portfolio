@@ -147,6 +147,22 @@
   word-break: break-word;
 }
 
+/* One filled panel per card (fresh-eyes critique, color section): the card's flagged accent
+   stat becomes a solid fill instead of just a colored number in an otherwise-neutral tile —
+   the concentrated-accent moment the critique asked for, scoped to this row only so the
+   case-study pages' standalone StatTile usages (a different, more restrained register) are
+   untouched. :has() + attribute-substring, not :global(.tile): this file's own CSS-module
+   hashing note above already established plain :global(.tile) does not match here. Fill/text
+   reuse the button-contrast tokens, so it stays wash-safe in all four washes. */
+.statRow [class*="tile"]:has([class*="accent"]) {
+  background: var(--color-btn-fill);
+}
+
+.statRow [class*="tile"]:has([class*="accent"]) [class*="number"],
+.statRow [class*="tile"]:has([class*="accent"]) [class*="label"] {
+  color: var(--color-on-accent);
+}
+
 .statRow :global(.tile):first-child {
   padding-left: 0;
 }
