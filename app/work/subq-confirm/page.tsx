@@ -8,7 +8,7 @@ import styles from "./page.module.css";
 
 const TITLE = "SubQ-Confirm: Medical Device Case Study | Chaz Stephens";
 const DESCRIPTION =
-  "SubQ-Confirm: a delivery-confirmation subsystem concept for wearable insulin pumps, developed end-to-end from clinical need through FDA pathway and go-to-market.";
+  "SubQ-Confirm: a delivery-confirmation subsystem concept for wearable insulin pumps, worked end-to-end from clinical need through FDA pathway and go-to-market as a graduate capstone project.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -44,13 +44,17 @@ export default function SubQConfirmCaseStudy() {
               number="01"
               total="07"
               title="SubQ-Confirm"
-              lede="A delivery-confirmation subsystem for wearable insulin pumps, designed for integration by pump manufacturers. Built as an individual capstone project for a graduate Medical Device Product Management course, covering the full lifecycle a PM owns: clinical need and market sizing, product requirements, FDA regulatory and reimbursement strategy, clinical evidence planning, risk and human factors, and go-to-market economics."
+              lede="An individual capstone project for a graduate Medical Device Product Management course. SubQ-Confirm is a delivery-confirmation subsystem concept for wearable insulin pumps, designed for integration by pump manufacturers, worked through the full lifecycle a PM owns: clinical need and market sizing, product requirements, FDA regulatory and reimbursement strategy, clinical evidence planning, risk and human factors, and go-to-market economics."
               level={1}
             />
             <div className={styles.metaBlock}>
               <p className={styles.metaLine}>
                 <strong>Role:</strong> Sole product manager. Market analysis,
                 PRD, regulatory strategy, risk analysis, business case.
+              </p>
+              <p className={styles.metaLine}>
+                <strong>Status:</strong> Concept. Academic project, never
+                built or commercialized.
               </p>
               <p className={styles.metaLine}>
                 <strong>Timeline:</strong> August 2026.
@@ -344,7 +348,7 @@ export default function SubQConfirmCaseStudy() {
         </section>
       </main>
       <Footer
-        tags={["Case study", "SubQ-Confirm", "MDPM capstone", "2026"]}
+        tags={["Case study", "SubQ-Confirm", "Graduate capstone", "2026"]}
         activeTag="SubQ-Confirm"
       />
     </>

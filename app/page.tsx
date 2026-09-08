@@ -218,9 +218,9 @@ export default function Home() {
               <Reveal index={0}>
                 <TeaserCard
                   href="/work/subq-confirm"
-                  metadata={["Product management", "August 2026", "MDPM capstone"]}
+                  metadata={["Product management", "August 2026", "Graduate capstone"]}
                   title="SubQ-Confirm"
-                  description="A delivery-confirmation subsystem concept for wearable insulin pumps, developed end-to-end from clinical need through FDA pathway and go-to-market."
+                  description="A graduate capstone project: a delivery-confirmation subsystem concept for wearable insulin pumps, worked end-to-end from clinical need through FDA pathway and go-to-market."
                   stats={[
                     { number: "$110M", label: "SOM, 5 YEAR", accent: true },
                     { number: "71%", label: "GROSS MARGIN" },

@@ -173,16 +173,16 @@ export default function FitFinderCaseStudy() {
             <SectionHeading
               number="05"
               total="05"
-              title="A different kind of evidence than a class project"
+              title="What building it alone shows"
             />
             <p className={styles.body}>
-              Fit Finder isn&apos;t a capstone exercise, it&apos;s a product I
-              noticed a real gap for, built alone, shipped, and have kept
-              iterating on since, based on how people actually use it rather
-              than how I assumed they would. It&apos;s also a fair signal of
-              who I am outside of a job description: curious enough to go
-              build the thing when I run into a problem I can&apos;t stop
-              thinking about, regardless of what field it&apos;s in.
+              Fit Finder is a product I noticed a real gap for, built alone,
+              shipped, and have kept iterating on since, based on how people
+              actually use it rather than how I assumed they would. It also
+              says something about how I work outside a job description. This
+              was a problem I couldn&apos;t stop thinking about, so I learned
+              what I needed to and built something for it, in a field I had no
+              background in.
             </p>
             <div className={styles.cta}>
               <a
