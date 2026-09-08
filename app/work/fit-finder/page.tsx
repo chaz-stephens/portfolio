@@ -54,8 +54,8 @@ export default function FitFinderCaseStudy() {
                 catalog/data pipeline, premium feature design, mobile app.
               </p>
               <p className={styles.metaLine}>
-                <strong>Status:</strong> Live web tool; Android app has
-                completed alpha testing and is in Google Play Store review.
+                <strong>Status:</strong> Live web tool; Android app
+                published on the Google Play Store.
               </p>
             </div>
             <div className={styles.statRow}>
@@ -66,7 +66,7 @@ export default function FitFinderCaseStudy() {
                 <StatTile number="TOP" label="TRAFFIC ON SITE" accent size="lg" />
               </Reveal>
               <Reveal index={2}>
-                <StatTile number="IN REVIEW" label="GOOGLE PLAY STORE" size="lg" />
+                <StatTile number="LIVE" label="ON GOOGLE PLAY" size="lg" />
               </Reveal>
             </div>
           </div>
@@ -112,9 +112,8 @@ export default function FitFinderCaseStudy() {
               (wider, slimmer, higher rise, and so on) against the user&apos;s
               own measurements; and notifications when a new catalog entry
               matches their profile. The premium tier is built on Stripe
-              billing. A native Android app, wrapping the same tool, has
-              cleared alpha testing and is currently in Google Play Store
-              review.
+              billing. A native Android app, wrapping the same tool, is
+              published on the Google Play Store.
             </p>
             <Reveal>
               <ImageLightbox
@@ -194,8 +193,17 @@ export default function FitFinderCaseStudy() {
               >
                 Try Fit Finder
               </a>
+              <a
+                href="https://play.google.com/store/apps/details?id=com.indigoandasphalt.fitfinder"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-ghost"
+              >
+                Get the Android app
+              </a>
               <span className={styles.ctaCaption}>
-                Live web tool, indigoandasphalt.com
+                Live web tool at indigoandasphalt.com, Android app on Google
+                Play.
               </span>
             </div>
           </div>

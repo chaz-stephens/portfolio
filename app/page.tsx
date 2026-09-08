@@ -237,7 +237,7 @@ export default function Home() {
                   stats={[
                     { number: "1,115+", label: "CATALOG MODELS" },
                     { number: "TOP", label: "TRAFFIC ON SITE", accent: true },
-                    { number: "IN REVIEW", label: "GOOGLE PLAY STORE" },
+                    { number: "LIVE", label: "ON GOOGLE PLAY" },
                   ]}
                 />
               </Reveal>

@@ -145,11 +145,15 @@
 
 .cta {
   margin-top: var(--space-6);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-5);
 }
 
 .ctaCaption {
-  display: block;
-  margin-top: var(--space-3);
+  flex-basis: 100%;
+  margin-top: var(--space-1);
   font-family: var(--font-label);
   font-size: 0.75rem;
   color: var(--color-ink-muted);
