@@ -36,7 +36,7 @@ const SKILLS = [
     label: "AI Fluency",
     items: [
       "Practical use of AI tools (Claude, Gemini, Copilot) in daily workflow",
-      "Google Generative AI Leader certification (in progress)",
+      "Google Cloud Certified Generative AI Leader",
     ],
   },
 ];
