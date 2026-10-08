@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# chaz-stephens.com
 
-## Getting Started
+Portfolio site for Chaz Stephens. Next.js App Router, statically exported, served
+from a Cloudflare Worker. Two case studies live under `app/work/`: the Denim Fit
+Finder and SubQ-Confirm.
 
-First, run the development server:
+## Local development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`npm run start` does **not** work here. `next.config.ts` sets `output: "export"`,
+and Next refuses to run `next start` against an exported build. To preview the
+real production output, build it and serve the directory:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build          # writes ./out
+npx serve out          # or: python3 -m http.server 4321 -d out
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The exported routes are files, not directories, so a plain static server wants
+`http://localhost:4321/work/fit-finder.html`. The Worker handles the
+extensionless URL in production.
 
-## Learn More
+## Deploying
 
-To learn more about Next.js, take a look at the following resources:
+**Push to `main`.** Cloudflare builds and deploys within a few minutes. Nothing
+is run by hand, and there are no GitHub Actions in this repo.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The target is a Cloudflare Worker named `portfolio` on the
+`chaz@indigoandasphalt.com` account, configured in `wrangler.jsonc`. It serves
+`./out` as static assets, which is why `out/` is gitignored but is still what
+ships: Cloudflare runs the build itself.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+To check what is actually live rather than trusting the local clone:
 
-## Deploy on Vercel
+```bash
+npx wrangler deployments list --name portfolio | tail -20
+curl -sL https://chaz-stephens.com/work/fit-finder/ | grep -c "some phrase you just changed"
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+A deploy that has not landed yet looks like a 200 on the page with stale
+content, so grep for something you just changed rather than only checking the
+status code.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Layout
+
+| Path | What it is |
+|---|---|
+| `app/page.tsx` | Homepage, including the teaser cards and their stat numbers |
+| `app/work/fit-finder/` | Denim Fit Finder case study, page plus CSS module |
+| `app/work/subq-confirm/` | SubQ-Confirm case study |
+| `components/` | Shared components: `SectionHeading`, `StatTile`, `CountUpNumber`, `ImageLightbox`, `Reveal` |
+| `public/fit-finder/` | Case study screenshots, `tool-*.png`, all exported at 2000x1250 |
+| `public/resume.pdf` | The CV linked from the header and the homepage |
+
+## Conventions worth knowing
+
+- **`DESIGN_SPEC.md` is the source of truth** for the visual system, and
+  `AGENTS.md` carries the rules for working in this repo. Read both before
+  changing anything visual.
+- **Stat numbers render as `0` in the static HTML.** `CountUpNumber` animates
+  from zero when the element scrolls into view, so the pre-rendered markup is
+  correct even though it looks wrong in `curl` output.
+- **`ImageLightbox` puts its `className` on the wrapping `<button>`, not the
+  `<img>`.** Styling the image itself through that prop will not do what you
+  expect. Size the source files instead.
+- **Case study screenshots are captured at one viewport and exported at a single
+  size** so the grid lines up without `object-fit` cropping. Match the existing
+  dimensions when replacing one.
