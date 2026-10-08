@@ -232,10 +232,10 @@ export default function Home() {
                 <TeaserCard
                   href="/work/fit-finder"
                   metadata={["Sole builder", "Live product", "Web + Android + Stripe"]}
-                  title="Fit Finder"
-                  description="A body-measurement matching tool that helps people find jeans that actually fit, built and shipped independently."
+                  title="Denim Fit Finder"
+                  description="A garment-measurement matching tool that helps people find jeans that actually fit, built and shipped independently."
                   stats={[
-                    { number: "1,115+", label: "CATALOG MODELS" },
+                    { number: "3,500+", label: "CATALOG MODELS" },
                     { number: "TOP", label: "TRAFFIC ON SITE", accent: true },
                     { number: "LIVE", label: "ON GOOGLE PLAY" },
                   ]}

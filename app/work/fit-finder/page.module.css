@@ -86,62 +86,68 @@
   }
 }
 
-/* Web tool screenshot — bordered per the system's card contract (2px ink outline, no fill). */
-.mediaWeb {
-  display: block;
-  width: 100%;
-  height: auto;
+/* Four equal tiles, two up. Every shot is captured at the same viewport and
+   cropped from the top, so the grid reads as one set rather than a hero plus
+   leftovers. */
+.mediaGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5);
   margin-top: var(--space-6);
-  border: var(--border-width-bold) solid var(--color-border-bold);
 }
 
-.mediaPhones {
+.shot {
+  margin: 0;
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-4);
-  margin-top: var(--space-6);
+  flex-direction: column;
+  gap: var(--space-2);
 }
 
-.mediaPhone {
+/* Bordered per the system's card contract (2px ink outline, no fill). */
+/* All four shots are captured at the same viewport and exported at 2000x1250,
+   so the tiles line up without any object-fit cropping. */
+.shotImg {
   display: block;
   width: 100%;
-  max-width: 220px;
   height: auto;
   border: var(--border-width-bold) solid var(--color-border-bold);
 }
 
-@media (max-width: 640px) {
-  .mediaPhone {
-    max-width: 45%;
-  }
+.shotCaption {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  color: var(--color-ink-muted);
 }
 
-/* Photos get their own reveal signature (DESIGN_SPEC.md §5's differentiated-motion rule
-   extended to this page's one media-heavy section): a settle-into-focus scale instead of the
-   plain translateY every other reveal uses, since a screenshot benefits from looking like it's
-   coming into focus, not sliding up. */
-:global(.js) .mediaWeb,
-:global(.js) .mediaPhone {
+/* Photos keep their own reveal signature (DESIGN_SPEC.md section 5 differentiated motion):
+   a settle-into-focus scale rather than the translateY every other reveal uses. */
+:global(.js) .shotImg {
   opacity: 0;
-  transform: scale(0.96);
-  transition: opacity var(--duration-reveal) var(--ease-reveal),
-    transform var(--duration-reveal) var(--ease-reveal);
+  transform: scale(0.985);
+  transition: opacity 600ms ease, transform 600ms ease;
 }
 
-:global(.js) :global(.reveal-visible) .mediaWeb,
-:global(.js) :global(.reveal-visible) .mediaPhone {
+:global(.js) :global(.reveal-visible) .shotImg {
   opacity: 1;
   transform: scale(1);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .mediaWeb,
-  .mediaPhone {
+  :global(.js) .shotImg,
+  :global(.js) :global(.reveal-visible) .shotImg {
     opacity: 1;
     transform: none;
     transition: none;
   }
 }
+
+@media (max-width: 720px) {
+  .mediaGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 .cta {
   margin-top: var(--space-6);
